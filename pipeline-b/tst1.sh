@@ -13,7 +13,7 @@ module load cuda/11.1
 
 #singularity run --nv docker://tensorflow/tensorflow:latest-gpu python -c "import tensorflow as tf; print('Num GPUs Available: ',len(tf.config.experimental.list_physical_devices('GPU'))); print('Tensorflow version: ',tf.__version__)"
 
-singularity run --nv --bind .:/data/ docker://icrsc/he-class-alma python tst1.py
+singularity run --nv --bind ../../data/:/data/ docker://icrsc/he-class-alma python tst1.py
 
 
 
