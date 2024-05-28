@@ -3,7 +3,7 @@
 #SBATCH -N 1
 #SBATCH --gres=gpu:1
 #SBATCH --partition=gpu
-#SBATCH --chdir=/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/pipeline/
+#SBATCH --chdir=/home/ralcraft/he-class/he-class-pipeline/pipeline-b/
 #SBATCH -o slurm.out # STDOUT
 #SBATCH -e slurm.err # STDERR
 
