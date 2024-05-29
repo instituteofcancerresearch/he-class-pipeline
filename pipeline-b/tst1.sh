@@ -16,9 +16,6 @@ echo "Data input: $data_input"
 sing_im="$3/he-class-alma.sif"
 echo "Singularity image: $sing_im"
 
-echo "Working dir is $log_output"
-cd $log_output
-
 echo "Pulling the singularity image with the following command: singularity pull $sing_im docker://icrsc/he-class-alma"
 singularity pull "$sing_im" docker://icrsc/he-class-alma
 
