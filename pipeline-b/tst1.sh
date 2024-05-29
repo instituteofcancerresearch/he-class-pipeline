@@ -9,11 +9,16 @@
 
 module load cuda/11.1
 
-##singularity run --nv /soft/singularity/tensorflow_20.08-tf2-py3.sif python -c "import tensorflow as tf; print('Num GPUs Available: ',len(tf.config.experimental.list_physical_devices('GPU'))); print('Tensorflow version: ',tf.__version__)"
+# The folders are controlled by the user
+log_output="$1"
+echo "Log output: $log_output"
+data_input="$2"
+echo "Data input: $data_input"
+sing_im="$3/he-class-alma.sif"
+echo "Singularity image: $sing_im"
 
-#singularity run --nv docker://tensorflow/tensorflow:latest-gpu python -c "import tensorflow as tf; print('Num GPUs Available: ',len(tf.config.experimental.list_physical_devices('GPU'))); print('Tensorflow version: ',tf.__version__)"
-
-singularity run --nv --bind .:/data/ docker://icrsc/he-class-alma python tst1.py
+singularity pull "$sing_im" docker://icrsc/he-class-alma
+singularity run --nv --bind .:/heapplog/ "$sing_im" python tst1.py "$log_output" "$data_input"
 
 
 
