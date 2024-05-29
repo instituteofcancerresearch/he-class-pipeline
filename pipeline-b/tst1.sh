@@ -18,6 +18,8 @@ sing_im="$3/he-class-alma.sif"
 echo "Singularity image: $sing_im"
 
 singularity pull "$sing_im" docker://icrsc/he-class-alma
+
+echo "Running the singularity container with the following command: singularity run --nv --bind $log_output:/heapplog/ $sing_im python tst1.py /heapplog/ $data_input"
 singularity run --nv --bind "$log_output":/heapplog/ "$sing_im" python tst1.py /heapplog/ "$data_input"
 
 
