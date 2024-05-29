@@ -20,7 +20,7 @@ echo "Pulling the singularity image with the following command: singularity pull
 singularity pull "$sing_im" docker://icrsc/he-class-alma
 
 echo "Running the singularity container with the following command: singularity run --nv --bind $log_output:/heapplog/ $sing_im python tst1.py /heapplog/ $data_input"
-singularity run --nv --bind "$log_output":/heapplog/ "$sing_im" ./he-class-pipeline/pipeline-b/python tst1.py /heapplog/ "$data_input"
+singularity run --nv --bind "$log_output":/heapplog/ "$sing_im" python ./he-class-pipeline/pipeline-b/tst1.py /heapplog/ "$data_input"
 
 
 
