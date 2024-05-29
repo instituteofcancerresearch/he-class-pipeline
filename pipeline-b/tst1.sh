@@ -3,7 +3,6 @@
 #SBATCH -N 1
 #SBATCH --gres=gpu:1
 #SBATCH --partition=gpu
-#SBATCH --chdir=/home/ralcraft/he-class/he-class-pipeline/pipeline-b/
 #SBATCH -o slurm.out # STDOUT
 #SBATCH -e slurm.err # STDERR
 
@@ -17,6 +16,10 @@ echo "Data input: $data_input"
 sing_im="$3/he-class-alma.sif"
 echo "Singularity image: $sing_im"
 
+echo "Working dir is $log_output"
+cd $log_output
+
+echo "Pulling the singularity image with the following command: singularity pull $sing_im docker://icrsc/he-class-alma"
 singularity pull "$sing_im" docker://icrsc/he-class-alma
 
 echo "Running the singularity container with the following command: singularity run --nv --bind $log_output:/heapplog/ $sing_im python tst1.py /heapplog/ $data_input"
