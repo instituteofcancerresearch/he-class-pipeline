@@ -162,3 +162,4 @@ pipeline-b/cache/*
 pipeline-b/he-class-alma.sif
 pipeline-b/gpu-log.txt
 pipeline-b/dev.md
+pipeline-a/dev.md
