@@ -26,15 +26,12 @@ RUN mamba clean -afy
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 RUN pip install --no-cache-dir --upgrade pip
+RUN pip install --no-cache-dir tifffile==2019.7.26.2
 
-#RUN pip install javabridge
-#RUN pip install --no-cache-dir numpy
+#RUN pip install --no-cache-dir javabridge==1.0.19
 #RUN pip install --no-cache-dir openslide-python
-#RUN pip install --no-cache Pillow==6.1.0
-#RUN pip install --no-cache python-bioformats==1.3.0
-#RUN pip install --no-cache scipy==0.19.1
-#RUN pip install --no-cache tifffile==2019.7.26.2
+#RUN pip install --no-cache-dir python-bioformats
+
 #- javabridge==1.0.19
-#- tifffile==2019.7.26.2
 #- openslide-python==1.1.1
 #- python-bioformats==1.3.0

@@ -2,6 +2,7 @@ name: openslide-mod
 channels:
 - anaconda
 - conda-forge
+- bioconda
 - https://repo.anaconda.com/pkgs/main
 - defaults
 dependencies:
@@ -24,6 +25,7 @@ dependencies:
 - libxcb=1.13=h14c3975_1002
 - libxml2=2.9.9=h13577e0_2
 - lz4-c=1.8.3=he1b5a44_1001
+- nextflow
 - openssl=1.0.2r=h14c3975_0
 - pcre=8.41=hf484d3e_1003
 - pixman=0.34.0=h14c3975_1003
@@ -65,6 +67,7 @@ dependencies:
   - numpy==1.18.5  
   - Pillow==6.1.0  
   - scipy==0.19.1    
+
 
   
   
