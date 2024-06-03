@@ -1,3 +1,5 @@
+ #!/bin/sh
+ 
 #SBATCH -J "OSTiles"
 #SBATCH -o /data/scratch/DMP/UCEC/GENEVOD/ntrahearn/logs/OSTiles.output.%j
 #SBATCH -e /data/scratch/DMP/UCEC/GENEVOD/ntrahearn/logs/OSTiles.errors.%j
