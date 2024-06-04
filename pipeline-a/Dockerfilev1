@@ -1,0 +1,53 @@
+# https://biohpc.cornell.edu/doc/CondaInContainer.html
+# https://github.com/instituteofcancerresearch/SOPRANO/blob/python/Dockerfile
+
+# other javabridge installs - https://github.com/LeeKamentsky/python-javabridge/issues/167
+
+################### BUILD AND RUN THIS DOCKER FILE ############################
+# cd into the pipeline-a directory
+
+### BUILD IMAGE FROM root directory of project
+# docker build -t icrsc/he-class-slide .
+
+### TEST IMAGE
+#singularity run --nv docker://icrsc/he-class-slide python -c "print('Hello World')"
+
+### PUSH IMAGE TO DOCKER HUB
+# docker push icrsc/he-class-slide
+#################################################################################
+
+FROM condaforge/mambaforge:23.3.1-1 as conda
+
+# install JAVA
+ENV JAVA_HOME=/jdk-20.0.2
+ENV PATH=$JAVA_HOME/bin:$PATH
+RUN wget -O jdk.tar.gz https://download.oracle.com/java/20/archive/jdk-20.0.2_linux-x64_bin.tar.gz
+RUN tar zxvf jdk.tar.gz
+
+# Construct conda environment and clean up cache files
+COPY mamba/OSEnv.yml ./
+
+RUN conda env create -f OSEnv.yml
+RUN conda clean -afy
+
+# This is the conda magic. If you are running through a shell just activating the environment in your profile is peachy
+RUN echo "source activate r-shiny" >> ~/.bashrc
+ENV CONDA_EXE /opt/conda/bin/conda
+ENV CONDA_PREFIX /opt/conda/envs/r-shiny
+ENV CONDA_PYTHON_EXE /opt/conda/bin/python
+ENV CONDA_PROMPT_MODIFIER (r-shiny)
+ENV CONDA_DEFAULT_ENV r-shiny
+ENV PATH /opt/conda/envs/r-shiny/bin:/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+#RUN pip install --no-cache-dir --upgrade pip
+#RUN pip install --no-cache-dir tifffile==2019.7.26.2
+
+#RUN pip install git+https://github.com/LeeKamentsky/python-javabridge.git
+#RUN pip install --no-cache-dir javabridge==1.0.19
+#RUN pip install --no-cache-dir javabridge
+#RUN pip install --no-cache-dir openslide-python
+#RUN pip install --no-cache-dir python-bioformats
+
+#- javabridge==1.0.19
+#- openslide-python==1.1.1
+#- python-bioformats==1.3.0
