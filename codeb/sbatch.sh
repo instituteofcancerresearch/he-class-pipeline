@@ -24,5 +24,6 @@ codePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipe
 
 module load MATLAB
 
-matlab -nodesktop -nosplash -r "addpath(genpath('${codePath}')); CreateMaskTilesBatch('$ImageTilesPath', '$MaskTilesPath', '$MaskMethod', $Params); exit;"
+#matlab -nodesktop -nosplash -r "addpath(genpath('${codePath}')); CreateMaskTilesBatch('$ImageTilesPath', '$MaskTilesPath', '$MaskMethod', $Params); exit;"
+matlab -nodesktop -nosplash -r "addpath(genpath('./he-class-pipeline/codeb/')); CreateMaskTilesBatch('./outA/', './outB/', '"E"'); exit;"
 
