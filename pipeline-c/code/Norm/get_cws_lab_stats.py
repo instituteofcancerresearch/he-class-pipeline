@@ -6,14 +6,16 @@ import os
 def get_cws_lab_stats(cws_path, mask_path=None, file_pattern='Da*.jpg'):
     if mask_path == '':
         mask_path = None
+    print("",end="\n")
     print("get_cws_lab_stats", cws_path, mask_path, file_pattern)
     files = glob.glob(os.path.join(cws_path, file_pattern))
     
     hists = np.zeros((256, 3), dtype=np.int64)
     
+                            
     for file in files:
         file_name = os.path.basename(file)
-        print("file_name", file_name)
+        print("file_name", file_name,end="\t")
         
         #RSA todo what does this mean?
         if mask_path is None or os.path.isfile(os.path.join(mask_path, file_name[:-3]+'png')):            
