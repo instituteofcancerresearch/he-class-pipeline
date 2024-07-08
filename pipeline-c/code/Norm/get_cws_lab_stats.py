@@ -19,6 +19,12 @@ def get_cws_lab_stats(cws_path, mask_path=None, file_pattern='Da*.jpg'):
         
         #RSA todo what does this mean?
         if mask_path is None or os.path.isfile(os.path.join(mask_path, file_name[:-3]+'png')):            
+            if ".err" in file_name:
+                continue
+            if ".out" in file_name:
+                continue
+            if ".txt" in file_name:
+                continue
             print("...processing", file_name)
             im = cv2.imread(file)
 
