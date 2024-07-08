@@ -1,13 +1,31 @@
 #!/bin/sh
-#SBATCH -J "HEB"
-#SBATCH -o /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outBsrun.out
-#SBATCH -e /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outBsrun.err
+
+
+/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/
+
+#SBATCH -J "MaskTiles"
+#SBATCH -o /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/outB/MaskTiles.output.%j
+#SBATCH -e /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/outB/MaskTiles.errors.%j
 #SBATCH -n 4
+#SBATCH --mail-type="END,FAIL"
 #SBATCH -t 100:00:00
+
 module load MATLAB/R2020b
-ImageTilesPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
-MaskTilesPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
-MaskMethod="E"
-Params="jpg, [3.5 500 225]"
-codePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/code/"
-matlab -nodesktop -nosplash -r "addpath(genpath(/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/code)); CreateMaskTilesBatch(/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA, /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB, "E", "jpg,[3.5 500 225]"); exit;"
+
+#ImageTilesPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Tiles/AdInCar/ICR/Tiles/"
+ImageTilesPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/outA"
+#MaskTilesPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Tiles/AdInCar/ICR/Masks/"
+MaskTilesPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/outB"
+
+MaskMethod="E";
+Params="'jpg', [3.5 500 225]"
+
+#codePath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Code/MaskTiles/"
+codePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/codeb/"
+
+
+
+module load MATLAB
+
+matlab -nodesktop -nosplash -r "addpath(genpath('${codePath}')); CreateMaskTilesBatch('$ImageTilesPath', '$MaskTilesPath', '$MaskMethod', $Params); exit;"
+
