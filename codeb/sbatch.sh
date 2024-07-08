@@ -1,8 +1,8 @@
 #!/bin/sh
 
 #SBATCH -J "HEBr"
-#SBATCH -o srun_br.out
-#SBATCH -e srun_br.err
+#SBATCH -o outB/srun_b.out
+#SBATCH -e outB/srun_b.err
 #SBATCH -n 4
 #SBATCH -t 100:00:00
 
