@@ -4,6 +4,7 @@ import numpy as np
 import os
 import shutil
 from .get_cws_lab_stats import get_cws_lab_stats
+import datetime
 
 def norm_cws_by_stats(source_path, out_path, source_stats, target_stats, mask_path=None, file_pattern='Da*.jpg'):
     try:        
@@ -14,8 +15,14 @@ def norm_cws_by_stats(source_path, out_path, source_stats, target_stats, mask_pa
     
     files = glob.glob(os.path.join(source_path, file_pattern))
     
+    output_log = f"{out_path}/p-log.txt"
+                
     for file in files:
         file_name = os.path.basename(file)
+        
+        if os.path.exists(output_log):
+            with open(output_log, "a") as f:
+                f.write(f"\t{datetime.datetime.now()}\tStarting H&E Pipeline:C:Norm\n")
         
         if mask_path is None or os.path.isfile(os.path.join(mask_path, file_name[:-3]+'png')):
             im = cv2.imread(file)
