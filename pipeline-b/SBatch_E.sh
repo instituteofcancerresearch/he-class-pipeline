@@ -7,5 +7,5 @@
 #SBATCH -t 100:00:00
 
 module load MATLAB/R2020b
-matlab -nodesktop -nosplash -r "addpath(genpath('./he-class-pipeline/codeb/')); CreateMaskTilesBatch('./outA/', './outB/', '"E"'); exit;"
+matlab -nodesktop -nosplash -r "addpath(genpath('./he-class-pipeline/pipeline-b/')); CreateMaskTilesBatch('./outA/', './outB/', '"E"'); exit;"
 
