@@ -1,0 +1,52 @@
+################### BUILD AND RUN THIS DOCKER FILE ############################
+# cd into the pipeline-a directory
+
+### BUILD IMAGE FROM root directory of project
+# docker build -t icrsc/he-class-norm -f Dockerfile_c .
+
+### TEST IMAGE
+
+# singularity run -B /home/ralcraft/dev/shiny-proxy-developed/he-class-app/pipelines/out-a:/input -B /home/ralcraft/dev/shiny-proxy-developed/he-class-app/pipelines/out-c:/output docker://icrsc/he-class-norm ./data ./output/c.czi ./output "" "" "*.*"
+
+
+
+
+
+### PUSH IMAGE TO DOCKER HUB
+# docker push icrsc/he-class-slide
+#################################################################################
+
+FROM python:3.8
+
+RUN mkdir /app
+WORKDIR /app
+
+RUN apt-get update -y
+RUN apt-get install -y wget git unzip diffutils
+RUN apt-get install -y gcc make autoconf automake cmake
+RUN apt-get install -y pkg-config
+RUN apt-get install -y libtool
+
+# install JAVA
+ENV JAVA_HOME=/app/jdk-20.0.2
+ENV PATH=$JAVA_HOME/bin:$PATH
+RUN wget -O jdk.tar.gz https://download.oracle.com/java/20/archive/jdk-20.0.2_linux-x64_bin.tar.gz
+RUN tar zxvf jdk.tar.gz
+
+RUN apt-get install -y openslide-tools
+   
+RUN pip install --upgrade pip
+RUN pip install tifffile
+RUN pip install certifi
+RUN pip install future
+RUN pip install imagecodecs
+RUN pip install imagecodecs-lite
+RUN pip install numpy
+RUN pip install Pillow
+RUN pip install scipy
+RUN pip install opencv-contrib-python-headless
+
+# Code from Pipeline C
+COPY ./pipeline-c/code /app/code
+
+ENTRYPOINT [ "python3","/app/code/calling_wrapper.py"]

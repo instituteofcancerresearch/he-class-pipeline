@@ -41,5 +41,6 @@ function CreateMaskTilesBatch(TilesFolder, MasksFolder, Method, varargin)
 		fprintf('\n');
         maskTileFun(InFolder, OutFolder);
     end
+    fprintf('Completed\n');	
 end
 
