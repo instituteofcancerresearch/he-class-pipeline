@@ -1,8 +1,5 @@
 #!/bin/sh
 
-
-/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/
-
 #SBATCH -J "MaskTiles"
 #SBATCH -o /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/outB/MaskTiles.output.%j
 #SBATCH -e /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/outB/MaskTiles.errors.%j
