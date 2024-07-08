@@ -1,3 +1,7 @@
+# From here: 
+https://github.com/sottorivalab/FORECAST_cell_classification
+
+
 3. set off batch
 navigate to the directory pipeline-b and set off the batch file. 3 inputs are log-dir, data-input-dir, singularity-sif-location.  
 

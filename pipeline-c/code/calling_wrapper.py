@@ -23,7 +23,7 @@ def main(args):
     print(f"Output path: {out_path}")
     print(f"Output log: {output_log}")
     
-    if os.exists(output_log):    
+    if os.path.exists(output_log):
         with open(output_log, "a") as f:
             f.write(f"{datetime.datetime.now()}\tStarting H&E Pipeline:C:Norm\n")
     else:
