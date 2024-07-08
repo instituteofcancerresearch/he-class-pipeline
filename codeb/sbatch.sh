@@ -1,10 +1,9 @@
 #!/bin/sh
 
 #SBATCH -J "HEBr"
-#SBATCH -o ./outB/srun_b.out
-#SBATCH -e ./outB/srun_b.err
+#SBATCH -o srun_br.out
+#SBATCH -e srun_br.err
 #SBATCH -n 4
-#SBATCH --mail-type="END,FAIL"
 #SBATCH -t 100:00:00
 
 module load MATLAB/R2020b
