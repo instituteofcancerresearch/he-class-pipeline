@@ -13,9 +13,9 @@
 module load MATLAB/R2020b
 
 #ImageTilesPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Tiles/AdInCar/ICR/Tiles/"
-ImageTilesPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/outA"
+ImageTilesPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/outA/"
 #MaskTilesPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Tiles/AdInCar/ICR/Masks/"
-MaskTilesPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/outB"
+MaskTilesPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/outB/"
 
 MaskMethod="E";
 Params="'jpg', [3.5 500 225]"
@@ -27,5 +27,5 @@ codePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipe
 
 module load MATLAB
 
-matlab -nodesktop -nosplash -r "addpath(genpath('${codePath}')); CreateMaskTilesBatch('$ImageTilesPath', '$MaskTilesPath', '$MaskMethod', $Params); exit;"
+srun matlab -nodesktop -nosplash -r "addpath(genpath('${codePath}')); CreateMaskTilesBatch('$ImageTilesPath', '$MaskTilesPath', '$MaskMethod', $Params); exit;"
 
