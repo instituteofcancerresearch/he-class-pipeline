@@ -163,3 +163,7 @@ pipeline-b/he-class-alma.sif
 pipeline-b/gpu-log.txt
 pipeline-b/dev.md
 pipeline-a/dev.md
+pipeline-d/code/cell_classifier/3rdparty/*
+
+pipeline-d/code/cell_detector/analysis/subpackages/*
+pipeline-d/code/cell_detector/matlab_common/*

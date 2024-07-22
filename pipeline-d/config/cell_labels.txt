@@ -1,0 +1,5 @@
+pinred epithelial #Epithelial cell
+pingreen stromal #Stromal cell
+pinblue immune #Chronic inflammatory cell
+flagblue immune #Acute inflammatory cell
+unk unknown #Unknown
