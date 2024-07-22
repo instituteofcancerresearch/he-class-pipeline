@@ -1,7 +1,6 @@
 name: tfAlmaGPU1p4
 channels:
-  - menpo
-  - https://repo.continuum.io/pkgs/free
+  - menpo  
   - defaults
   - pip:
     - bleach
