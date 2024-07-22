@@ -55,5 +55,22 @@ for file in "${files[@]}"; do
     source activate pytorch0p3
 
     python3 -c "import sys; sys.path.append('${classificationCodePath}'); import processCSVs; processCSVs.processCSVs('${imageName}', '${cellDetectionCSVPath}', '${tilePath}', '${cellClassifierPath}', '${cellClassificationCSVPath}', segmentPath='${segmentationTilePath}', batchSize=${classificationBatchSize}, outLabels=${labelNames}, minProb=${cellClassCertainty}, noClassLabel=${noLabelIdx}, outputProbs=${outputProbs})"
+
+    matlabOpeningCommands="addpath(genpath('${matlabPath}'), genpath('${outputAnnotationCodePath}'), genpath('${mergeCSVCodePath}'));"
+
+    dotAnnotationSize=6
+    tifFile="${tifPath}/${imageName%.*}_Annotated.tif"
+
+    matlabSmallDotCommands="WriteAnnotations('${imageName}', '${cellClassificationCSVPath}', '${tilePath}', '${smallDotTilePath}', '${labelFile}', ${dotAnnotationSize}); Tiles2TIF('${smallDotTilePath}/${imageName}/', [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], '${tifFile}', 'jpg', false);"
+
+    dotAnnotationSize=30
+    tifFile="${tifPath}/${imageName%.*}_AnnotatedBigDot.tif"
+
+    matlabBigDotCommands="WriteAnnotations('${imageName}', '${cellClassificationCSVPath}', '${tilePath}', '${bigDotTilePath}', '${labelFile}', ${dotAnnotationSize}); Tiles2TIF('${bigDotTilePath}/${imageName}/', [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], '${tifFile}', 'jpg', false);"
     
+    mergeCSVFile="${mergeCSVPath}/${imageName%.*}.csv"
+    
+    matlabMergeCSVCommands="MergeCSVs('${cellClassificationCSVPath}/${imageName}', '${tilePath}/${imageName}', '${mergeCSVFile}');"
+
+    matlab -nodesktop -nosplash -r "${matlabOpeningCommands} ${matlabSmallDotCommands} ${matlabBigDotCommands} ${matlabMergeCSVCommands} exit;"
 done
