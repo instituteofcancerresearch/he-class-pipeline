@@ -6,8 +6,10 @@ srun --pty --mem=10GB -c 1 -t 30:00:00 -p interactive bash
 
 # First try to run the script directly
 cd /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline
+git checkout .
 git pull
 cd /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/pipeline-d
+conda remove --name pytorch0p3 --all
 conda env create -f conda_ymls/pytorch0p3.yml
 chmod +x run_cell_classifier.sh
 ./run_cell_classifier.sh
