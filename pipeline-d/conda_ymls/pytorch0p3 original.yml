@@ -73,6 +73,7 @@ dependencies:
   - jupyter_core=4.4.0=py_0
   - jupyter_highlight_selected_word=0.2.0=py36_1000
   - jupyter_latex_envs=1.4.4=py36_1000
+  - jupyter_nbextensions_configurator=0.4.1=py36_0
   - kiwisolver=1.0.1=py36h6bb024c_1002
   - libblas=3.8.0=17_openblas
   - libcblas=3.8.0=17_openblas

@@ -5,8 +5,11 @@ segmentationTilePath="../tiles/masks/"
 cellDetectionResultsPath="../results/detection/"
 cellClassificationResultsPath="../results/classificaion/"
 
-cellDetectorCheckPointPath="../models/detection/"
-cellClassifierPath="../models/classification/Cell_Classifier.h5"
+#cellDetectorCheckPointPath="../models/detection/"
+#cellClassifierPath="../models/classification/Cell_Classifier.h5"
+
+cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
+cellClassifierPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellClassification/EPICC/NDPI/Current/EPICC_Cell_Classifier_NDPI.h5"
 
 labelFile="../config/cell_labels.txt"
 labelNames="['epithelial', 'stromal', 'immune', 'immune', 'unknown']"
