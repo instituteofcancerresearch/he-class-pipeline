@@ -1,7 +1,7 @@
 #!/bin/bash
 
-tilePath="../tiles/tiles_norm_c/"
-segmentationTilePath="../tiles/masks/"
+tilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outC/"
+segmentationTilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB/"
 cellDetectionResultsPath="../results/detection/"
 cellClassificationResultsPath="../results/classificaion/"
 
