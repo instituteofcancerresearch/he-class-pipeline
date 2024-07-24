@@ -9,8 +9,13 @@ cd /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline
 git checkout .
 git pull
 cd /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/pipeline-d
+
+conda remove --name tf1p4 --all
+conda env create -f conda_ymls/pytorch0p3.yml
+
 conda remove --name pytorch0p3 --all
 conda env create -f conda_ymls/pytorch0p3.yml
+
 chmod +x run_cell_classifier.sh
 ./run_cell_classifier.sh
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-tilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outC/"
-segmentationTilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB/"
+tilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outC"
+segmentationTilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
 cellDetectionResultsPath="../results/detection/"
 cellClassificationResultsPath="../results/classificaion/"
 
@@ -30,7 +30,7 @@ else
     files=("$tilePath"/*/)
 fi
 
-currentPath=$(dirname "${0}")
+currentPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/pipeline-d/code"
 
 sccnnDetectionCodePath="${currentPath}/cell_detector/analysis/"
 classificationCodePath="${currentPath}/cell_classifier/classification/"
