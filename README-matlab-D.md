@@ -10,8 +10,9 @@ git checkout .
 git pull
 cd /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/pipeline-d
 
-conda remove --name tf1p4 --all
-conda env create -f conda_ymls/pytorch0p3.yml
+mamba works conda doesn't
+mamba remove --name tf1p4 --all
+mamba env create -f conda_ymls/tf1p4.yml
 
 conda remove --name pytorch0p3 --all
 conda env create -f conda_ymls/pytorch0p3.yml
@@ -20,11 +21,12 @@ chmod +x run_cell_classifier.sh
 ./run_cell_classifier.sh
 
 # First conda environment
-mamba create -n tf-1 tensorflow-gpu
-mamba activate tf-1
-mamba install anaconda::pillow
-python -m pip install wheels
-python3 -m pip install matlabengine
+conda activate tf1p4
+conda deactivate
+
+conda activate pytorch0p3
+conda install -c conda-forge opencv
+conda deactivate
 
 # run the script 1
 cd code/cell_detector/analysis
