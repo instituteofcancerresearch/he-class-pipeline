@@ -2,8 +2,10 @@ import os
 import sys
 import pathlib
 
-import sccnn_detection as sccnn
-from subpackages import NetworkOptions
+count = 1
+for arg in sys.argv[1:]:
+    print("Arg",count,arg)
+    count+=1
 
 exp_dir = os.path.normpath(str(pathlib.Path(sys.argv[1])))
 data_dir = os.path.normpath(str(pathlib.Path(sys.argv[2])))
@@ -23,6 +25,21 @@ if len(sys.argv) > 6 and len(sys.argv[6]) > 0:
     tissue_segment_dir = os.path.normpath(str(pathlib.Path(sys.argv[6])))
 else:
     tissue_segment_dir = ''
+    
+if len(sys.argv) > 7 and len(sys.argv[7]) > 0:
+    matlab_code_path = os.path.normpath(str(pathlib.Path(sys.argv[7])))
+    sys.path.append(matlab_code_path)
+
+#current_dir =  os.path.abspath(os.path.dirname(__file__))
+#parent_dir = os.path.abspath(current_dir + "/../")
+sub_current_dir =  os.path.abspath(os.path.dirname(__file__)) + "/subpackages/"
+print("Adding subackages path:", sub_current_dir)
+sys.path.append(sub_current_dir)
+for path in sys.path:
+    print("Path:",path)
+
+import sccnn_detection as sccnn
+from subpackages import NetworkOptions
 
 opts = NetworkOptions.NetworkOptions(exp_dir=exp_dir,
                                      num_examples_per_epoch_train=1,

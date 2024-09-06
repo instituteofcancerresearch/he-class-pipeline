@@ -10,8 +10,34 @@ import scipy.io as sio
 import time
 from fastai.transforms import *
 from fastai.conv_learner import *
+import datetime
 
-def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, segmentPath=None, windowSize=[51, 51], cellImageSize=224, inLabels=None, outLabels=['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end'], batchSize=30, arch=dn201, gpu=True, overwrite=False, minProb=0.0, noClassLabel=None, outputProbs=False):
+def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, segmentPath=None, windowSize=[51, 51], cellImageSize=224, inLabels=None, outLabels=['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end'], batchSize=30, arch=dn201, gpu=True, overwrite=False, minProb=0.0, noClassLabel=None, outputProbs=False):    
+    outputProbs = str(outputProbs).lower() == 'true'
+    minProb = float(minProb)
+    noClassLabel = int(noClassLabel)                    
+    batchSize = int(batchSize)
+    
+    print("***** Inputs **********************")
+    print("imagePath",imagePath)
+    print("detectionPath",detectionPath)
+    print("tilePath",tilePath)
+    print("classifierPath",classifierPath)
+    print("outPath",outPath)
+    print("segmentPath",segmentPath)
+    print("windowSize",windowSize)
+    print("cellImageSize",cellImageSize)
+    print("inLabels",inLabels)
+    print("outLabels",outLabels)
+    print("batchSize",batchSize)
+    print("arch",arch)
+    print("gpu",gpu)
+    print("overwrite",overwrite)
+    print("minProb",minProb)
+    print("noClassLabel",noClassLabel)
+    print("outputProbs",outputProbs)
+    print("*********************************")
+    
     if arch is not None:
         tforms = tfms_from_model(arch, cellImageSize)
         
@@ -34,17 +60,25 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
         model = model.cpu().eval()
     
     detectionPath = os.path.join(detectionPath, '')
-
-    CSVs = GLOB.glob(os.path.join(detectionPath, imagePath, '*.csv'))
-
+    print("DetectionPath =",detectionPath)
+    print("ImagePath =",imagePath)
+    imageName = imagePath.split('/')[-1]
+    print("GlobPath =",str(os.path.join(detectionPath, imageName, '*.csv')))
+    
+    CSVs = GLOB.glob(os.path.join(detectionPath, imageName, '*.csv'))
+        
+    len_csvs = len(CSVs)
+    count = 1
     for csvPath in CSVs:
         outCSVPath = os.path.join(outPath, csvPath[len(detectionPath):])
+        #print("OutpathCSV =",outCSVPath," , Overwrite =",overwrite)
         
         if outputProbs:
             outProbCSVPath = os.path.join(os.path.dirname(outCSVPath), 'probabilities', os.path.basename(outCSVPath))
         
         if overwrite or not os.path.isfile(outCSVPath):
-            print("Classifying cells in: "+csvPath, flush=True)
+            print(datetime.datetime.now(), count, "/", len_csvs, "Classifying cells in: "+csvPath, flush=True)
+            count += 1
             tileImagePath = os.path.join(tilePath, csvPath[len(detectionPath):-4]+'.jpg')
             tileImage = open_image(tileImagePath)
 
@@ -88,7 +122,8 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
                     validRows = range(0, len(csvData))
                 
                 cellLabels = np.zeros(len(validRows))
-                
+                                
+                print("Looping", len(validRows), batchSize)
                 for i in range(0, len(validRows), batchSize):
                     iEnd = min(i+batchSize, len(validRows))
                     
@@ -110,12 +145,12 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
                 
                     probs = np.exp(logProbs)
                     batchLabels = np.argmax(probs, axis=1)
-                    
+                                        
                     if minProb > 0.0 and noClassLabel >= 0 and noClassLabel < len(outLabels):
                         batchLabels[np.max(probs, axis=1) < minProb] = noClassLabel;
 
                     cellLabels[i:iEnd] = batchLabels
-                    
+                                        
                     if outputProbs:
                         cellProbs[validRows[i:iEnd], :-2] = probs
                     

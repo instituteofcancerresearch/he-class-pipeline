@@ -1,4 +1,5 @@
 import tensorflow as tf
+import stain_normalization as sn # not needed forces path recognition
 
 from subpackages import variable_summaries
 from subpackages import train_op
@@ -35,10 +36,10 @@ class SCCNN:
         self.X = tf.cast(x, dtype=tf.float32)
         self.Y = tf.cast(y, dtype=tf.float32)
 
-        self.images = tf.placeholder(tf.float32,
+        self.images = tf.compat.v1.placeholder(tf.float32,
                                      shape=[self.batch_size, self.image_height, self.image_width, self.in_feat_dim])
 
-        self.labels = tf.placeholder(tf.float32,
+        self.labels = tf.compat.v1.placeholder(tf.float32,
                                      shape=[self.batch_size, self.out_height, self.out_width, self.out_feat_dim])
 
         self.train_op = None
