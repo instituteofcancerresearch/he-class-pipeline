@@ -15,6 +15,6 @@ echo "Input: $input_path"
 echo "Output: $output_path"
 # run singularity
 
-srun singularity run -B /data/rds/DMP/UCEC/GENEVOD/ntrahearn/Images/ClassifierPipelineDemoImages/testNDPIs:/input -B /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA:/output HEA.sif ./input ./output Y Y *.ndpi
+srun singularity run -B /data/rds/DMP/UCEC/GENEVOD/ntrahearn/Images/ClassifierPipelineDemoImages/testNDPIs:/input -B /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA:/output /data/scratch/shared/SINGULARITY-DOWNLOAD/tools/.singularity/HEA.sif ./input ./output Y Y *.ndpi
 #srun singularity run -B $input_path:/input -B $ouput_path:/output $singularity_path ./input ./output Y Y *.ndpi
 
