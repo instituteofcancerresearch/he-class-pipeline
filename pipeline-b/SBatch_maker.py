@@ -7,6 +7,7 @@ working_dir = sys.argv[1]
 pipeline_dir = sys.argv[2]
 inB = sys.argv[3]
 outB = sys.argv[4]
+method = sys.argv[5]
 
 batch_file = f"{working_dir}/b_run.sh"
 
@@ -26,7 +27,7 @@ with open(batch_file, "a") as f:
     f.write('"')
     f.write(f"addpath(genpath('{pipeline_dir}/he-class-pipeline/pipeline-b/')); ")
     f.write(f"CreateMaskTilesBatch('{inB}', '{outB}', '")
-    f.write('"T"')    
+    f.write(f'"{method}"')
     f.write("'); exit;")
     f.write('"')
 """
