@@ -24,7 +24,7 @@ with open(batch_file, "a") as f:
     f.write("echo 'Starting HEBr'\n")
     f.write("matlab -nodesktop -nosplash -r ")
     f.write('"')
-    f.write(f"addpath(genpath('{pipeline_dir}/pipeline-b/')); ")
+    f.write(f"addpath(genpath('{pipeline_dir}/he-class-pipeline/pipeline-b/')); ")
     f.write(f"CreateMaskTilesBatch('{inB}', '{outB}', '")
     f.write('"T"')    
     f.write("'); exit;")
