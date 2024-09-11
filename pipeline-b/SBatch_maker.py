@@ -28,6 +28,7 @@ with open(batch_file, "a") as f:
     f.write(f"CreateMaskTilesBatch('{inB}', '{outB}', '")
     f.write('"T"')    
     f.write("'); exit;")
+    f.write('"')
 """
 #!/bin/sh
 #SBATCH -J "HEBr"
