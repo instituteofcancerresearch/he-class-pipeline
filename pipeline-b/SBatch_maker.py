@@ -21,12 +21,13 @@ with open(batch_file, "a") as f:
     f.write("#SBATCH -t 100:00:00\n")
     f.write("source ~/.bashrc\n")
     f.write("module load MATLAB/R2020b\n")
-    f.write("matlab -nodesktop -nosplash -r ")
-    f.write('"')
-    f.write("addpath(genpath('./he-class-pipeline/pipeline-b/')); ")
-    f.write("CreateMaskTilesBatch('./outA/', './outB/', '")
-    f.write('"T"')    
-    f.write("'); exit;")
+    f.write("echo 'Starting HEBr'\n")
+    #f.write("matlab -nodesktop -nosplash -r ")
+    #f.write('"')
+    #f.write("addpath(genpath('./he-class-pipeline/pipeline-b/')); ")
+    #f.write("CreateMaskTilesBatch('./outA/', './outB/', '")
+    #f.write('"T"')    
+    #f.write("'); exit;")
 """
 #!/bin/sh
 #SBATCH -J "HEBr"
