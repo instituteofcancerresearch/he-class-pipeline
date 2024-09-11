@@ -8,11 +8,11 @@ source ~/.bashrc
 singularity_path=$1
 input_path=$2
 output_path=$3
+# concat file path with file
+singularity_path="$singularity_path/HEA.sif"
 echo "Singularity path: $singularity_path"
 echo "Input: $input_path"
 echo "Output: $output_path"
-# concat file path with file
-singularity_path="$singularity_path/HEA.sif"
 # run singularity
-srun singularity run -B $input_path:/input -B $ouput_path:/output $singularity_path ./input ./output Y Y *.ndpi
+singularity run -B $input_path:/input -B $ouput_path:/output $singularity_path ./input ./output Y Y *.ndpi
 
