@@ -13,3 +13,6 @@ echo "Branch: $branch"
 singularity_path="$singularity_path/HEA.sif"
 docker_path="docker://icrsc/he-class-slide"
 singularity build --force $singularity_path $docker_path
+# if in the right place:
+#/data/scratch/shared/SINGULARITY-DOWNLOAD/tools/.singularity
+#singularity build --force HEA.sif docker://icrsc/he-class-slide

@@ -12,9 +12,9 @@ def main(args):
     input_path = args[0]
     output_path = args[1]
     log_path = args[2]
-    container_path = args[2].upper()
-    overwrite = args[3].upper()
-    pattern = args[4]
+    container_path = args[3].upper()
+    overwrite = args[4].upper()
+    pattern = args[5]
     print(f"Pattern: {pattern}")
     if container_path == "Y":        
         input_path = "/input"
