@@ -11,6 +11,7 @@ def main(args):
     print(args)
     input_path = args[0]
     output_path = args[1]
+    log_path = args[2]
     container_path = args[2].upper()
     overwrite = args[3].upper()
     pattern = args[4]
@@ -18,12 +19,21 @@ def main(args):
     if container_path == "Y":        
         input_path = "/input"
         output_path = "/output"
-
-    output_log = f"{output_path}/p-log.txt"
+        log_path = "/log"
+        
+    output_log = f"{log_path}/a_log.txt"
     print(f"Input path: {input_path}")
     print(f"Output path: {output_path}")
     print(f"Output log: {output_log}")
     
+    if not os.path.exists(log_path):
+        os.makedirs(log_path)
+        print("Making log dir: ", log_path)
+    
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+        print("Making results dir: ", log_path)
+            
     #onlyfiles = [f for f in listdir(input_path) if isfile(join(input_path, f))]            
     path = f'{input_path}/{pattern}'
     matching_files = glob.glob(path)    
