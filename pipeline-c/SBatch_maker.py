@@ -20,6 +20,15 @@ with open(batch_file, "w") as f:
     f.write("#!/bin/sh\n")
 
 with open(batch_file, "a") as f:
+    """    
+    log_path = args[0]
+    cws_path = args[1]
+    target_path = args[2]
+    out_path = args[3]    
+    cws_mask_path = args[4]
+    target_mask_path = args[5]
+    file_pattern = args[6]
+    """
     f.write("#SBATCH -J HECr\n")
     f.write("#SBATCH -o c_run.out\n")
     f.write("#SBATCH -e c_run.err\n")
@@ -34,7 +43,7 @@ with open(batch_file, "a") as f:
     f.write(f"-B {working_dir}:/log ")    
     f.write(f"-B {inC_masks}:/input_masks ")    
     f.write(f"-B {inC_refMasks}:/target_masks ")    
-    f.write(f"{sing_dir}/HEC.sif /input_tiles /target_tiles /output /log /input_masks /target_masks *.*")    
+    f.write(f"{sing_dir}/HEC.sif /log /input_tiles /target_tiles /output /input_masks /target_masks *.*")    
             
 """
 #!/bin/sh
