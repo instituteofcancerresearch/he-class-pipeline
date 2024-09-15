@@ -1,7 +1,7 @@
 #!/bin/sh
-#SBATCH -J "HEAi"
-#SBATCH -o a_install.out
-#SBATCH -e a_install.err
+#SBATCH -J "HECi"
+#SBATCH -o c_install.out
+#SBATCH -e c_install.err
 #SBATCH -n 4
 #SBATCH -t 100:00:00
 source ~/.bashrc
