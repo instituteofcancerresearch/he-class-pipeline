@@ -10,19 +10,24 @@ import os
 
 def main(args):
     print("Calling pipeline C:Norm with args",args)
-    cws_path = args[0]
-    target_path = sys.argv[1]
-    out_path = args[2]
-    log_path = args[3]
+    log_path = args[0]
+    cws_path = args[1]
+    target_path = args[2]
+    out_path = args[3]    
     cws_mask_path = args[4]
     target_mask_path = args[5]
     file_pattern = args[6]
                         
     
     output_log = f"{log_path}/c_log.txt"
-    print(f"Input path: {cws_path}")
-    print(f"Output path: {out_path}")
+    print(f"cws_path: {cws_path}")
+    print(f"target_path: {target_path}")
+    print(f"out_path: {out_path}")
+    print(f"log_path: {log_path}")
     print(f"Output log: {output_log}")
+    print(f"cws_mask_path: {cws_mask_path}")
+    print(f"target_mask_path: {target_mask_path}")
+    print(f"file_pattern: {file_pattern}")
     
     if os.path.exists(output_log):
         with open(output_log, "a") as f:
