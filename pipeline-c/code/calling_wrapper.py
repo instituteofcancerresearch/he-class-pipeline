@@ -13,12 +13,13 @@ def main(args):
     cws_path = args[0]
     target_path = sys.argv[1]
     out_path = args[2]
-    cws_mask_path = args[3]
-    target_mask_path = args[4]
-    file_pattern = args[5]
+    log_path = args[3]
+    cws_mask_path = args[4]
+    target_mask_path = args[5]
+    file_pattern = args[6]
                         
     
-    output_log = f"{out_path}/p-log.txt"
+    output_log = f"{log_path}/c_log.txt"
     print(f"Input path: {cws_path}")
     print(f"Output path: {out_path}")
     print(f"Output log: {output_log}")
