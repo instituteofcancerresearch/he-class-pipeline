@@ -4,14 +4,15 @@ import sys
 print(sys.argv)
 
 working_dir = sys.argv[1]
-pipeline_dir = sys.argv[2]
-inC_tiles = sys.argv[3]
-inC_masks = sys.argv[4]
-inC_refTiles = sys.argv[5]
-inC_refMasks = sys.argv[6]
-outC = sys.argv[7]
-pattern = sys.argv[7]
-sing_dir = sys.argv[8]
+sing_dir = sys.argv[2]
+pipeline_dir = sys.argv[3]
+inC_tiles = sys.argv[4]
+inC_masks = sys.argv[5]
+inC_refTiles = sys.argv[6]
+inC_refMasks = sys.argv[7]
+outC = sys.argv[8]
+pattern = sys.argv[9]
+
 
 batch_file = f"{working_dir}/c_run.sh"
 
