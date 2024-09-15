@@ -11,6 +11,7 @@ inC_refTiles = sys.argv[5]
 inC_refMasks = sys.argv[6]
 outC = sys.argv[7]
 pattern = sys.argv[7]
+sing_dir = sys.argv[8]
 
 batch_file = f"{working_dir}/c_run.sh"
 
@@ -32,7 +33,7 @@ with open(batch_file, "a") as f:
     f.write(f"-B {working_dir}:/log ")    
     f.write(f"-B {inC_masks}:/input_masks ")    
     f.write(f"-B {inC_refMasks}:/target_masks ")    
-    f.write("HEC.sif /input_tiles /target_tiles /output /log /input_masks /target_masks *.*")    
+    f.write(f"{sing_dir}/HEC.sif /input_tiles /target_tiles /output /log /input_masks /target_masks *.*")    
             
 """
 #!/bin/sh
