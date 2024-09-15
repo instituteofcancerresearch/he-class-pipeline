@@ -26,6 +26,7 @@ RUN apt-get install -y wget git unzip diffutils
 RUN apt-get install -y gcc make autoconf automake cmake
 RUN apt-get install -y pkg-config
 RUN apt-get install -y libtool
+RUN apt-get install libgl1
 
 # install JAVA
 ENV JAVA_HOME=/app/jdk-20.0.2
