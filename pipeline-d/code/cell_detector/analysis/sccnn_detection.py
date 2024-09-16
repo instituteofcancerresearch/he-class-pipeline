@@ -1,8 +1,7 @@
 import tensorflow as tf
 import stain_normalization as sn # not needed forces path recognition
+
 import os,sys
-
-
 dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(dir_path)
 

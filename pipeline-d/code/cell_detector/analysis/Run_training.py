@@ -2,6 +2,11 @@ import os
 from shutil import copyfile
 import pickle
 import scipy.io as sio
+
+import os,sys
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(dir_path)
+
 import sccnn_detection as sccnn
 from subpackages import NetworkOptions
 

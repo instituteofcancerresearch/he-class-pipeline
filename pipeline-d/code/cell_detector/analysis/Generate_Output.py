@@ -2,6 +2,9 @@ import os
 import sys
 import pathlib
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(dir_path)
+
 count = 1
 for arg in sys.argv[1:]:
     print("Arg",count,arg)
