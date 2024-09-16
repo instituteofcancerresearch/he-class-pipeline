@@ -1,5 +1,6 @@
 #!/bin/sh
 #SBATCH -p gpu
+#SBATCH -J "HEDri"
 #SBATCH -t 12:00:00
 #SBATCH --gres=gpu:1
 

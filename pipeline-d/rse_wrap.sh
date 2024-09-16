@@ -20,7 +20,7 @@ do
   var1="logsD/d_run_$counter.err"
   var2="logsD/d_run_$counter.out"  
   jabname="HEDr"  
-  sbatch --error=$var1 --output=$var2 --job-name=$jobname "$pipe_path/rse_sbatch_single.sh" $image_file $code_path $steps
+  sbatch --error=$var1 --output=$var2 "$pipe_path/rse_sbatch_single.sh" $image_file $code_path $steps
   ((counter++))
 done
 
