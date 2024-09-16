@@ -14,5 +14,5 @@ singularity_path="$singularity_path/HEC.sif"
 docker_path="docker://icrsc/he-class-norm"
 singularity build --force $singularity_path $docker_path
 # if in the right place:
-#/data/scratch/shared/SINGULARITY-DOWNLOAD/tools/.singularity
+#cd /data/scratch/shared/SINGULARITY-DOWNLOAD/tools/.singularity
 #singularity build --force HEC.sif docker://icrsc/he-class-norm

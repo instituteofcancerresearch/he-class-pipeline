@@ -29,21 +29,26 @@ with open(batch_file, "a") as f:
     target_mask_path = args[5]
     file_pattern = args[6]
     """
+    sing_call = f"singularity run "
+    sing_call += f"-B {inC_tiles}:/input_tiles "
+    sing_call += f"-B {inC_refTiles}:/target_tiles "
+    sing_call += f"-B {outC}:/output -B {working_dir}:/log "
+    sing_call += f"-B {inC_masks}:/input_masks "
+    sing_call += f"-B {inC_refMasks}:/target_masks "
+    sing_call += f"{sing_dir}/HEC.sif "
+    sing_call += "/log /input_tiles /target_tiles /output /input_masks /target_masks *.*"
+            
     f.write("#SBATCH -J HECr\n")
     f.write("#SBATCH -o c_run.out\n")
     f.write("#SBATCH -e c_run.err\n")
     f.write("#SBATCH -n 4\n")
     f.write("#SBATCH -t 100:00:00\n")
     f.write("source ~/.bashrc\n")        
-    f.write("echo 'Starting HECr'\n")    
-    f.write("srun singularity run ")    
-    f.write(f"-B {inC_tiles}:/input_tiles ")    
-    f.write(f"-B {inC_refTiles}:/target_tiles ")    
-    f.write(f"-B {outC}:/output ")    
-    f.write(f"-B {working_dir}:/log ")    
-    f.write(f"-B {inC_masks}:/input_masks ")    
-    f.write(f"-B {inC_refMasks}:/target_masks ")    
-    f.write(f"{sing_dir}/HEC.sif /log /input_tiles /target_tiles /output /input_masks /target_masks *.*")    
+    f.write(f"echo '********'\n")    
+    f.write(f"echo '{sing_call}'\n")    
+    f.write(f"echo '********'\n")       
+    f.write("echo 'Starting HECr'\n")        
+    f.write(f"srun {sing_call}")
             
 """
 #!/bin/sh
