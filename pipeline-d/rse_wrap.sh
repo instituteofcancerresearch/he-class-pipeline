@@ -13,11 +13,12 @@ steps=$4
 counter=0
 for image_file in "$image_dir"/*
 do
-  echo "ImageFile=$image_file"
-  echo "PipePath=$pipe_path"
+  echo "BatchPath=$pipe_path/rse_sbatch_single.sh"
+  echo "ImageFile=$image_file"  
   echo "CodePath=$code_path"
+  echo "Steps=$steps"  
   var1="d_run_$counter.err"
-  var2="d_run_$counter.out"
+  var2="d_run_$counter.out"  
   sbatch --error=$var1 --output=$var2 "$pipe_path/rse_sbatch_single.sh" $image_file $code_path $steps
   ((counter++))
 done
