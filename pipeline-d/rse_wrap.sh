@@ -17,8 +17,8 @@ do
   echo "ImageFile=$image_file"  
   echo "CodePath=$code_path"
   echo "Steps=$steps"  
-  var1="/logsD/d_run_$counter.err"
-  var2="/logsD/d_run_$counter.out"  
+  var1="logsD/d_run_$counter.err"
+  var2="logsD/d_run_$counter.out"  
   jabname="HEDr$counter"  
   sbatch --error=$var1 --output=$var2 --job-name=$jobname "$pipe_path/rse_sbatch_single.sh" $image_file $code_path $steps
   ((counter++))
