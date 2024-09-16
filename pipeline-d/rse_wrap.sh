@@ -8,9 +8,9 @@ counter=0
 for image_file in "$image_dir"/*
 do
   echo "$image_file"
-  var1="logs/he_$counter.err"
-  var2="logs/he_$counter.out"
-  sbatch --error=$var1 --output=$var2 rse_sbatch_single.sh $image_file $code_path $steps
+  var1="d_run_$counter.err"
+  var2="d_run_$counter.out"
+  sbatch --error=$var1 --output=$var2 $code_path/rse_sbatch_single.sh $image_file $code_path $steps
   ((counter++))
 done
 

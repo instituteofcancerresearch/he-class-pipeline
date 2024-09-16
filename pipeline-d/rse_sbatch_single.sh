@@ -20,7 +20,7 @@ tilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
 cellDetectionResultsPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
 cellClassificationResultsPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
 segmentationTilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
-currentPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/pipeline-d/code"    
+currentPath=$code_path
 ###################
 if [[ $steps == *"1"* ]]; then
     echo "script 1"
