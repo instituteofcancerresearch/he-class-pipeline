@@ -35,6 +35,8 @@ echo "cellDetectionResultsPath: $cellDetectionResultsPath"
 echo "cellClassificationResultsPath: $cellClassificationResultsPath"
 echo "cellDetectorCheckPointPath: $cellDetectorCheckPointPath"
 
+echo "********************************"
+
 currentPath=$code_path
 ###################
 if [[ $steps == *"1"* ]]; then
