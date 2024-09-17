@@ -50,7 +50,7 @@ python3 -c "import torch;print(torch.cuda.is_available())"
 
 cd /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev
 
-sbatch --error=logsD/tst.err --output=logsD/tst.out --job-name=tst /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/he-class-pipeline/pipeline-d/rse_sbatch_single.sh /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev/outA/SS-05-14545-1A.ndpi /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/he-class-pipeline/pipeline-d/code steps123 /data/scratch/shared/SINGULARITY-DOWNLOAD/mamba /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE
+sbatch --error=logsD/tst.err --output=logsD/tst.out --job-name=tst /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/he-class-pipeline/pipeline-d/rse_sbatch_single.sh /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev/outA/SS-05-14545-1A.ndpi /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/he-class-pipeline/pipeline-d/code steps123 /data/scratch/shared/SINGULARITY-DOWNLOAD/mamba /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev/outA /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev/outB /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev/outD /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev/outE
 
 
 ###### SHARED MAMBA ENV FOR STAGE 3 inc tensorflow and matlab #####################################

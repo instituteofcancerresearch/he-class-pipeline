@@ -11,30 +11,27 @@ imageName=$1
 code_path=$2
 steps=$3
 conda_dir=$4
-
-echo "imageName: $imageName"
-echo "code_path: $code_path"
-echo "steps: $steps"
-echo "conda_dir: $conda_dir"
-
-conda_env1="$conda_dir/he-shared-tensorflow"
-conda_env2="$conda_dir/he-shared-pytorch"
-echo "conda_env1: $conda_env1"
-echo "conda_env2: $conda_env2"
-
-###################
 tilePath=$5 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
 segmentationTilePath=$6 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
 cellDetectionResultsPath=$7 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
 cellClassificationResultsPath=$8 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
 cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
 
-echo "tilePath=: $tilePath"
+echo "imageName: $imageName"
+echo "code_path: $code_path"
+echo "steps: $steps"
+echo "conda_dir: $conda_dir"
+echo "tilePath: $tilePath"
 echo "segmentationTilePath: $segmentationTilePath"
 echo "cellDetectionResultsPath: $cellDetectionResultsPath"
 echo "cellClassificationResultsPath: $cellClassificationResultsPath"
 echo "cellDetectorCheckPointPath: $cellDetectorCheckPointPath"
+conda_env1="$conda_dir/he-shared-tensorflow"
+conda_env2="$conda_dir/he-shared-pytorch"
+echo "conda_env1: $conda_env1"
+echo "conda_env2: $conda_env2"
 
+###################
 echo "********************************"
 
 currentPath=$code_path
