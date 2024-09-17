@@ -18,8 +18,8 @@ echo "steps: $steps"
 echo "conda_dir: $conda_dir"
 
 conda_env1="$conda_dir/he-shared-tensorflow"
-conda_env1="$conda_dir/he-shared-pytorch"
-echo "conda_env1: $conda_env2"
+conda_env2="$conda_dir/he-shared-pytorch"
+echo "conda_env1: $conda_env1"
 echo "conda_env2: $conda_env2"
 
 ###################
