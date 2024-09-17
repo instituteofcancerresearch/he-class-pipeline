@@ -4,7 +4,6 @@ import pathlib
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(dir_path)
-sys.path.append(str(dir_path) + "/subpackages")
 
 print("Paths:",sys.path)
 
@@ -45,7 +44,7 @@ for path in sys.path:
     print("Path:",path)
 
 import sccnn_detection as sccnn
-from .subpackages import NetworkOptions
+from subpackages import NetworkOptions
 
 opts = NetworkOptions.NetworkOptions(exp_dir=exp_dir,
                                      num_examples_per_epoch_train=1,

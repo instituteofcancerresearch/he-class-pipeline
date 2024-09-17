@@ -8,12 +8,12 @@ sys.path.append(str(dir_path) + "/subpackages")
 
 print("Paths in scnn:", sys.path)
 
-import subpackages.variable_summaries as variable_summaries
-import subpackages.train_op as train_op
-import subpackages.loss_function as loss_function
-import subpackages.inference as inference
-import subpackages.generate_output as generate_output
-import subpackages.run_training as run_training
+from subpackages import variable_summaries
+from subpackages import train_op
+from subpackages import loss_function
+from subpackages import inference
+from subpackages import generate_output
+from subpackages import run_training
 
 
 class SCCNN:
