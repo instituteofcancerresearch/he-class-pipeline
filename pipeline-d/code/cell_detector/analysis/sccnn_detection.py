@@ -28,6 +28,8 @@ class SCCNN:
         self.out_width = out_width
         self.out_feat_dim = out_feat_dim
         self.radius = radius
+        
+        tf.compat.v1.disable_eager_execution()
 
         x, y = tf.meshgrid(tf.range(0, out_height), tf.range(0, out_width))
 
