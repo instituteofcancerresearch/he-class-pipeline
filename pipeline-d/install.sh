@@ -15,10 +15,10 @@ echo "conda_dir: $conda_dir"
 conda_env1 = "$conda_dir/he-shared-tensorflow"
 echo "conda_env1: $conda_env2"
 echo "Creating conda env for tensorflow"
-mamba create --prefix $conda_env1 -c conda-forge python=3.7 cudatoolkit=11.2.2 cudnn=8.1.0.77
-mamba activate he-shared-tensorflow
-mamba install conda-forge::tensorflow
-mamba install conda-forge::tensorflow-gpu
+y | mamba create --prefix $conda_env1 -c conda-forge python=3.7 cudatoolkit=11.2.2 cudnn=8.1.0.77
+y | mamba activate he-shared-tensorflow
+y | mamba install conda-forge::tensorflow
+y | mamba install conda-forge::tensorflow-gpu
 #2. Install MatLab
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/software/applications/MATLAB/R2020b/bin/glnxa64
 python3 -m pip install --upgrade pip
@@ -32,14 +32,14 @@ echo "Finished installing tensorflow"
 echo "Creating conda env for pytorch"
 conda_env2 = "$conda_dir/he-shared-pytorch"
 echo "conda_env2: $conda_env2"
-mamba create --prefix $conda_env2 -c conda-forge python=3.6 cudatoolkit=11.2.2 cudnn=8.1.0.77
-mamba activate he-shared-pytorch
+y | mamba create --prefix $conda_env2 -c conda-forge python=3.6 cudatoolkit=11.2.2 cudnn=8.1.0.77
+y | mamba activate he-shared-pytorch
 python3 -m pip install --upgrade pip
 python3 -m pip install torch==0.3.1 -f https://download.pytorch.org/whl/torch_stable.html
 python3 -m pip install torchvision==0.2.1
 python3 -m pip install torchtext==0.2.3
 python3 -m pip install opencv-python==4.0.0.21
-mamba install bcolz
+y | mamba install bcolz
 python3 -m pip install fastai==0.7.0
 mamba deactivate
 echo "Finished installing pytorch"
