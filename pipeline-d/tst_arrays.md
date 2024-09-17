@@ -53,6 +53,11 @@ cd /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev
 sbatch --error=logsD/tst.err --output=logsD/tst.out --job-name=tst /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/he-class-pipeline/pipeline-d/rse_sbatch_single.sh /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev/outA/SS-05-14545-1A.ndpi /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/he-class-pipeline/pipeline-d/code steps12 /data/scratch/shared/SINGULARITY-DOWNLOAD/mamba
 
 
+###### SHARED MAMBA ENV FOR STAGE 3 inc tensorflow and matlab #####################################
+mamba activate /data/scratch/shared/SINGULARITY-DOWNLOAD/mamba/he-shared-tensorflow
+mamba activate /data/scratch/shared/SINGULARITY-DOWNLOAD/mamba/he-shared-pytorch
+
+
 import sys; 
 
 python3 -m pip uninstall torch

@@ -9,6 +9,7 @@ image_dir=$1
 pipe_path=$2
 code_path=$3
 steps=$4
+conda_dir=$5
 
 counter=0
 for image_file in "$image_dir"/*
@@ -20,7 +21,7 @@ do
   var1="logsD/d_run_$counter.err"
   var2="logsD/d_run_$counter.out"  
   jabname="HEDr"  
-  sbatch --error=$var1 --output=$var2 "$pipe_path/rse_sbatch_single.sh" $image_file $code_path $steps
+  sbatch --error=$var1 --output=$var2 "$pipe_path/rse_sbatch_single.sh" $image_file $code_path $steps $conda_dir
   ((counter++))
 done
 

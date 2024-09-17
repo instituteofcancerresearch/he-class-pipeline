@@ -19,6 +19,7 @@ mamba create --force --prefix "$conda_env1" -c conda-forge python=3.7 cudatoolki
 mamba activate $conda_env1
 mamba install --force conda-forge::tensorflow
 mamba install --force conda-forge::tensorflow-gpu
+mamba install --force pillow
 #2. Install MatLab
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/software/applications/MATLAB/R2020b/bin/glnxa64
 python3 -m pip install --upgrade pip
