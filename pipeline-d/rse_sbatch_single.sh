@@ -29,6 +29,12 @@ cellDetectionResultsPath=$7 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-clas
 cellClassificationResultsPath=$8 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
 cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
 
+echo "tilePath=: $tilePath"
+echo "segmentationTilePath: $segmentationTilePath"
+echo "cellDetectionResultsPath: $cellDetectionResultsPath"
+echo "cellClassificationResultsPath: $cellClassificationResultsPath"
+echo "cellDetectorCheckPointPath: $cellDetectorCheckPointPath"
+
 currentPath=$code_path
 ###################
 if [[ $steps == *"1"* ]]; then
