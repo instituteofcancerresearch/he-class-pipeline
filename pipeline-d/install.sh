@@ -39,7 +39,7 @@ python3 -m pip install torch==0.3.1 -f https://download.pytorch.org/whl/torch_st
 python3 -m pip install torchvision==0.2.1
 python3 -m pip install torchtext==0.2.3
 python3 -m pip install opencv-python==4.0.0.21
-mamba --force install bcolz
+mamba install --force bcolz
 python3 -m pip install fastai==0.7.0
 mamba deactivate
 echo "Finished installing pytorch"
