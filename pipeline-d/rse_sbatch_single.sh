@@ -10,10 +10,17 @@ source ~/.bashrc
 imageName=$1
 code_path=$2
 steps=$3
+conda_dir=$4
 
 echo "imageName: $imageName"
 echo "code_path: $code_path"
 echo "steps: $steps"
+echo "conda_dir: $conda_dir"
+
+conda_env1="$conda_dir/he-shared-tensorflow"
+conda_env1="$conda_dir/he-shared-pytorch"
+echo "conda_env1: $conda_env2"
+echo "conda_env2: $conda_env2"
 
 ###################
 cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
@@ -25,7 +32,7 @@ currentPath=$code_path
 ###################
 if [[ $steps == *"1"* ]]; then
     echo "script 1"
-    mamba activate he-tensorflow
+    mamba activate $conda_env1
     python3 --version
     python3 -m pip show matlabengine
     python3 -c "import sys; print(sys.argv)" "$file_name" "$code_path"
@@ -43,7 +50,7 @@ fi
 if [[ $steps == *"2"* ]]; then
     echo "script 2"
     #source activate pytorch0p3
-    mamba activate he-pytorch
+    mamba activate $conda_env2
     #python3 -c "import cv2;"
     #python3 -c "import torch;"
     #python3 -c "import fastai;"
