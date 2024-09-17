@@ -38,8 +38,12 @@ if len(sys.argv) > 7 and len(sys.argv[7]) > 0:
 #current_dir =  os.path.abspath(os.path.dirname(__file__))
 #parent_dir = os.path.abspath(current_dir + "/../")
 sub_current_dir =  os.path.abspath(os.path.dirname(__file__)) + "/subpackages/"
-print("Adding subackages path:", sub_current_dir)
+matlab_dir1 =  "../matlab_common"
+matlab_dir2 =  "../../matlab_common"
+print("Adding subpackages path:", sub_current_dir)
 sys.path.append(sub_current_dir)
+sys.path.append(matlab_dir1)
+sys.path.append(matlab_dir2)
 for path in sys.path:
     print("Path:",path)
 
