@@ -46,7 +46,7 @@ python3 -c "import torch;print(torch.cuda.is_available())"
 
 
 #############################################################
-./rse_wrap.sh "/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outC" "/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/pipeline-d/code" "steps23"
+./rse_wrap.sh "/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outC" "/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/pipeline-d/code" "steps1"
 
 cd /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev
 

@@ -4,6 +4,9 @@ import pathlib
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(dir_path)
+sys.path.append(str(dir_path) + "/subpackages")
+
+print("Paths:",sys.path)
 
 count = 1
 for arg in sys.argv[1:]:
