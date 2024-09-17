@@ -23,11 +23,12 @@ echo "conda_env1: $conda_env1"
 echo "conda_env2: $conda_env2"
 
 ###################
+tilePath=$5 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
+segmentationTilePath=$6 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
+cellDetectionResultsPath=$7 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
+cellClassificationResultsPath=$8 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
 cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
-tilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
-cellDetectionResultsPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
-cellClassificationResultsPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
-segmentationTilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
+
 currentPath=$code_path
 ###################
 if [[ $steps == *"1"* ]]; then
