@@ -45,7 +45,7 @@ for path in sys.path:
     print("Path:",path)
 
 import sccnn_detection as sccnn
-from subpackages import NetworkOptions
+from .subpackages import NetworkOptions
 
 opts = NetworkOptions.NetworkOptions(exp_dir=exp_dir,
                                      num_examples_per_epoch_train=1,
