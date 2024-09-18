@@ -139,7 +139,7 @@ if [[ $steps == *"3"* ]]; then
     echo "dotAnnotationSize: $dotAnnotationSize"
     echo "======================="
     echo "Calling matLab Tiles2TIF with the following parameters:"
-    echo "smallDotTilePath:${smallDotTilePath}/${imageBase}/"
+    echo "smallDotTilePath:${smallDotTilePath}/${imageBase}"
     echo "tileWidth: $tileWidth"
     echo "tileHeight: $tileHeight"
     echo "imageWidth: $imageWidth"
@@ -153,9 +153,9 @@ if [[ $steps == *"3"* ]]; then
     ###########################
     dotAnnotationSize=30
     tifFile="${tifPath}/${imageBase%.*}_AnnotatedBigDot.tif"
-    bigDotTilePath="${cellClassificationResultsPath}/labelledImagesBigDot/"
+    bigDotTilePath="${cellClassificationResultsPath}/labelledImagesBigDot"
     labelFile="${config_path}/cell_labels.txt"
-    mergeCSVPath="${cellClassificationResultsPath}/all_cells/"
+    mergeCSVPath="${cellClassificationResultsPath}/all_cells"
     ###########################
 
     echo "=======BIG DOT================"
@@ -179,15 +179,15 @@ if [[ $steps == *"3"* ]]; then
     
     matlabBigDotCommands="WriteAnnotations('${imageName}', '${cellClassificationCSVPath}', '${tilePath}', '${bigDotTilePath}', '${labelFile}', ${dotAnnotationSize}); Tiles2TIF('${bigDotTilePath}/${imageBase}/', [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], '${tifFile}', 'jpg', false);"
     
-    mergeCSVFile="${mergeCSVPath}/${imageName%.*}.csv"
+    mergeCSVFile="${mergeCSVPath}/${imageBase%.*}.csv"
 
     echo "=======MERGE CSV================"
     echo "Calling matLab MergeCSVs with the following parameters:"
-    echo "cellClassificationCSVPath: $cellClassificationCSVPath/${imageName}"
-    echo "tilePath: $tilePath/${imageName}"
+    echo "cellClassificationCSVPath: $cellClassificationCSVPath/${imageBase}"
+    echo "tilePath: $tilePath/${imageBase}"
     echo "mergeCSVFile: $mergeCSVFile"
     echo "======================="
-    matlabMergeCSVCommands="MergeCSVs('${cellClassificationCSVPath}/${imageName}', '${tilePath}/${imageName}', '${mergeCSVFile}');"
+    matlabMergeCSVCommands="MergeCSVs('${cellClassificationCSVPath}/${imageBase}', '${tilePath}/${imageBase}', '${mergeCSVFile}');"
     
     matlab -nodesktop -nosplash -r "${matlabOpeningCommands} ${matlabSmallDotCommands} ${matlabBigDotCommands} ${matlabMergeCSVCommands} exit;"   
 fi
