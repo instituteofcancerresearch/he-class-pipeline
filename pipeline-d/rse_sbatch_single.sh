@@ -8,16 +8,18 @@
 source ~/.bashrc
 
 imageName=$1
-code_path=$2
-steps=$3
-conda_dir=$4
-tilePath=$5 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
-segmentationTilePath=$6 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
-cellDetectionResultsPath=$7 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
-cellClassificationResultsPath=$8 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
+imageBase=$2
+code_path=$3
+steps=$4
+conda_dir=$5
+tilePath=$6 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
+segmentationTilePath=$7 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
+cellDetectionResultsPath=$8 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
+cellClassificationResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
 cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
 
 echo "imageName: $imageName"
+echo "imageBase: $imageBase"
 echo "code_root: $code_path"
 echo "steps: $steps"
 echo "conda_dir: $conda_dir"
@@ -118,7 +120,7 @@ if [[ $steps == *"3"* ]]; then
     ###########################
     dotAnnotationSize=6
     tifPath="${cellClassificationResultsPath}/tif/"
-    tifFile="${tifPath}/${imageName%.*}_Annotated.tif"    
+    tifFile="${tifPath}/${imageBase%.*}_Annotated.tif"    
     smallDotTilePath="${cellClassificationResultsPath}/labelledImages/"
     labelFile="${config_path}/cell_labels.txt"
     ###########################
@@ -133,7 +135,7 @@ if [[ $steps == *"3"* ]]; then
     echo "dotAnnotationSize: $dotAnnotationSize"
     echo "======================="
     echo "Calling matLab Tiles2TIF with the following parameters:"
-    echo "smallDotTilePath:${smallDotTilePath}/${imageName}/"
+    echo "smallDotTilePath:${smallDotTilePath}/${imageBase}/"
     echo "tileWidth: $tileWidth"
     echo "tileHeight: $tileHeight"
     echo "imageWidth: $imageWidth"
@@ -141,13 +143,12 @@ if [[ $steps == *"3"* ]]; then
     echo "tifFile: $tifFile"
     echo "jpg"
     echo "false"
-    echo "======================="
     
-    matlabSmallDotCommands="WriteAnnotations('${imageName}', '${cellClassificationCSVPath}', '${tilePath}', '${smallDotTilePath}', '${labelFile}', ${dotAnnotationSize}); Tiles2TIF('${smallDotTilePath}/${imageName}/', [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], '${tifFile}', 'jpg', false);"
+    matlabSmallDotCommands="WriteAnnotations('${imageName}', '${cellClassificationCSVPath}', '${tilePath}', '${smallDotTilePath}', '${labelFile}', ${dotAnnotationSize}); Tiles2TIF('${smallDotTilePath}/${imageBase}/', [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], '${tifFile}', 'jpg', false);"
     
     ###########################
     dotAnnotationSize=30
-    tifFile="${tifPath}/${imageName%.*}_AnnotatedBigDot.tif"
+    tifFile="${tifPath}/${imageBase%.*}_AnnotatedBigDot.tif"
     bigDotTilePath="${cellClassificationResultsPath}/labelledImagesBigDot/"
     labelFile="${config_path}/cell_labels.txt"
     mergeCSVPath="${cellClassificationResultsPath}/all_cells/"
@@ -163,17 +164,16 @@ if [[ $steps == *"3"* ]]; then
     echo "dotAnnotationSize: $dotAnnotationSize"
     echo "======================="
     echo "Calling matLab Tiles2TIF with the following parameters:"
-    echo "bigDotTilePath:${bigDotTilePath}/${imageName}/"
+    echo "bigDotTilePath:${bigDotTilePath}/${imageBase}/"
     echo "tileWidth: $tileWidth"
     echo "tileHeight: $tileHeight"
     echo "imageWidth: $imageWidth"
     echo "imageHeight: $imageHeight"
     echo "tifFile: $tifFile"
     echo "jpg"
-    echo "false"
-    echo "======================="
+    echo "false"    
     
-    matlabBigDotCommands="WriteAnnotations('${imageName}', '${cellClassificationCSVPath}', '${tilePath}', '${bigDotTilePath}', '${labelFile}', ${dotAnnotationSize}); Tiles2TIF('${bigDotTilePath}/${imageName}/', [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], '${tifFile}', 'jpg', false);"
+    matlabBigDotCommands="WriteAnnotations('${imageName}', '${cellClassificationCSVPath}', '${tilePath}', '${bigDotTilePath}', '${labelFile}', ${dotAnnotationSize}); Tiles2TIF('${bigDotTilePath}/${imageBase}/', [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], '${tifFile}', 'jpg', false);"
     
     mergeCSVFile="${mergeCSVPath}/${imageName%.*}.csv"
 
