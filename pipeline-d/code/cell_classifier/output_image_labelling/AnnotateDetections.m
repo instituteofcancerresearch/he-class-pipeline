@@ -1,6 +1,7 @@
 function AnnotatedImage = AnnotateDetections(CSVPath, TilePath, LabelMap, AnnotationSize)
     AnnotatedImage = im2double(imread(TilePath)).^0.3;
 
+    disp(CSVPath);
     fid = fopen(CSVPath);
     
     if fid ~= -1

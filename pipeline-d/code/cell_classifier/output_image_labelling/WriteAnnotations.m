@@ -7,6 +7,7 @@ function WriteAnnotations(ImageNamePattern, DetectionPath, TilePath, OutPath, Co
         OverWrite = false;
     end
 
+    disp(ColourCodeFile);
     fid = fopen(ColourCodeFile);
     colourCodes=textscan(fid, '%s %s %*[^\n]', 'Delimiter', ' ');
     fclose(fid);
