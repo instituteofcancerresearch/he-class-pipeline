@@ -7,18 +7,21 @@
 
 source ~/.bashrc
 
-imageName=$1
-code_path=$2
-steps=$3
-conda_dir=$4
-tilePath=$5 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
-segmentationTilePath=$6 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
-cellDetectionResultsPath=$7 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
-cellClassificationResultsPath=$8 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
+imagePath=$1
+imageName=$2
+code_root=$3
+steps=$4
+conda_dir=$5
+tilePath=$6 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
+segmentationTilePath=$7 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
+cellDetectionResultsPath=$8 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
+cellClassificationResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
 cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
 
+echo "*********INPUTS***********************"
+echo "imagePath: $imagePath"
 echo "imageName: $imageName"
-echo "code_path: $code_path"
+echo "code_root: $code_root"
 echo "steps: $steps"
 echo "conda_dir: $conda_dir"
 echo "tilePath: $tilePath"
@@ -26,12 +29,15 @@ echo "segmentationTilePath: $segmentationTilePath"
 echo "cellDetectionResultsPath: $cellDetectionResultsPath"
 echo "cellClassificationResultsPath: $cellClassificationResultsPath"
 echo "cellDetectorCheckPointPath: $cellDetectorCheckPointPath"
+echo "********************************"
 conda_env1="$conda_dir/he-shared-tensorflow"
 conda_env2="$conda_dir/he-shared-pytorch"
-code_path="$code_path/code"
-config_path="$code_path/config"
+code_path="$code_root/code"
+config_path="$code_root/config"
 echo "conda_env1: $conda_env1"
 echo "conda_env2: $conda_env2"
+echo "code_path: $code_path"
+echo "config_path: $config_path"
 
 ###################
 echo "********************************"
@@ -43,32 +49,27 @@ if [[ $steps == *"1"* ]]; then
     mamba activate $conda_env1
     python3 --version
     python3 -m pip show matlabengine
-    python3 -c "import sys; print(sys.argv)" "$file_name" "$code_path"
-    #python3 -c "import tensorflow as tf; print(tf.__version__)"   
+    python3 -c "import sys; print(sys.argv)" "$file_name" "$code_path"    
     ################################################### 
     
-    sccnnDetectionCodePath="${currentPath}/cell_detector/analysis/"    
+    sccnnDetectionCodePath="${currentPath}/cell_detector/analysis"    
     detectionBatchSize=500
     ##################################################
-    (cd "${sccnnDetectionCodePath}" && python3 "./Generate_Output.py" "${cellDetectorCheckPointPath}" "${tilePath}" "${cellDetectionResultsPath}" "${detectionBatchSize}" "${imageName}" "${segmentationTilePath}" "${matlabPath}")
-    #(cd "${sccnnDetectionCodePath}" && source activate tf1p4 && python3 "./Generate_Output.py" "${cellDetectorCheckPointPath}" "${tilePath}" "${cellDetectionResultsPath}" "${detectionBatchSize}" "${imageName}" "${segmentationTilePath}")
+    (cd "${sccnnDetectionCodePath}" && \
+    python3 "./Generate_Output.py" "${cellDetectorCheckPointPath}" "${tilePath}" \
+    "${cellDetectionResultsPath}" "${detectionBatchSize}" "${imageName}" \
+    "${segmentationTilePath}" "${matlabPath}")    
     mamba deactivate
 fi
 
 if [[ $steps == *"2"* ]]; then
-    echo "script 2"
-    #source activate pytorch0p3
+    echo "script 2"    
     mamba activate $conda_env2
-    #python3 -c "import cv2;"
-    #python3 -c "import torch;"
-    #python3 -c "import fastai;"
-    #python3 -c "from fastai.transforms import *;"
-    #python3 -c "from fastai.conv_learner import *;"
     ###################
-    classificationCodePath="${code_path}/cell_classifier/classification/"
+    classificationCodePath="${code_path}/cell_classifier/classification"
     cellClassifierPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellClassification/EPICC/NDPI/Current/EPICC_Cell_Classifier_NDPI.h5"
-    cellDetectionCSVPath="${cellDetectionResultsPath}/20180117/csv/"
-    cellClassificationCSVPath="${cellClassificationResultsPath}/csv/"
+    cellDetectionCSVPath="${cellDetectionResultsPath}/20180117/csv"
+    cellClassificationCSVPath="${cellClassificationResultsPath}/csv"
     
     classificationBatchSize=50
     cellClassCertainty=0.0
@@ -77,13 +78,31 @@ if [[ $steps == *"2"* ]]; then
     noLabelIdx=4
     labelNames='["epithelial", "stromal", "immune", "unknown"]'
     ###################
-    python3 -c "import sys; sys.path.append('${classificationCodePath}'); import processCSVs;processCSVs.processCSVs(imagePath='${imageName}', detectionPath='${cellDetectionCSVPath}', tilePath='${tilePath}',classifierPath='${cellClassifierPath}', outPath='${cellClassificationCSVPath}', segmentPath='${segmentationTilePath}', batchSize='${classificationBatchSize}', outLabels='${labelNames}',minProb='${cellClassCertainty}', noClassLabel='${noLabelIdx}', outputProbs='${outputProbs}', overwrite='${overwrite}');"
-    # ------- function --------
-    #def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, 
-    #segmentPath=None, windowSize=[51, 51], cellImageSize=224, inLabels=None, 
-    #outLabels=['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end'], 
-    #batchSize=30, arch=dn201, gpu=True, overwrite=False, minProb=0.0, noClassLabel=None, outputProbs=False):        
-    # --------------------------
+    echo "=======Calling processCSVs with the following parameters: ====="
+    echo "classificationCodePath: $classificationCodePath"
+    echo "imageName: $imageName"        
+    echo "detectionPath: ${cellDetectionCSVPath}"
+    echo "tilePath: ${tilePath}"
+    echo "classifierPath: ${cellClassifierPath}"
+    echo "outPath: ${cellClassificationCSVPath}"
+    echo "segmentPath: ${segmentationTilePath}"
+    echo "batchSize: ${classificationBatchSize}"
+    echo "outLabels: ${labelNames}"
+    echo "minProb: ${cellClassCertainty}"
+    echo "noClassLabel: ${noLabelIdx}"
+    echo "outputProbs: ${outputProbs}"
+    echo "overwrite: ${overwrite})"
+    echo "======================="
+
+    python3 -c "import sys; sys.path.append('${classificationCodePath}'); \
+    import processCSVs;processCSVs.processCSVs(imagePath='${imageName}', \
+    detectionPath='${cellDetectionCSVPath}', \
+    tilePath='${tilePath}',classifierPath='${cellClassifierPath}', \
+    outPath='${cellClassificationCSVPath}', segmentPath='${segmentationTilePath}', \
+    batchSize='${classificationBatchSize}', outLabels='${labelNames}',\
+    minProb='${cellClassCertainty}', noClassLabel='${noLabelIdx}', \
+    outputProbs='${outputProbs}', overwrite='${overwrite}');"    
+    
     mamba deactivate
 fi
 
@@ -92,7 +111,8 @@ if [[ $steps == *"3"* ]]; then
 
     module load MATLAB/R2020b
 
-    imageScan="$imageName/FinalScan.ini"
+    echo "=========variables=============="
+    imageScan="$imagePath/FinalScan.ini"
     imageWidth=$(sed -n 's/iWidth=//p' "${imageScan}" | head -1)
     imageHeight=$(sed -n 's/iHeight=//p' "${imageScan}" | head -1)
     tileWidth=$(sed -n 's/iImageWidth=//p' "${imageScan}")
@@ -102,41 +122,114 @@ if [[ $steps == *"3"* ]]; then
     echo "imageHeight: $imageHeight"
     echo "tileWidth: $tileWidth"
     echo "tileHeight: $tileHeight"
+    echo "======================="
 
-    ###########################
+    ###########################    
+    cellClassificationCSVPath="${cellClassificationResultsPath}/csv"
     matlabPath="${currentPath}/cell_detector/matlab_common/"
     outputAnnotationCodePath="${currentPath}/cell_classifier/output_image_labelling/"
-    mergeCSVCodePath="${currentPath}/cell_classifier/merge_csvs/"            
+    mergeCSVCodePath="${currentPath}/cell_classifier/merge_csvs/"                
     ###########################
 
-    matlabOpeningCommands="addpath(genpath('${matlabPath}'), genpath('${outputAnnotationCodePath}'), genpath('${mergeCSVCodePath}'));"
+    matlabOpeningCommands="addpath(genpath('${matlabPath}'), \
+    genpath('${outputAnnotationCodePath}'), genpath('${mergeCSVCodePath}'));"
 
     echo "matlabOpeningCommands: $matlabOpeningCommands"
     
     ###########################
     dotAnnotationSize=6
-    tifPath="${cellClassificationResultsPath}/tif/"
+    tifPath="${cellClassificationResultsPath}/tif"
     tifFile="${tifPath}/${imageName%.*}_Annotated.tif"    
-    smallDotTilePath="${cellClassificationResultsPath}/labelledImages/"
+    smallDotTilePath="${cellClassificationResultsPath}/labelledImages"
     labelFile="${config_path}/cell_labels.txt"
     ###########################
+
+    echo "=======SMALL DOT================"
+    echo "Calling matLab WriteAnnotations with the following parameters:"
+    echo "imageName: $imageName"
+    echo "cellClassificationCSVPath: $cellClassificationCSVPath"
+    echo "tilePath: $tilePath"
+    echo "smallDotTilePath: $smallDotTilePath"
+    echo "labelFile: $labelFile"
+    echo "dotAnnotationSize: $dotAnnotationSize"
+    echo "======================="
+    echo "Calling matLab Tiles2TIF with the following parameters:"
+    echo "smallDotTilePath:${smallDotTilePath}/${imageName}"
+    echo "tileWidth: $tileWidth"
+    echo "tileHeight: $tileHeight"
+    echo "imageWidth: $imageWidth"
+    echo "imageHeight: $imageHeight"
+    echo "tifFile: $tifFile"
+    echo "jpg"
+    echo "false"
     
-    matlabSmallDotCommands="WriteAnnotations('${imageName}', '${cellClassificationCSVPath}', '${tilePath}', '${smallDotTilePath}', '${labelFile}', ${dotAnnotationSize}); Tiles2TIF('${smallDotTilePath}/${imageName}/', [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], '${tifFile}', 'jpg', false);"
+    matlabSmallDotCommands="WriteAnnotations('${imageName}', \
+    '${cellClassificationCSVPath}', \
+    '${tilePath}', \
+    '${smallDotTilePath}', \
+    '${labelFile}', \
+    ${dotAnnotationSize}); \
+    Tiles2TIF('${smallDotTilePath}/${imageName}', \
+    [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], \
+    '${tifFile}', 'jpg', false);"
     
     ###########################
     dotAnnotationSize=30
     tifFile="${tifPath}/${imageName%.*}_AnnotatedBigDot.tif"
-    bigDotTilePath="${cellClassificationResultsPath}/labelledImagesBigDot/"
+    bigDotTilePath="${cellClassificationResultsPath}/labelledImagesBigDot"
     labelFile="${config_path}/cell_labels.txt"
-    mergeCSVPath="${cellClassificationResultsPath}/all_cells/"
+    mergeCSVPath="${cellClassificationResultsPath}/all_cells"
+    mkdir -p $mergeCSVPath
     ###########################
+
+    echo "=======BIG DOT================"
+    echo "Calling matLab WriteAnnoatioans with the following parameters:"
+    echo "imageName: $imageName"
+    echo "cellClassificationCSVPath: $cellClassificationCSVPath"
+    echo "tilePath: $tilePath"
+    echo "bigDotTilePath: $bigDotTilePath"
+    echo "labelFile: $labelFile"
+    echo "dotAnnotationSize: $dotAnnotationSize"
+    echo "======================="
+    echo "Calling matLab Tiles2TIF with the following parameters:"
+    echo "bigDotTilePath:${bigDotTilePath}/${imageName}"
+    echo "tileWidth: $tileWidth"
+    echo "tileHeight: $tileHeight"
+    echo "imageWidth: $imageWidth"
+    echo "imageHeight: $imageHeight"
+    echo "tifFile: $tifFile"
+    echo "jpg"
+    echo "false"    
     
-    matlabBigDotCommands="WriteAnnotations('${imageName}', '${cellClassificationCSVPath}', '${tilePath}', '${bigDotTilePath}', '${labelFile}', ${dotAnnotationSize}); Tiles2TIF('${bigDotTilePath}/${imageName}/', [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], '${tifFile}', 'jpg', false);"
+    matlabBigDotCommands="WriteAnnotations('${imageName}', \
+    '${cellClassificationCSVPath}', \
+    '${tilePath}', '${bigDotTilePath}', \
+    '${labelFile}', \
+    ${dotAnnotationSize}); \
+    Tiles2TIF('${bigDotTilePath}/${imageName}', \
+    [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], \
+    '${tifFile}', 'jpg', false);"
     
     mergeCSVFile="${mergeCSVPath}/${imageName%.*}.csv"
-    matlabMergeCSVCommands="MergeCSVs('${cellClassificationCSVPath}/${imageName}', '${tilePath}/${imageName}', '${mergeCSVFile}');"
+
+    echo "=======MERGE CSV================"
+    echo "Calling matLab MergeCSVs with the following parameters:"
+    echo "mergeClassificationCSVPath: $cellClassificationCSVPath/${imageName}"
+    echo "tilePath: $tilePath/${imageName}"
+    echo "mergeCSVFile: $mergeCSVFile"
+    echo "======================="
+    matlabMergeCSVCommands="MergeCSVs('${cellClassificationCSVPath}/${imageName}', \
+    '${tilePath}/${imageName}', '${mergeCSVFile}');"
     
-    matlab -nodesktop -nosplash -r "${matlabOpeningCommands} ${matlabSmallDotCommands} ${matlabBigDotCommands} ${matlabMergeCSVCommands} exit;"   
+    echo "=======MATLAB COMMANDS================"
+    echo "matlabOpeningCommands: $matlabOpeningCommands"
+    echo "matlabSmallDotCommands: $matlabSmallDotCommands"
+    echo "matlabBigDotCommands: $matlabBigDotCommands"
+    echo "matlabMergeCSVCommands: $matlabMergeCSVCommands"
+
+    matlab -nodesktop -nosplash -r "${matlabOpeningCommands} \
+    ${matlabSmallDotCommands} ${matlabBigDotCommands} \
+    ${matlabMergeCSVCommands} exit;"   
 fi
 
 echo "complete"

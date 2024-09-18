@@ -151,7 +151,7 @@ class CWSGENERATOR:
             thumb = thumb.resize(size=[1024, thumbnail_height], resample=Image.BICUBIC)
             thumb.save(os.path.join(output_dir, 'SlideThumb.jpg'), format='JPEG')
         else:
-       	    slide_dimension_rescale = np.round(np.array(slide_dimension) / rescale)
+            slide_dimension_rescale = np.round(np.array(slide_dimension) / rescale)
             slide_dimension_ss1 = (slide_dimension_rescale / 16).astype(np.int32)
             scale_h = round(slide_dimension[0]) / 1024
             thumbnail_height = int(round(slide_dimension[1] / scale_h))

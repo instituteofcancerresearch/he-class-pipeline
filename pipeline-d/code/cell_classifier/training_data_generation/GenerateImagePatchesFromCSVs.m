@@ -13,6 +13,8 @@ function GenerateImagePatchesFromCSVs(CSVPath, TilePath, OutPath, nPatches, Patc
             readPositions = [7 20];
         end
 
+        disp('Logging MatLab file path');
+        disp(fullfile(TilePath, csvFolders(i).name, '/FinalScan.ini'));
         fid = fopen(fullfile(TilePath, csvFolders(i).name, '/FinalScan.ini'), 'r');
         tileDims = textscan(fid, '%s', 2, 'delimiter', '\n', 'headerlines', readPositions(1));
         tileDims = split(tileDims{:}, '=');

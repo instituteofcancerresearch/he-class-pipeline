@@ -7,6 +7,8 @@ function WriteAnnotations(ImageNamePattern, DetectionPath, TilePath, OutPath, Co
         OverWrite = false;
     end
 
+    disp('Logging MatLab file path');
+    disp(ColourCodeFile);
     fid = fopen(ColourCodeFile);
     colourCodes=textscan(fid, '%s %s %*[^\n]', 'Delimiter', ' ');
     fclose(fid);
@@ -15,14 +17,23 @@ function WriteAnnotations(ImageNamePattern, DetectionPath, TilePath, OutPath, Co
 
     labelNames = colourCodes(:, 2);
     colourCodes = colourCodes(:, 1);
-    
+
+    disp('Matlab output labels and colours:');    
+    disp(labelNames);
+    disp(colourCodes);
+        
     parfor i = 1:length(colourCodes)
         colourCode = colourCodes{i};
-
-        if strcmp(labelNames{i}, 'unk')
+        labelName = labelNames{i};
+        disp('Matlab output label and colour:');
+        disp(labelName);
+        disp(colourCode);
+        
+        if strcmp(labelNames{i}, 'unknown')
             labelColours{i} = [];
-        else
-            labelColours{i} = (hex2dec({colourCode(1:2), colourCode(3:4), colourCode(5:6)})')./255;
+        else            
+            % labelColours{i} = (hex2dec({colourCode(1:2), colourCode(3:4), colourCode(5:6)}))./255;
+            labelColours{i} = (i/length(colourCodes))*255; % hex2dec(colourCode)./255;
         end
     end
     
@@ -33,6 +44,15 @@ function WriteAnnotations(ImageNamePattern, DetectionPath, TilePath, OutPath, Co
     
     tileFiles = dir(fullfile(TilePath, ImageNamePattern, 'Da*.jpg'));
     csvFiles = dir(fullfile(DetectionPath, ImageNamePattern, 'Da*.csv'));
+
+    disp('Matlab output tile path:');
+    disp(fullfile(TilePath, ImageNamePattern, 'Da*.jpg'));    
+    disp('Matlab output tile files:');
+    disp(tileFiles);
+    disp('Matlab output csv path:');
+    disp(fullfile(DetectionPath, ImageNamePattern, 'Da*.jpg'));    
+    disp('Matlab output csv files:');
+    disp(csvFiles);
 
     if isempty(csvFiles)
         error('No CSV Files Found!');
