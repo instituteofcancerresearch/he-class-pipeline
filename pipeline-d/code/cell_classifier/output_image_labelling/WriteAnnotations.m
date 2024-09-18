@@ -18,19 +18,21 @@ function WriteAnnotations(ImageNamePattern, DetectionPath, TilePath, OutPath, Co
     labelNames = colourCodes(:, 2);
     colourCodes = colourCodes(:, 1);
 
-    disp('Matlab output:');
+    disp('Matlab output labels and colours:');    
     disp(labelNames);
     disp(colourCodes);
-    
+        
     parfor i = 1:length(colourCodes)
         colourCode = colourCodes{i};
-        disp('Matlab Colour code:');
+        labelName = labelNames{i};
+        disp('Matlab output label and colour:');
+        disp(labelName);
         disp(colourCode);
-
-        if strcmp(labelNames{i}, 'unk')
+        
+        if strcmp(labelNames{i}, 'unknown')
             labelColours{i} = [];
         else            
-            labelColours{i} = (hex2dec({colourCode(1:2), colourCode(3:4), colourCode(5:6)})')./255;
+            labelColours{i} = (hex2dec({colourCode(1:2), colourCode(3:4), colourCode(5:6)}))./255;
         end
     end
     
