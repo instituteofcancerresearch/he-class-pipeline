@@ -24,6 +24,7 @@ mamba install --force pillow
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/software/applications/MATLAB/R2020b/bin/glnxa64
 python3 -m pip install --upgrade pip
 python3 -m pip install matlabengine==9.9.6
+mamba install --force -c conda-forge cudatoolkit-dev
 mamba deactivate
 echo "Finished installing tensorflow"
 ####################################################################################################
@@ -42,6 +43,7 @@ python3 -m pip install torchtext==0.2.3
 python3 -m pip install opencv-python==4.0.0.21
 mamba install --force bcolz
 python3 -m pip install fastai==0.7.0
+mamba install --force -c conda-forge cudatoolkit-dev
 mamba deactivate
 echo "Finished installing pytorch"
 

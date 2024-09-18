@@ -28,6 +28,8 @@ echo "cellClassificationResultsPath: $cellClassificationResultsPath"
 echo "cellDetectorCheckPointPath: $cellDetectorCheckPointPath"
 conda_env1="$conda_dir/he-shared-tensorflow"
 conda_env2="$conda_dir/he-shared-pytorch"
+code_path="$code_path/code"
+config_path="$code_path/config"
 echo "conda_env1: $conda_env1"
 echo "conda_env2: $conda_env2"
 
@@ -116,7 +118,7 @@ if [[ $steps == *"3"* ]]; then
     tifPath="${cellClassificationResultsPath}/tif/"
     tifFile="${tifPath}/${imageName%.*}_Annotated.tif"    
     smallDotTilePath="${cellClassificationResultsPath}/labelledImages/"
-    labelFile="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/pipeline-d/code/config/cell_labels.txt"
+    labelFile="${config_path}/cell_labels.txt"
     ###########################
     
     matlabSmallDotCommands="WriteAnnotations('${imageName}', '${cellClassificationCSVPath}', '${tilePath}', '${smallDotTilePath}', '${labelFile}', ${dotAnnotationSize}); Tiles2TIF('${smallDotTilePath}/${imageName}/', [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], '${tifFile}', 'jpg', false);"
@@ -125,7 +127,7 @@ if [[ $steps == *"3"* ]]; then
     dotAnnotationSize=30
     tifFile="${tifPath}/${imageName%.*}_AnnotatedBigDot.tif"
     bigDotTilePath="${cellClassificationResultsPath}/labelledImagesBigDot/"
-    labelFile="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/pipeline-d/code/config/cell_labels.txt"
+    labelFile="${config_path}/cell_labels.txt"
     mergeCSVPath="${cellClassificationResultsPath}/all_cells/"
     ###########################
     
