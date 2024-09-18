@@ -39,13 +39,18 @@ def main(args):
     matching_files = glob.glob(path)    
     print(f"Matching files: {matching_files}")
 
-    if os.path.exists(output_log):
-        with open(output_log, "a") as f:
-            f.write(f"{datetime.datetime.now()}\tStarting OpenSlide ICR\n")
-    else:
-        with open(output_log, "w") as f:
-            f.write(f"{datetime.datetime.now()}\tStarting OpenSlide ICR\n")
+    try:
+        if os.path.exists(output_log):
+            with open(output_log, "a") as f:
+                f.write(f"{datetime.datetime.now()}\tStarting OpenSlide ICR\n")
+        else:
+            with open(output_log, "w") as f:
+                f.write(f"{datetime.datetime.now()}\tStarting OpenSlide ICR\n")
+        print("Output file successfully initialized",output_log)
+    except Exception as e:
+        print("Error initializing output file",output_log)
 
+    print(f"Starting loop for {len(matching_files)} files")
     for i in range(len(matching_files)):
         fl = matching_files[i]
         with open(output_log, "a") as f:
@@ -62,6 +67,7 @@ def main(args):
                     print(f"Removed {fo} to replace")
 
         
+        print(f"{i} Starting generate_cws, {fo}")
         generate_cws.save_cws.run(opts_in={'output_dir': output_path, 'wsi_input': fl, 'tif_obj': 40, 'cws_objective_value': 20, 'in_mpp': None, 'out_mpp': None, 'out_mpp_target_objective': 40}, file_name_pattern=pattern, num_cpu=4) 
         
     print("Finished OpenSlide ICR")
