@@ -24,11 +24,17 @@ class CWSGENERATOR:
                  out_mpp_target_objective=40):
         self.input_dir = input_dir
         self.file_name = os.path.basename(file_name)
-        if not os.path.isdir(output_dir):
-            os.makedirs(output_dir)
+        try:
+            if not os.path.isdir(output_dir):
+                os.makedirs(output_dir)
+        except:
+            print("Error creating output directory",output_dir)
         self.output_dir = os.path.join(output_dir, self.file_name)
-        if not os.path.isdir(self.output_dir):
-            os.makedirs(self.output_dir)
+        try:
+            if not os.path.isdir(self.output_dir):
+                os.makedirs(self.output_dir)
+        except:
+            print("Error creating output directory",self.output_dir)
         self.openslide_obj = openslide.OpenSlide(filename=os.path.join(self.input_dir, self.file_name))
         self.cws_read_size = np.array([cws_read_size_w, cws_read_size_h])
 
