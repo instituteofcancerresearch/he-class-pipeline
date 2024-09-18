@@ -1,4 +1,6 @@
 function Save_Detection_Output(results_dir, sub_dir_name, h5_file_name, image_path_full, maxclique)
+    disp('MATLab: check file existance');
+    disp(fullfile(results_dir, 'annotated_images', sub_dir_name,[h5_file_name(1:end-2), 'png']), 'file'));
     if ~exist(...
             fullfile(results_dir, 'annotated_images', sub_dir_name, ...
             [h5_file_name(1:end-2), 'png']), 'file')

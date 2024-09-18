@@ -11,14 +11,30 @@ from subpackages import h5
 
 
 def make_sub_dirs(opts, sub_dir_name):
-    if not os.path.isdir(os.path.join(opts.results_dir, 'h5', sub_dir_name)):
-        os.makedirs(os.path.join(opts.results_dir, 'h5', sub_dir_name))
-    if not os.path.isdir(os.path.join(opts.results_dir, 'annotated_images', sub_dir_name)):
-        os.makedirs(os.path.join(opts.results_dir, 'annotated_images', sub_dir_name))
-    if not os.path.isdir(os.path.join(opts.results_dir, 'csv', sub_dir_name)):
-        os.makedirs(os.path.join(opts.results_dir, 'csv', sub_dir_name))
-    if not os.path.isdir(os.path.join(opts.preprocessed_dir, 'pre_processed', sub_dir_name)):
-        os.makedirs(os.path.join(opts.preprocessed_dir, 'pre_processed', sub_dir_name))
+    try:
+        print("Creating directory:",os.path.join(opts.results_dir, 'h5', sub_dir_name))
+        if not os.path.isdir(os.path.join(opts.results_dir, 'h5', sub_dir_name)):
+            os.makedirs(os.path.join(opts.results_dir, 'h5', sub_dir_name))
+    except Exception as e:    
+        print(e)
+    try:
+        print("Creating directory:",os.path.join(opts.results_dir, 'h5', sub_dir_name))
+        if not os.path.isdir(os.path.join(opts.results_dir, 'annotated_images', sub_dir_name)):
+            os.makedirs(os.path.join(opts.results_dir, 'annotated_images', sub_dir_name))
+    except Exception as e:    
+        print(e)
+    try:
+        print("Creating directory:",os.path.join(opts.results_dir, 'h5', sub_dir_name))
+        if not os.path.isdir(os.path.join(opts.results_dir, 'csv', sub_dir_name)):
+            os.makedirs(os.path.join(opts.results_dir, 'csv', sub_dir_name))
+    except Exception as e:    
+        print(e)
+    try:
+        print("Creating directory:",os.path.join(opts.preprocessed_dir, 'h5', sub_dir_name))
+        if not os.path.isdir(os.path.join(opts.preprocessed_dir, 'pre_processed', sub_dir_name)):
+            os.makedirs(os.path.join(opts.preprocessed_dir, 'pre_processed', sub_dir_name))
+    except Exception as e:    
+        print(e)
 
 
 def pre_process_images(opts, sub_dir_name, eng=None):

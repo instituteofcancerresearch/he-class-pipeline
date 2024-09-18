@@ -83,6 +83,22 @@ if [[ $steps == *"2"* ]]; then
     noLabelIdx=4
     labelNames='["epithelial", "stromal", "immune", "unknown"]'
     ###################
+    echo "=======Calling processCSVs with the following parameters: ====="
+    echo "classificationCodePath: $classificationCodePath"
+    echo "imageName: $imageName"        
+    echo "detectionPath: ${cellDetectionCSVPath}"
+    echo "tilePath: ${tilePath}"
+    echo "classifierPath: ${cellClassifierPath}"
+    echo "outPath: ${cellClassificationCSVPath}"
+    echo "segmentPath: ${segmentationTilePath}"
+    echo "batchSize: ${classificationBatchSize}"
+    echo "outLabels: ${labelNames}"
+    echo "minProb: ${cellClassCertainty}"
+    echo "noClassLabel: ${noLabelIdx}"
+    echo "outputProbs: ${outputProbs}"
+    echo "overwrite: ${overwrite})"
+    echo "======================="
+
     python3 -c "import sys; sys.path.append('${classificationCodePath}'); import processCSVs;processCSVs.processCSVs(imagePath='${imageName}', detectionPath='${cellDetectionCSVPath}', tilePath='${tilePath}',classifierPath='${cellClassifierPath}', outPath='${cellClassificationCSVPath}', segmentPath='${segmentationTilePath}', batchSize='${classificationBatchSize}', outLabels='${labelNames}',minProb='${cellClassCertainty}', noClassLabel='${noLabelIdx}', outputProbs='${outputProbs}', overwrite='${overwrite}');"
     # ------- function --------
     #def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, 
@@ -130,7 +146,7 @@ if [[ $steps == *"3"* ]]; then
     ###########################
 
     echo "=======SMALL DOT================"
-    echo "Calling matLab WriteAnnoatioans with the following parameters:"
+    echo "Calling matLab WriteAnnotations with the following parameters:"
     echo "imageName: $imageName"
     echo "cellClassificationCSVPath: $cellClassificationCSVPath"
     echo "tilePath: $tilePath"

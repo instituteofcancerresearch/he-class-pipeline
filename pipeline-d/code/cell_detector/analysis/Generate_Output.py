@@ -72,26 +72,31 @@ opts.results_dir = os.path.join(opts.results_dir, '20180117')
 opts.preprocessed_dir = os.path.join(opts.preprocessed_dir, '20180117')
 
 try:
+    print("Creating directory:",os.path.join(opts.results_dir))
     if not os.path.isdir(opts.results_dir):
         os.makedirs(opts.results_dir)
 except Exception as e:    
     print(e)
 try:
+    print("Creating directory:",os.path.join(opts.results_dir, 'h5'))    
     if not os.path.isdir(os.path.join(opts.results_dir, 'h5')):
         os.makedirs(os.path.join(opts.results_dir, 'h5'))
 except Exception as e:    
     print(e)
 try:
+    print("Creating directory:",os.path.join(opts.results_dir, 'annotated_images'))
     if not os.path.isdir(os.path.join(opts.results_dir, 'annotated_images')):
         os.makedirs(os.path.join(opts.results_dir, 'annotated_images'))
 except Exception as e:    
     print(e)
 try:
+    print("Creating directory:",os.path.join(opts.results_dir, 'csv'))
     if not os.path.isdir(os.path.join(opts.results_dir, 'csv')):
         os.makedirs(os.path.join(opts.results_dir, 'csv'))
 except Exception as e:    
     print(e)
 try:
+    print("Creating directory:",os.path.join(opts.preprocessed_dir, 'pre_processed'))
     if not os.path.isdir(os.path.join(opts.preprocessed_dir, 'pre_processed')):
         os.makedirs(os.path.join(opts.preprocessed_dir, 'pre_processed'))
 except Exception as e:    
