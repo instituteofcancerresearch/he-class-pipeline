@@ -59,8 +59,8 @@ steps123 \
 /data/scratch/shared/SINGULARITY-DOWNLOAD/mamba \
 /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev/outA \
 /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev/outB \
-/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev/outD \
-/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev/outE
+/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev/outD1 \
+/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev/outD2
 
 
 ###### SHARED MAMBA ENV FOR STAGE 3 inc tensorflow and matlab #####################################
