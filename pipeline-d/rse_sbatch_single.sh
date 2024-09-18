@@ -139,9 +139,9 @@ if [[ $steps == *"3"* ]]; then
     
     ###########################
     dotAnnotationSize=6
-    tifPath="${cellClassificationResultsPath}/tif/"
+    tifPath="${cellClassificationResultsPath}/tif"
     tifFile="${tifPath}/${imageBase%.*}_Annotated.tif"    
-    smallDotTilePath="${cellClassificationResultsPath}/labelledImages/"
+    smallDotTilePath="${cellClassificationResultsPath}/labelledImages"
     labelFile="${config_path}/cell_labels.txt"
     ###########################
 
@@ -164,7 +164,15 @@ if [[ $steps == *"3"* ]]; then
     echo "jpg"
     echo "false"
     
-    matlabSmallDotCommands="WriteAnnotations('${imageName}', '${cellClassificationCSVPath}', '${tilePath}', '${smallDotTilePath}', '${labelFile}', ${dotAnnotationSize}); Tiles2TIF('${smallDotTilePath}/${imageBase}/', [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], '${tifFile}', 'jpg', false);"
+    matlabSmallDotCommands="WriteAnnotations('${imageName}', \
+    '${cellClassificationCSVPath}', \
+    '${tilePath}', \
+    '${smallDotTilePath}', \
+    '${labelFile}', \
+    ${dotAnnotationSize}); \
+    Tiles2TIF('${smallDotTilePath}/${imageBase}', \
+    [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], \
+    '${tifFile}', 'jpg', false);"
     
     ###########################
     dotAnnotationSize=30
@@ -184,7 +192,7 @@ if [[ $steps == *"3"* ]]; then
     echo "dotAnnotationSize: $dotAnnotationSize"
     echo "======================="
     echo "Calling matLab Tiles2TIF with the following parameters:"
-    echo "bigDotTilePath:${bigDotTilePath}/${imageBase}/"
+    echo "bigDotTilePath:${bigDotTilePath}/${imageBase}"
     echo "tileWidth: $tileWidth"
     echo "tileHeight: $tileHeight"
     echo "imageWidth: $imageWidth"
@@ -193,7 +201,14 @@ if [[ $steps == *"3"* ]]; then
     echo "jpg"
     echo "false"    
     
-    matlabBigDotCommands="WriteAnnotations('${imageName}', '${cellClassificationCSVPath}', '${tilePath}', '${bigDotTilePath}', '${labelFile}', ${dotAnnotationSize}); Tiles2TIF('${bigDotTilePath}/${imageBase}/', [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], '${tifFile}', 'jpg', false);"
+    matlabBigDotCommands="WriteAnnotations('${imageName}', \
+    '${cellClassificationCSVPath}', \
+    '${tilePath}', '${bigDotTilePath}', \
+    '${labelFile}', \
+    ${dotAnnotationSize}); \
+    Tiles2TIF('${bigDotTilePath}/${imageBase}', \
+    [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], \
+    '${tifFile}', 'jpg', false);"
     
     mergeCSVFile="${mergeCSVPath}/${imageBase%.*}.csv"
 
