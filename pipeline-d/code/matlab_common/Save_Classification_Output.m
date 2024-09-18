@@ -3,7 +3,7 @@ function Save_Classification_Output(results_dir, sub_dir_name, mat_file_name, im
 %     mkdir(fullfile(results_dir, 'csv', sub_dir_name));
 % end
 disp('MATLab: check file existance');
-disp(fullfile(results_dir, 'annotated_images', sub_dir_name,[mat_file_name(1:end-3), 'png']), 'file'));
+disp(fullfile(results_dir, 'annotated_images', sub_dir_name,[mat_file_name(1:end-3), 'png']));
 if ~exist(fullfile(results_dir, 'annotated_images', sub_dir_name, [mat_file_name(1:end-3), 'png']), 'file')
     strength = 5;
     A = readtable(csv_file_name);
