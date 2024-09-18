@@ -125,9 +125,10 @@ if [[ $steps == *"3"* ]]; then
     echo "======================="
 
     ###########################    
+    cellClassificationCSVPath="${cellClassificationResultsPath}/csv"
     matlabPath="${currentPath}/cell_detector/matlab_common/"
     outputAnnotationCodePath="${currentPath}/cell_classifier/output_image_labelling/"
-    mergeCSVCodePath="${currentPath}/cell_classifier/merge_csvs/"            
+    mergeCSVCodePath="${currentPath}/cell_classifier/merge_csvs/"                
     ###########################
 
     matlabOpeningCommands="addpath(genpath('${matlabPath}'), \
@@ -226,7 +227,9 @@ if [[ $steps == *"3"* ]]; then
     echo "matlabBigDotCommands: $matlabBigDotCommands"
     echo "matlabMergeCSVCommands: $matlabMergeCSVCommands"
 
-    matlab -nodesktop -nosplash -r "${matlabOpeningCommands} ${matlabSmallDotCommands} ${matlabBigDotCommands} ${matlabMergeCSVCommands} exit;"   
+    matlab -nodesktop -nosplash -r "${matlabOpeningCommands} \
+    ${matlabSmallDotCommands} ${matlabBigDotCommands} \
+    ${matlabMergeCSVCommands} exit;"   
 fi
 
 echo "complete"
