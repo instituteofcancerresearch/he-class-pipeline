@@ -18,7 +18,7 @@ cellClassificationResultsPath=$8 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he
 cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
 
 echo "imageName: $imageName"
-echo "code_path: $code_path"
+echo "code_root: $code_path"
 echo "steps: $steps"
 echo "conda_dir: $conda_dir"
 echo "tilePath: $tilePath"
@@ -32,6 +32,8 @@ code_path="$code_path/code"
 config_path="$code_path/config"
 echo "conda_env1: $conda_env1"
 echo "conda_env2: $conda_env2"
+echo "code_path: $code_path"
+echo "config_path: $config_path"
 
 ###################
 echo "********************************"
