@@ -1,6 +1,13 @@
 import tensorflow as tf
 import stain_normalization as sn # not needed forces path recognition
 
+import os,sys
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(dir_path)
+sys.path.append(str(dir_path) + "/subpackages")
+
+print("Paths in scnn:", sys.path)
+
 from subpackages import variable_summaries
 from subpackages import train_op
 from subpackages import loss_function
@@ -21,6 +28,8 @@ class SCCNN:
         self.out_width = out_width
         self.out_feat_dim = out_feat_dim
         self.radius = radius
+        
+        tf.compat.v1.disable_eager_execution()
 
         x, y = tf.meshgrid(tf.range(0, out_height), tf.range(0, out_width))
 

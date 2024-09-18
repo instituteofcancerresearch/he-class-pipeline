@@ -41,7 +41,7 @@ with open(batch_file, "a") as f:
     f.write(f"echo '********'\n")    
     f.write(f"echo '{sing_call}'\n")    
     f.write(f"echo '********'\n")       
-    f.write("echo 'Starting HECr'\n")        
+    f.write("echo 'Starting HEAr'\n")        
     f.write(f"srun {sing_call}")
 
 

@@ -1,30 +1,46 @@
 #!/bin/sh
-#SBATCH -J "tst-gpu"
 #SBATCH -p gpu
+#SBATCH -J "HEDri"
 #SBATCH -t 12:00:00
 #SBATCH --gres=gpu:1
+
 
 source ~/.bashrc
 
 imageName=$1
 code_path=$2
 steps=$3
+conda_dir=$4
+tilePath=$5 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
+segmentationTilePath=$6 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
+cellDetectionResultsPath=$7 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
+cellClassificationResultsPath=$8 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
+cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
 
 echo "imageName: $imageName"
 echo "code_path: $code_path"
 echo "steps: $steps"
+echo "conda_dir: $conda_dir"
+echo "tilePath: $tilePath"
+echo "segmentationTilePath: $segmentationTilePath"
+echo "cellDetectionResultsPath: $cellDetectionResultsPath"
+echo "cellClassificationResultsPath: $cellClassificationResultsPath"
+echo "cellDetectorCheckPointPath: $cellDetectorCheckPointPath"
+conda_env1="$conda_dir/he-shared-tensorflow"
+conda_env2="$conda_dir/he-shared-pytorch"
+code_path="$code_path/code"
+config_path="$code_path/config"
+echo "conda_env1: $conda_env1"
+echo "conda_env2: $conda_env2"
 
 ###################
-cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
-tilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
-cellDetectionResultsPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
-cellClassificationResultsPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
-segmentationTilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
-currentPath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/pipeline-d/code"    
+echo "********************************"
+
+currentPath=$code_path
 ###################
 if [[ $steps == *"1"* ]]; then
     echo "script 1"
-    mamba activate he-tensorflow
+    mamba activate $conda_env1
     python3 --version
     python3 -m pip show matlabengine
     python3 -c "import sys; print(sys.argv)" "$file_name" "$code_path"
@@ -42,7 +58,7 @@ fi
 if [[ $steps == *"2"* ]]; then
     echo "script 2"
     #source activate pytorch0p3
-    mamba activate he-pytorch
+    mamba activate $conda_env2
     #python3 -c "import cv2;"
     #python3 -c "import torch;"
     #python3 -c "import fastai;"
@@ -102,7 +118,7 @@ if [[ $steps == *"3"* ]]; then
     tifPath="${cellClassificationResultsPath}/tif/"
     tifFile="${tifPath}/${imageName%.*}_Annotated.tif"    
     smallDotTilePath="${cellClassificationResultsPath}/labelledImages/"
-    labelFile="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/pipeline-d/code/config/cell_labels.txt"
+    labelFile="${config_path}/cell_labels.txt"
     ###########################
     
     matlabSmallDotCommands="WriteAnnotations('${imageName}', '${cellClassificationCSVPath}', '${tilePath}', '${smallDotTilePath}', '${labelFile}', ${dotAnnotationSize}); Tiles2TIF('${smallDotTilePath}/${imageName}/', [${tileWidth} ${tileHeight}], [${imageWidth}, ${imageHeight}], '${tifFile}', 'jpg', false);"
@@ -111,7 +127,7 @@ if [[ $steps == *"3"* ]]; then
     dotAnnotationSize=30
     tifFile="${tifPath}/${imageName%.*}_AnnotatedBigDot.tif"
     bigDotTilePath="${cellClassificationResultsPath}/labelledImagesBigDot/"
-    labelFile="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/pipeline-d/code/config/cell_labels.txt"
+    labelFile="${config_path}/cell_labels.txt"
     mergeCSVPath="${cellClassificationResultsPath}/all_cells/"
     ###########################
     

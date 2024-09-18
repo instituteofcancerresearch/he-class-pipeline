@@ -2,6 +2,11 @@ import os
 import sys
 import pathlib
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(dir_path)
+
+print("Paths:",sys.path)
+
 count = 1
 for arg in sys.argv[1:]:
     print("Arg",count,arg)
@@ -33,8 +38,12 @@ if len(sys.argv) > 7 and len(sys.argv[7]) > 0:
 #current_dir =  os.path.abspath(os.path.dirname(__file__))
 #parent_dir = os.path.abspath(current_dir + "/../")
 sub_current_dir =  os.path.abspath(os.path.dirname(__file__)) + "/subpackages/"
-print("Adding subackages path:", sub_current_dir)
+matlab_dir1 =  "../matlab_common"
+matlab_dir2 =  "../../matlab_common"
+print("Adding subpackages path:", sub_current_dir)
 sys.path.append(sub_current_dir)
+sys.path.append(matlab_dir1)
+sys.path.append(matlab_dir2)
 for path in sys.path:
     print("Path:",path)
 
