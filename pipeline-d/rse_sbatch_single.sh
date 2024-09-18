@@ -18,6 +18,7 @@ cellDetectionResultsPath=$8 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-clas
 cellClassificationResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
 cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
 
+echo "*********INPUTS***********************"
 echo "imageName: $imageName"
 echo "imageBase: $imageBase"
 echo "code_root: $code_path"
@@ -28,6 +29,7 @@ echo "segmentationTilePath: $segmentationTilePath"
 echo "cellDetectionResultsPath: $cellDetectionResultsPath"
 echo "cellClassificationResultsPath: $cellClassificationResultsPath"
 echo "cellDetectorCheckPointPath: $cellDetectorCheckPointPath"
+echo "********************************"
 conda_env1="$conda_dir/he-shared-tensorflow"
 conda_env2="$conda_dir/he-shared-pytorch"
 code_path="$code_path/code"
@@ -96,6 +98,7 @@ if [[ $steps == *"3"* ]]; then
 
     module load MATLAB/R2020b
 
+    echo "=========variables=============="
     imageScan="$imageName/FinalScan.ini"
     imageWidth=$(sed -n 's/iWidth=//p' "${imageScan}" | head -1)
     imageHeight=$(sed -n 's/iHeight=//p' "${imageScan}" | head -1)
@@ -106,8 +109,9 @@ if [[ $steps == *"3"* ]]; then
     echo "imageHeight: $imageHeight"
     echo "tileWidth: $tileWidth"
     echo "tileHeight: $tileHeight"
+    echo "======================="
 
-    ###########################
+    ###########################    
     matlabPath="${currentPath}/cell_detector/matlab_common/"
     outputAnnotationCodePath="${currentPath}/cell_classifier/output_image_labelling/"
     mergeCSVCodePath="${currentPath}/cell_classifier/merge_csvs/"            
