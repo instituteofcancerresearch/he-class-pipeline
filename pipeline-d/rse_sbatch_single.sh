@@ -112,7 +112,7 @@ if [[ $steps == *"3"* ]]; then
     module load MATLAB/R2020b
 
     echo "=========variables=============="
-    imageScan="$imageName/FinalScan.ini"
+    imageScan="$imagePath/FinalScan.ini"
     imageWidth=$(sed -n 's/iWidth=//p' "${imageScan}" | head -1)
     imageHeight=$(sed -n 's/iHeight=//p' "${imageScan}" | head -1)
     tileWidth=$(sed -n 's/iImageWidth=//p' "${imageScan}")
