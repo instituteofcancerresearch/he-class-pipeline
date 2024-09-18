@@ -9,7 +9,7 @@ source ~/.bashrc
 
 imageName=$1
 imageBase=$2
-code_path=$3
+code_root=$3
 steps=$4
 conda_dir=$5
 tilePath=$6 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
@@ -21,7 +21,7 @@ cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/Cell
 echo "*********INPUTS***********************"
 echo "imageName: $imageName"
 echo "imageBase: $imageBase"
-echo "code_root: $code_path"
+echo "code_root: $code_root"
 echo "steps: $steps"
 echo "conda_dir: $conda_dir"
 echo "tilePath: $tilePath"
@@ -32,7 +32,7 @@ echo "cellDetectorCheckPointPath: $cellDetectorCheckPointPath"
 echo "********************************"
 conda_env1="$conda_dir/he-shared-tensorflow"
 conda_env2="$conda_dir/he-shared-pytorch"
-code_path="$code_path/code"
+code_path="$code_root/code"
 config_path="$code_root/config"
 echo "conda_env1: $conda_env1"
 echo "conda_env2: $conda_env2"
