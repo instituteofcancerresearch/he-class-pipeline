@@ -41,7 +41,7 @@ with open(batch_file, "a") as f:
     f.write("#SBATCH -J HECr\n")
     f.write("#SBATCH -o c_run.out\n")
     f.write("#SBATCH -e c_run.err\n")
-    f.write("#SBATCH -n 4\n")
+    f.write("#SBATCH -n 1\n")
     f.write("#SBATCH -t 100:00:00\n")
     f.write("source ~/.bashrc\n")        
     f.write(f"echo '********'\n")    
