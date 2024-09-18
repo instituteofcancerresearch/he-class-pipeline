@@ -33,7 +33,7 @@ function WriteAnnotations(ImageNamePattern, DetectionPath, TilePath, OutPath, Co
             labelColours{i} = [];
         else            
             % labelColours{i} = (hex2dec({colourCode(1:2), colourCode(3:4), colourCode(5:6)}))./255;
-            labelColours{i} = i/length(colourCodes); % hex2dec(colourCode)./255;
+            labelColours{i} = (i/length(colourCodes))*255; % hex2dec(colourCode)./255;
         end
     end
     
