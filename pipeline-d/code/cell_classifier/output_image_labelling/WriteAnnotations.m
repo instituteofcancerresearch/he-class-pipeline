@@ -45,6 +45,15 @@ function WriteAnnotations(ImageNamePattern, DetectionPath, TilePath, OutPath, Co
     tileFiles = dir(fullfile(TilePath, ImageNamePattern, 'Da*.jpg'));
     csvFiles = dir(fullfile(DetectionPath, ImageNamePattern, 'Da*.csv'));
 
+    disp('Matlab output tile path:');
+    disp(fullfile(TilePath, ImageNamePattern, 'Da*.jpg'));    
+    disp('Matlab output tile files:');
+    disp(tileFiles);
+    disp('Matlab output csv path:');
+    disp(fullfile(DetectionPath, ImageNamePattern, 'Da*.jpg'));    
+    disp('Matlab output csv files:');
+    disp(csvFiles);
+
     if isempty(csvFiles)
         error('No CSV Files Found!');
     else
