@@ -178,7 +178,7 @@ if [[ $steps == *"3"* ]]; then
     bigDotTilePath="${cellClassificationResultsPath}/labelledImagesBigDot"
     labelFile="${config_path}/cell_labels.txt"
     mergeCSVPath="${cellClassificationResultsPath}/all_cells"
-    mkir -p $mergeCSVPath
+    mkdir -p $mergeCSVPath
     ###########################
 
     echo "=======BIG DOT================"
