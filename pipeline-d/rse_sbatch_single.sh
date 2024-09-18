@@ -53,7 +53,7 @@ if [[ $steps == *"1"* ]]; then
     #python3 -c "import tensorflow as tf; print(tf.__version__)"   
     ################################################### 
     
-    sccnnDetectionCodePath="${currentPath}/cell_detector/analysis/"    
+    sccnnDetectionCodePath="${currentPath}/cell_detector/analysis"    
     detectionBatchSize=500
     ##################################################
     (cd "${sccnnDetectionCodePath}" && python3 "./Generate_Output.py" "${cellDetectorCheckPointPath}" "${tilePath}" "${cellDetectionResultsPath}" "${detectionBatchSize}" "${imageName}" "${segmentationTilePath}" "${matlabPath}")
@@ -71,10 +71,10 @@ if [[ $steps == *"2"* ]]; then
     #python3 -c "from fastai.transforms import *;"
     #python3 -c "from fastai.conv_learner import *;"
     ###################
-    classificationCodePath="${code_path}/cell_classifier/classification/"
+    classificationCodePath="${code_path}/cell_classifier/classification"
     cellClassifierPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellClassification/EPICC/NDPI/Current/EPICC_Cell_Classifier_NDPI.h5"
-    cellDetectionCSVPath="${cellDetectionResultsPath}/20180117/csv/"
-    cellClassificationCSVPath="${cellClassificationResultsPath}/csv/"
+    cellDetectionCSVPath="${cellDetectionResultsPath}/20180117/csv"
+    cellClassificationCSVPath="${cellClassificationResultsPath}/csv"
     
     classificationBatchSize=50
     cellClassCertainty=0.0
@@ -214,12 +214,18 @@ if [[ $steps == *"3"* ]]; then
 
     echo "=======MERGE CSV================"
     echo "Calling matLab MergeCSVs with the following parameters:"
-    echo "cellClassificationCSVPath: $cellClassificationCSVPath/${imageBase}"
+    echo "mergeClassificationCSVPath: $cellClassificationCSVPath/${imageBase}"
     echo "tilePath: $tilePath/${imageBase}"
     echo "mergeCSVFile: $mergeCSVFile"
     echo "======================="
     matlabMergeCSVCommands="MergeCSVs('${cellClassificationCSVPath}/${imageBase}', '${tilePath}/${imageBase}', '${mergeCSVFile}');"
     
+    echo "=======MATLAB COMMANDS================"
+    echo "matlabOpeningCommands: $matlabOpeningCommands"
+    echo "matlabSmallDotCommands: $matlabSmallDotCommands"
+    echo "matlabBigDotCommands: $matlabBigDotCommands"
+    echo "matlabMergeCSVCommands: $matlabMergeCSVCommands"
+
     matlab -nodesktop -nosplash -r "${matlabOpeningCommands} ${matlabSmallDotCommands} ${matlabBigDotCommands} ${matlabMergeCSVCommands} exit;"   
 fi
 
