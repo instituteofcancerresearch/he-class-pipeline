@@ -1,5 +1,9 @@
-pinred epithelial #Epithelial cell
-pingreen stromal #Stromal cell
-pinblue immune #Chronic inflammatory cell
-flagblue immune #Acute inflammatory cell
-unk unknown #Unknown
+000000 nep #Black - normal epithelium
+ff0000 cep #Red - cancer epithelium
+ff00ff fib #Pink/Magenta - fibroblast
+008000 lym #Dark Green - lymphocyte
+00ff00 neu #Light Green - neutrophil
+ffff00 mac #Yellow - macrophage
+c0c0c0 end #Light Grey - endothelial
+0000ff myo #Blue - myocyte
+800000 unk #Brown - unknown
