@@ -76,7 +76,7 @@ if [[ $steps == *"2"* ]]; then
     cellClassCertainty=0.0
     outputProbs=False
 	overwrite=False
-    labelNames="['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end']"
+    labelNames='["nep", "unk", "myo", "cep", "fib", "lym", "neu", "mac", "end"]'
     noLabelIdx=1
     ###################
     echo "=======Calling processCSVs with the following parameters: ====="
