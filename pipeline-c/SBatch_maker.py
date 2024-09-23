@@ -36,7 +36,7 @@ with open(batch_file, "a") as f:
     sing_call += f"-B {inC_masks}:/input_masks "
     sing_call += f"-B {inC_refMasks}:/target_masks "
     sing_call += f"{sing_dir}/HEC.sif "
-    sing_call += "/log /input_tiles /target_tiles /output /input_masks /target_masks *.*"
+    sing_call += "/log /input_tiles /target_tiles /output /input_masks /target_masks '*.*'"
             
     f.write("#SBATCH -J HECr\n")
     f.write("#SBATCH -o c_run.out\n")
