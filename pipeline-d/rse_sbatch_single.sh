@@ -43,6 +43,7 @@ echo "config_path: $config_path"
 echo "********************************"
 
 currentPath=$code_path
+matlabPath="${currentPath}/cell_detector/matlab_common/"
 ###################
 if [[ $steps == *"1"* ]]; then
     echo "script 1"
