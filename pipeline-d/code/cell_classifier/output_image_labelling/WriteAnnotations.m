@@ -64,6 +64,7 @@ function WriteAnnotations(ImageNamePattern, DetectionPath, TilePath, OutPath, Co
         end
 
         parfor i = 1:length(tileFiles)
+            disp('Matlab output tile file:', i,tileFiles(i).name);
             [~, TileName, ~] = fileparts(tileFiles(i).name);
             currTileFile = fullfile(tileFiles(i).folder, tileFiles(i).name);
             
