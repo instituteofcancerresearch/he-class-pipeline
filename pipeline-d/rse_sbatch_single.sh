@@ -75,8 +75,8 @@ if [[ $steps == *"2"* ]]; then
     cellClassCertainty=0.0
     outputProbs=False
 	overwrite=False
-    noLabelIdx=4
-    labelNames='["epithelial", "stromal", "immune", "unknown"]'
+    labelNames="['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end']"
+    noLabelIdx=1
     ###################
     echo "=======Calling processCSVs with the following parameters: ====="
     echo "classificationCodePath: $classificationCodePath"
