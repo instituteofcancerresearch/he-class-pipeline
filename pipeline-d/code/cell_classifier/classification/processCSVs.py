@@ -133,7 +133,8 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
                     validRows = [i for i in range(0, len(csvData)) if csvData[i][0] in inLabels]
                 else:
                     validRows = range(0, len(csvData))
-                print("ValidRows =",len(validRows))
+                print("ValidRows =",len(validRows),validRows)
+                print("From csvdata =",len(csvData),csvData)
                 
                 cellLabels = np.zeros(len(validRows))
                                 
