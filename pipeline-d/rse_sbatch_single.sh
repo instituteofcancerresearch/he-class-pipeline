@@ -46,7 +46,7 @@ currentPath=$code_path
 matlabPath="${currentPath}/cell_detector/matlab_common/"
 ###################
 if [[ $steps == *"1"* ]]; then
-    echo "script 1"
+    echo "@@@@@@@@@@@@ script 1 @@@@@@@@@@@@"    
     mamba activate $conda_env1
     python3 --version
     python3 -m pip show matlabengine
@@ -64,7 +64,7 @@ if [[ $steps == *"1"* ]]; then
 fi
 
 if [[ $steps == *"2"* ]]; then
-    echo "script 2"    
+    echo "@@@@@@@@@@@@ script 2 @@@@@@@@@@@@"    
     mamba activate $conda_env2
     ###################
     classificationCodePath="${code_path}/cell_classifier/classification"
@@ -108,7 +108,7 @@ if [[ $steps == *"2"* ]]; then
 fi
 
 if [[ $steps == *"3"* ]]; then
-    echo "script 3"
+    echo "@@@@@@@@@@@@ script 3 @@@@@@@@@@@@"    
 
     module load MATLAB/R2020b
 
