@@ -24,11 +24,13 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
             inLabels = None
         else:            
             inLabels = inLabels.replace(" ","").replace('"',"").replace("'","")[1:-1].split(',')
+    inLabels = None
     if type(outLabels) is str:
         if len(outLabels) < 3:
             outLabels = ['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end']
         else:
             outLabels = outLabels.replace(" ","").replace('"',"").replace("'","")[1:-1].split(',')
+    outLabels = ['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end']
     
     print("***** Inputs **********************")
     print("imagePath",imagePath)
@@ -132,6 +134,7 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
                     validRows = [i for i in range(0, len(csvData)) if csvData[i][0] in inLabels]
                 else:
                     validRows = range(0, len(csvData))
+                print("ValidRows =",len(validRows))
                 
                 cellLabels = np.zeros(len(validRows))
                                 
