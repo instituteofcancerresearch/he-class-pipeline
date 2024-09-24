@@ -26,7 +26,7 @@ if len(sys.argv) > 5:
 else:
     file_name_pattern = "*"
     
-if len(sys.argv) > 6 and len(sys.argv[6]) > 0:
+if len(sys.argv) > 6 and len(sys.argv[6]) > 1:
     tissue_segment_dir = os.path.normpath(str(pathlib.Path(sys.argv[6])))
 else:
     tissue_segment_dir = ''

@@ -85,7 +85,7 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
             tileImage = np.concatenate((tileImage[int(math.floor((windowSize[1]-1)/2))::-1,:], tileImage, tileImage[:int(math.floor(-(windowSize[1]-1)/2)):-1,:]),0)
             tileImage = np.concatenate((tileImage[:,int(math.floor((windowSize[1]-1)/2))::-1], tileImage, tileImage[:,:int(math.floor(-(windowSize[1]-1)/2)):-1]),1)
             
-            if segmentPath is not None and len(segmentPath) > 0:
+            if segmentPath is not None and len(segmentPath) > 1:
                 segmentImagePath = os.path.join(segmentPath, csvPath[len(detectionPath):-4]+'.png')
                 
                 if os.path.isfile(segmentImagePath):
