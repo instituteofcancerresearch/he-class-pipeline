@@ -23,15 +23,14 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
         if len(inLabels) < 3:
             inLabels = None
         else:            
-            inLabels = inLabels.replace(" ","").replace('"',"").replace("'","")[1:-1].split(',')
-    inLabels = None
+            inLabels = inLabels.replace(" ","").replace('"',"").replace("'","").replace("[","").replace("]","").split(',')
+    
     if type(outLabels) is str:
         if len(outLabels) < 3:
             outLabels = ['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end']
         else:
             outLabels = outLabels.replace(" ","").replace('"',"").replace("'","")[1:-1].split(',')
-    outLabels = ['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end']
-    
+        
     print("***** Inputs **********************")
     print("imagePath",imagePath)
     print("detectionPath",detectionPath)
