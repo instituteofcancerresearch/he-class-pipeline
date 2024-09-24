@@ -38,6 +38,7 @@ def make_sub_dirs(opts, sub_dir_name):
 
 
 def pre_process_images(opts, sub_dir_name, eng=None):
+    print('pre_process_images', flush=True)
     if eng is None:
         eng = matlab.engine.start_matlab()
         eng.eval('run initialize_matlab_variables.m', nargout=0)
@@ -143,6 +144,7 @@ def generate_output(network, opts, save_pre_process=True, network_output=True, p
 
         eng.eval('run initialize_matlab_variables.m', nargout=0)
         if save_pre_process:
+            print('Save preprocessing images', flush=True)
             pre_process_images(opts=opts, sub_dir_name=sub_dir_name, eng=eng)
 
         # files = sorted(glob.glob(os.path.join(opts.data_dir, sub_dir_name, 'Da*.jpg')))
