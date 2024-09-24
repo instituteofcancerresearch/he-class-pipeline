@@ -28,6 +28,7 @@ echo "cellClassificationResultsPath: $cellClassificationResultsPath"
 counter=0
 for image_file in "$image_dir"/*
 do
+  echo "$counter ---------------------------"
   base_image_file=$(basename $image_file)
   echo "BatchPath=$pipe_path/rse_sbatch_single.sh"
   echo "ImageFile=$image_file"  
@@ -41,4 +42,4 @@ do
   ((counter++))
 done
 
-echo $counter
+echo "Total = $counter"
