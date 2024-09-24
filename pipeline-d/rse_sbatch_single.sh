@@ -88,6 +88,7 @@ if [[ $steps == *"2"* ]]; then
     echo "outPath: ${cellClassificationCSVPath}"
     echo "segmentPath: ${segmentationTilePath}"
     echo "batchSize: ${classificationBatchSize}"
+    echo "inLabels: ${labelNames}"
     echo "outLabels: ${labelNames}"
     echo "minProb: ${cellClassCertainty}"
     echo "noClassLabel: ${noLabelIdx}"
@@ -100,7 +101,7 @@ if [[ $steps == *"2"* ]]; then
     detectionPath='${cellDetectionCSVPath}', \
     tilePath='${tilePath}',classifierPath='${cellClassifierPath}', \
     outPath='${cellClassificationCSVPath}', segmentPath='${segmentationTilePath}', \
-    batchSize='${classificationBatchSize}', outLabels='${labelNames}',\
+    batchSize='${classificationBatchSize}', inLabels='${labelNames}', outLabels='${labelNames}',\
     minProb='${cellClassCertainty}', noClassLabel='${noLabelIdx}', \
     outputProbs='${outputProbs}', overwrite='${overwrite}');"    
     

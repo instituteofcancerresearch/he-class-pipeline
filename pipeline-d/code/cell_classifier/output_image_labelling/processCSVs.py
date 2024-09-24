@@ -15,6 +15,9 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
     if arch is not None:
         tforms = tfms_from_model(arch, cellImageSize)
         
+    print("In labels", inLabels)
+    print("Out labels", outLabels)
+    
     model = torch.load(classifierPath, map_location=lambda storage, loc: storage)
     
     if gpu:
