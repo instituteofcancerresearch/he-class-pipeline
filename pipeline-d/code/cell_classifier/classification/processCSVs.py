@@ -13,10 +13,22 @@ from fastai.conv_learner import *
 import datetime
 
 def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, segmentPath=None, windowSize=[51, 51], cellImageSize=224, inLabels=None, outLabels=['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end'], batchSize=30, arch=dn201, gpu=True, overwrite=False, minProb=0.0, noClassLabel=None, outputProbs=False):    
+    print("######### Entered processCSVs v1 ########## ")
     outputProbs = str(outputProbs).lower() == 'true'
     minProb = float(minProb)
     noClassLabel = int(noClassLabel)                    
     batchSize = int(batchSize)
+    
+    if type(inLabels) is str:
+        if len(inLabels) < 3:
+            inLabels = None
+        else:            
+            inLabels = inLabels.replace(" ","")[1:-1].split(',')
+    if type(outLabels) is str:
+        if len(outLabels) < 3:
+            outLabels = ['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end']
+        else:
+            outLabels = outLabels.replace(" ","")[1:-1].split(',')
     
     print("***** Inputs **********************")
     print("imagePath",imagePath)
@@ -27,8 +39,8 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
     print("segmentPath",segmentPath)
     print("windowSize",windowSize)
     print("cellImageSize",cellImageSize)
-    print("inLabels",inLabels)
-    print("outLabels",outLabels)
+    print("inLabels",inLabels,type(inLabels))
+    print("outLabels",outLabels,type(outLabels))
     print("batchSize",batchSize)
     print("arch",arch)
     print("gpu",gpu)
