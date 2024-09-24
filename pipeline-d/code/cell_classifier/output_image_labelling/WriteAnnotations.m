@@ -45,13 +45,13 @@ function WriteAnnotations(ImageNamePattern, DetectionPath, TilePath, OutPath, Co
     tileFiles = dir(fullfile(TilePath, ImageNamePattern, 'Da*.jpg'));
     csvFiles = dir(fullfile(DetectionPath, ImageNamePattern, 'Da*.csv'));
 
-    disp('Matlab output tile path:');
+    disp('Matlab input tile path:');
     disp(fullfile(TilePath, ImageNamePattern, 'Da*.jpg'));    
-    disp('Matlab output tile files:');
+    disp('Matlab input tile files:');
     disp(tileFiles);
-    disp('Matlab output csv path:');
+    disp('Matlab input csv path:');
     disp(fullfile(DetectionPath, ImageNamePattern, 'Da*.jpg'));    
-    disp('Matlab output csv files:');
+    disp('Matlab input csv files:');
     disp(csvFiles);
 
     if isempty(csvFiles)
@@ -59,8 +59,11 @@ function WriteAnnotations(ImageNamePattern, DetectionPath, TilePath, OutPath, Co
     else
         outFolders = unique({tileFiles.folder});
     
+        disp("Making output directories");
         for i = 1:length(outFolders)
-            mkdir(fullfile(OutPath, outFolders{i}((length(TilePath)+1):end)));
+            dirToMake = fullfile(OutPath, outFolders{i}((length(TilePath)+1):end));
+            mkdir(dirToMake);            
+            fprintf('%d Output directory created: %s\n', i, dirToMake);
         end
 
         parfor i = 1:length(tileFiles)
@@ -73,9 +76,18 @@ function WriteAnnotations(ImageNamePattern, DetectionPath, TilePath, OutPath, Co
             currOutTileFile = fullfile(OutPath, tileFiles(i).folder((length(TilePath)+1):end), [TileName '.jpg']);
 
             if OverWrite || ~(exist(currOutTileFile, 'file'))
-                fprintf('Annotating tile for: %s\n', currTileFile);
-                annotatedImage = AnnotateDetections(currCSVFile, currTileFile, labelMap, AnnotationSize);
-                imwrite(annotatedImage, currOutTileFile);
+                try
+                    fprintf('Annotating tile for: %s\n', currTileFile);
+                    annotatedImage = AnnotateDetections(currCSVFile, currTileFile, labelMap, AnnotationSize);
+                    imwrite(annotatedImage, currOutTileFile);
+                catch e
+                    fprintf('!!! Error annotating tile for: %s\n', currTileFile);
+                    disp(currCSVFile)
+                    disp(currTileFile)
+                    disp(labelMap)
+                    disp(AnnotationSize)
+                    fprintf('!!! Error message: %s\n', e.message);
+                end
             else
                 fprintf('Annotated tile already exists for: %s, skipping.\n', currOutTileFile);
             end
