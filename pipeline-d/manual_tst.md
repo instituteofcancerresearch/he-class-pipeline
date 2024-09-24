@@ -8,6 +8,8 @@ Running the wraper
 #############################################################
 ./rse_wrap.sh "/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outC" "/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/he-class-pipeline/pipeline-d/code" "steps1"
 
+cd /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev3;
+
 Running a single process
 ###################################################################
 sbatch --error=logsD/tst.err --output=logsD/tst.out --job-name=tst \
@@ -26,3 +28,16 @@ steps123 \
 ###### SHARED MAMBA ENV FOR STAGE 3 inc tensorflow and matlab #####################################
 mamba activate /data/scratch/shared/SINGULARITY-DOWNLOAD/mamba/he-shared-tensorflow
 mamba activate /data/scratch/shared/SINGULARITY-DOWNLOAD/mamba/he-shared-pytorch
+
+
+# testing full batch
+sbatch /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/he-class-pipeline/pipeline-d/rse_wrap.sh \
+/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev3/outC \
+/data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/he-class-pipeline/pipeline-d \
+/data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/he-class-pipeline/pipeline-d \
+steps1 \
+/data/scratch/shared/SINGULARITY-DOWNLOAD/mamba \
+/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev3/outC \
+/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev3/outB \
+/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev3/outD1 \
+/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-dev3/outD2;
