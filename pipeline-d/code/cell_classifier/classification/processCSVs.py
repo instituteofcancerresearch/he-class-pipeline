@@ -84,12 +84,11 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
     count = 1
     for csvPath in CSVs:
         outCSVPath = os.path.join(outPath, csvPath[len(detectionPath):])
-        #print("OutpathCSV =",outCSVPath," , Overwrite =",overwrite)
-        
+                
         if outputProbs:
             outProbCSVPath = os.path.join(os.path.dirname(outCSVPath), 'probabilities', os.path.basename(outCSVPath))
         
-        if overwrite or not os.path.isfile(outCSVPath):
+        if overwrite or not os.path.isfile(outCSVPath):            
             print(datetime.datetime.now(), count, "/", len_csvs, "Classifying cells in: "+csvPath, flush=True)
             count += 1
             tileImagePath = os.path.join(tilePath, csvPath[len(detectionPath):-4]+'.jpg')
@@ -129,6 +128,7 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
                     for i in range(0, len(csvData)):
                         cellProbs[i, -2:] = csvData[i][1:]
                 
+                inLabels = None
                 if inLabels is not None:
                     validRows = [i for i in range(0, len(csvData)) if csvData[i][0] in inLabels]
                 else:
