@@ -5,7 +5,7 @@
 #SBATCH --gres=gpu:1
 
 
-source ~/.bashrc
+source /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/home/.bashrc
 
 imagePath=$1
 imageName=$2
@@ -50,7 +50,11 @@ if [[ $steps == *"1"* ]]; then
     mamba activate $conda_env1
     python3 --version
     python3 -m pip show matlabengine
-    python3 -c "import sys; print(sys.argv)" "$file_name" "$code_path"    
+    python3 -c "import sys; print(sys.argv)" "$file_name" "$code_path"   
+
+    ##################################################
+    echo "Check tensorflow installation"
+    python3 -c "import tensorflow as tf;tf.config.list_physical_devices('GPU');print('Num GPUs Available: ', len(tf.config.list_physical_devices('GPU')))"
     ################################################### 
     
     sccnnDetectionCodePath="${currentPath}/cell_detector/analysis"    
