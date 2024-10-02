@@ -36,8 +36,15 @@ function AnnotatedImage = AnnotateDetections(CSVPath, TilePath, LabelMap, Annota
         
             if ~isempty(colour)
                 isCellType = strcmp(labels, cellTypes{i});
-                disp("Annotate image")
+                disp("Annotate image 1...");
+                disp(isCellType);
+                disp(colour);
+                disp(AnnotationSize);
+                disp(X(isCellType));
+                disp(Y(isCellType));
+                disp("Annotate image 2...");
                 AnnotatedImage = annotate_image_with_class(AnnotatedImage, [X(isCellType), Y(isCellType)], colour, AnnotationSize);
+                disp("...annotated image");
             end
         end
     end
