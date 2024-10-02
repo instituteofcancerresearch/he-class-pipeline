@@ -10,6 +10,7 @@ function AnnotatedImage = AnnotateDetections(CSVPath, TilePath, LabelMap, Annota
         fclose(fid);
             
         labels = CSV{1}(2:end);
+        disp(labels);
             
         X = cellfun(@str2num, CSV{2}(2:end));
         Y = cellfun(@str2num, CSV{3}(2:end));
@@ -17,10 +18,19 @@ function AnnotatedImage = AnnotateDetections(CSVPath, TilePath, LabelMap, Annota
         %keys(LabelMap)
         cellTypes = sort(intersect(unique(labels), keys(LabelMap)));
         cellTypes = cellTypes(end:-1:1);
+
+        disp(cellTypes);
+
+        disp(length(cellTypes));
     
     
         for i=1:length(cellTypes)
+            disp(i);
+            disp(length(cellTypes));
+            disp(cellTypes(i));
+            disp(LabelMap)
             colour = LabelMap(cellTypes{i});
+            disp(colour);
         
             if ~isempty(colour)
                 isCellType = strcmp(labels, cellTypes{i});
