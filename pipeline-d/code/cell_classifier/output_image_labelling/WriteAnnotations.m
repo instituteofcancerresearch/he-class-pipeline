@@ -29,7 +29,7 @@ function WriteAnnotations(ImageNamePattern, DetectionPath, TilePath, OutPath, Co
         disp(labelName);
         disp(colourCode);
         
-        if strcmp(labelNames{i}, 'unknown')
+        if strcmp(labelNames{i}, 'unk')
             labelColours{i} = [];
         else            
             labelColours{i} = (hex2dec({colourCode(1:2), colourCode(3:4), colourCode(5:6)}))./255;
