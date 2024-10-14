@@ -5,7 +5,7 @@
 #SBATCH --gres=gpu:1
 
 
-source ~/.bashrc
+source /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/home/.bashrc
 
 imagePath=$1
 imageName=$2
@@ -43,13 +43,18 @@ echo "config_path: $config_path"
 echo "********************************"
 
 currentPath=$code_path
+matlabPath="${currentPath}/cell_detector/matlab_common/"
 ###################
 if [[ $steps == *"1"* ]]; then
-    echo "script 1"
+    echo "@@@@@@@@@@@@ script 1 @@@@@@@@@@@@"    
     mamba activate $conda_env1
     python3 --version
     python3 -m pip show matlabengine
-    python3 -c "import sys; print(sys.argv)" "$file_name" "$code_path"    
+    python3 -c "import sys; print(sys.argv)" "$file_name" "$code_path"   
+
+    ##################################################
+    echo "Check tensorflow installation"
+    python3 -c "import tensorflow as tf;tf.config.list_physical_devices('GPU');print('Num GPUs Available: ', len(tf.config.list_physical_devices('GPU')))"
     ################################################### 
     
     sccnnDetectionCodePath="${currentPath}/cell_detector/analysis"    
@@ -63,7 +68,7 @@ if [[ $steps == *"1"* ]]; then
 fi
 
 if [[ $steps == *"2"* ]]; then
-    echo "script 2"    
+    echo "@@@@@@@@@@@@ script 2 @@@@@@@@@@@@"    
     mamba activate $conda_env2
     ###################
     classificationCodePath="${code_path}/cell_classifier/classification"
@@ -75,7 +80,7 @@ if [[ $steps == *"2"* ]]; then
     cellClassCertainty=0.0
     outputProbs=False
 	overwrite=False
-    labelNames="['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end']"
+    labelNames='["nep", "unk", "myo", "cep", "fib", "lym", "neu", "mac", "end"]'
     noLabelIdx=1
     ###################
     echo "=======Calling processCSVs with the following parameters: ====="
@@ -87,6 +92,7 @@ if [[ $steps == *"2"* ]]; then
     echo "outPath: ${cellClassificationCSVPath}"
     echo "segmentPath: ${segmentationTilePath}"
     echo "batchSize: ${classificationBatchSize}"
+    echo "inLabels: ${labelNames}"
     echo "outLabels: ${labelNames}"
     echo "minProb: ${cellClassCertainty}"
     echo "noClassLabel: ${noLabelIdx}"
@@ -99,7 +105,7 @@ if [[ $steps == *"2"* ]]; then
     detectionPath='${cellDetectionCSVPath}', \
     tilePath='${tilePath}',classifierPath='${cellClassifierPath}', \
     outPath='${cellClassificationCSVPath}', segmentPath='${segmentationTilePath}', \
-    batchSize='${classificationBatchSize}', outLabels='${labelNames}',\
+    batchSize='${classificationBatchSize}', inLabels='${labelNames}', outLabels='${labelNames}',\
     minProb='${cellClassCertainty}', noClassLabel='${noLabelIdx}', \
     outputProbs='${outputProbs}', overwrite='${overwrite}');"    
     
@@ -107,7 +113,7 @@ if [[ $steps == *"2"* ]]; then
 fi
 
 if [[ $steps == *"3"* ]]; then
-    echo "script 3"
+    echo "@@@@@@@@@@@@ script 3 @@@@@@@@@@@@"    
 
     module load MATLAB/R2020b
 

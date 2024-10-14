@@ -2,6 +2,8 @@ import os
 import sys
 import pathlib
 
+print("####### Calling Generate_Output.py #######")
+
 dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(dir_path)
 
@@ -16,6 +18,10 @@ exp_dir = os.path.normpath(str(pathlib.Path(sys.argv[1])))
 data_dir = os.path.normpath(str(pathlib.Path(sys.argv[2])))
 results_dir = os.path.normpath(str(pathlib.Path(sys.argv[3])))
 
+print("Exp dir:",exp_dir)
+print("Data dir:",data_dir)
+print("Results dir:",results_dir)
+
 if len(sys.argv) > 4:
     batch_size = int(sys.argv[4])
 else:
@@ -26,11 +32,16 @@ if len(sys.argv) > 5:
 else:
     file_name_pattern = "*"
     
-if len(sys.argv) > 6 and len(sys.argv[6]) > 0:
+print("Batch size:",batch_size)
+print("File name pattern:",file_name_pattern)
+
+if len(sys.argv) > 6 and len(sys.argv[6]) > 1:
     tissue_segment_dir = os.path.normpath(str(pathlib.Path(sys.argv[6])))
 else:
     tissue_segment_dir = ''
     
+print("Tissue segment dir:",tissue_segment_dir)
+
 if len(sys.argv) > 7 and len(sys.argv[7]) > 0:
     matlab_code_path = os.path.normpath(str(pathlib.Path(sys.argv[7])))
     sys.path.append(matlab_code_path)

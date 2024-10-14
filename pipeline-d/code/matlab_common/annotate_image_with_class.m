@@ -1,5 +1,5 @@
 function image = annotate_image_with_class(image, points, colour, strength)
-    
+    disp("Annotating images function 3...");
     if size(image, 3)~=3
         error('Please input an RGB image');
     end

@@ -14,10 +14,21 @@ tilePath=$6 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
 segmentationTilePath=$7 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
 cellDetectionResultsPath=$8 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
 cellClassificationResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
+echo "*********INPUTS***********************"
+echo "image_dir: $image_dir"
+echo "pipe_path: $pipe_path"
+echo "code_path: $code_path"
+echo "steps: $steps"
+echo "conda_dir: $conda_dir"
+echo "tilePath: $tilePath"
+echo "segmentationTilePath: $segmentationTilePath"
+echo "cellDetectionResultsPath: $cellDetectionResultsPath"
+echo "cellClassificationResultsPath: $cellClassificationResultsPath"
 
 counter=0
 for image_file in "$image_dir"/*
 do
+  echo "$counter ---------------------------"
   base_image_file=$(basename $image_file)
   echo "BatchPath=$pipe_path/rse_sbatch_single.sh"
   echo "ImageFile=$image_file"  
@@ -31,4 +42,4 @@ do
   ((counter++))
 done
 
-echo $counter
+echo "Total = $counter"
