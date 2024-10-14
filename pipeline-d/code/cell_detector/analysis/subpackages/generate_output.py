@@ -106,11 +106,12 @@ def generate_network_output(opts, sub_dir_name, network, sess, logits):
                     data_train = np.pad(data_train, ((0, opts.batch_size-data_count), (0, 0), (0, 0), (0, 0)), mode='constant')
                 data_train = data_train.astype(np.float32, copy=False)
                 data_train_float32 = data_train / 255.0
-                logits_out = sess.run(
+                logits_out = sess.run( #RSA todo this is where it goes into the detection network
                     logits,
                     feed_dict={network.images: data_train_float32,
                                })
-                label_patches[start:end] = logits_out[:data_count, :, :, :]
+                label_patches[start:end] = logits_out[:data_count, :, :, :] 
+                #RSA this is the most likely step where the network is being called
 
                 if end + opts.batch_size > opts.num_examples_per_epoch_for_train - 1:
                     end = opts.num_examples_per_epoch_for_train - opts.batch_size
@@ -149,7 +150,7 @@ def generate_output(network, opts, save_pre_process=True, network_output=True, p
 
         # files = sorted(glob.glob(os.path.join(opts.data_dir, sub_dir_name, 'Da*.jpg')))
         if network_output:
-            logits = network.inference()
+            logits = network.inference() #RSA TODO
             saver = tf.train.Saver(tf.global_variables(), max_to_keep=opts.num_of_epoch)
             with tf.Session() as sess:
                 ckpt = tf.train.get_checkpoint_state(opts.checkpoint_dir)

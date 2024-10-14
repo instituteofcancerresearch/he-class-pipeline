@@ -1,0 +1,37 @@
+montage -limit area 12192 -limit memory 8192 \ 
+Da0.jpg \ 
+Da1.jpg \ 
+Da2.jpg \ 
+Da3.jpg \ 
+Da4.jpg \ 
+Da5.jpg \ 
+Da6.jpg \ 
+Da7.jpg \ 
+Da8.jpg \ 
+Da9.jpg \ 
+Da10.jpg \ 
+Da11.jpg \ 
+Da12.jpg \ 
+Da13.jpg \ 
+Da14.jpg \ 
+Da15.jpg \ 
+Da16.jpg \ 
+Da17.jpg \ 
+Da18.jpg \ 
+Da19.jpg \ 
+Da20.jpg \ 
+Da21.jpg \ 
+Da22.jpg \ 
+Da23.jpg \ 
+Da24.jpg \ 
+Da25.jpg \ 
+Da26.jpg \ 
+Da27.jpg \ 
+Da28.jpg \ 
+Da29.jpg \ 
+Da30.jpg \ 
+Da31.jpg \ 
+Da32.jpg \ 
+Da33.jpg \ 
+Da34.jpg \ 
+-mode Concatenate -tile  5x7 Da_tiled.jpg 
