@@ -61,7 +61,7 @@ def run(opts_in, file_name_pattern='*.ndpi', num_cpu=12):
         input_dir, file_name = os.path.split(wsi_input)
         output_log = "a_log.txt"
         with open(output_log, "a") as f:
-            f.write(datetime.datetime.now())
+            f.write(str(datetime.datetime.now()))
             f.write("\tRunning\t")
             f.write(file_name)
             f.write("\n")
