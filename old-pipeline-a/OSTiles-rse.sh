@@ -38,5 +38,5 @@ else
 	echo "Setting up the singularity container..."
     export SINGULARITYENV_is_singularity="TRUE"
     OpenSlideContainerPath="/opt/software/containers/singularity/openslideicr.sif"
-    singularity exec --bind "/opt/software,/data," "$OpenSlideContainerPath" "$0"    
+    singularity exec --bind "/opt/software,/data," "$OpenSlideContainerPath" "$0" "$1" "$2" "$3"
 fi
