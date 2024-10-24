@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -J "OS-ra-Tiles"
+#SBATCH -J "HEAr"
 #SBATCH -o a_run.out
 #SBATCH -e a_run.err
 #SBATCH -n 8
