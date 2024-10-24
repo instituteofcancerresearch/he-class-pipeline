@@ -51,9 +51,10 @@ if __name__ == '__main__':
     
     output_log = "a_log.txt"
     with open(output_log, "a") as f:
-        f.write(f"{datetime.datetime.now()}\tStarting OpenSlide ICR\n")
-    
-    
+        f.write(datetime.datetime.now())
+        f.write("\tStarting OpenSlide ICR\n")
+        
+        
     opts = {
         'output_dir': output_dir,
         'wsi_input': wsi_input,
