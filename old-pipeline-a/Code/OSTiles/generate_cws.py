@@ -51,7 +51,7 @@ if __name__ == '__main__':
     
     output_log = "a_log.txt"
     with open(output_log, "a") as f:
-        f.write("Starting OpenSlide ICR\n")
+        f.write(f"{datetime.datetime.now()}\tStarting OpenSlide ICR\n")
     
     
     opts = {
