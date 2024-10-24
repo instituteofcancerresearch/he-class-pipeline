@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH -J "OS-ra-Tiles"
-#SBATCH -o /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-old/logs/OSTiles.%j.out
-#SBATCH -e /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-old/logs/OSTiles.%j.err
+#SBATCH -o a_run.out
+#SBATCH -e a_run.err
 #SBATCH -n 8
 #SBATCH --mail-type="END,FAIL"
 #SBATCH -t 100:00:00
