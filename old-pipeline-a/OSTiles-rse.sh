@@ -25,9 +25,9 @@ if [[ "$is_singularity" == "TRUE" ]]; then
 
     #module load anaconda/3 openslide java/jdk15.0.1
 	module load anaconda/3 java/jdk15.0.1		    
-	#source /data/scratch/shared/RSE/sources/.nick
-    source /data/scratch/shared/RSE/sources/.rachel
-    mamba activate /data/scratch/shared/RSE/.conda/envs/openslide-mod
+	source /data/scratch/shared/RSE/sources/.nick
+    #source /data/scratch/shared/RSE/sources/.rachel
+    conda activate /data/scratch/shared/RSE/.conda/envs/openslide-mod
     #source activate openslide-mod
 	
     mkdir -p "$TilePath"
