@@ -40,9 +40,9 @@ if __name__ == '__main__':
         
     i,count = 0,0
     if len(sys.argv) > 5:
-        i = sys.argv[5]        
+        i = int(sys.argv[5])
     if len(sys.argv) > 6:
-        count = sys.argv[6]
+        count = int(sys.argv[6])
     print(i,"/",count)
 
     print("---Inputs---")
@@ -78,7 +78,7 @@ if __name__ == '__main__':
         f.write(i)
         f.write("/")
         f.write(count)
-        f.write("\n")                
+        f.write(":")
     save_cws.run(opts_in=opts, file_name_pattern=file_name_pattern, num_cpu=4)
     
     if i == count and count != 0:
