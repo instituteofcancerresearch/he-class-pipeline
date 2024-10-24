@@ -58,11 +58,11 @@ def run(opts_in, file_name_pattern='*.ndpi', num_cpu=12):
                   files_all)
 
     if os.path.isfile(wsi_input):        
-        input_dir, file_name = os.path.split(wsi_input)
+        input_dir, file_name = os.path.split(wsi_input)      
         output_log = "a_log.txt"
         with open(output_log, "a") as f:
             f.write(str(datetime.datetime.now()))
             f.write("\tRunning\t")
             f.write(file_name)
-            f.write("\n")
+            f.write("\n")  
         single_file_run(file_name=file_name, output_dir=output_dir, input_dir=input_dir, tif_obj=tif_obj, cws_objective_value=cws_objective_value, in_mpp=in_mpp, out_mpp=out_mpp, out_mpp_target_objective=out_mpp_target_objective)

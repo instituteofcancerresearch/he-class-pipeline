@@ -57,11 +57,12 @@ if __name__ == '__main__':
     print("------")
     
     output_log = "a_log.txt"
-    with open(output_log, "a") as f:
-        f.write(str(datetime.datetime.now()))
-        f.write("\tStarting OpenSlide ICR\n")
-        
-        
+    if i == 1:
+        with open(output_log, "a") as f:
+            f.write("----------------------------------\n")
+            f.write(str(datetime.datetime.now()))
+            f.write("\tStarting OpenSlide ICR\n")
+                
     opts = {
         'output_dir': output_dir,
         'wsi_input': wsi_input,
@@ -71,8 +72,15 @@ if __name__ == '__main__':
         'out_mpp': out_mpp,
         'out_mpp_target_objective': out_mpp_target_objective
             }
-
-    save_cws.run(opts_in=opts, file_name_pattern=file_name_pattern, num_cpu=4)
+        
     
     with open(output_log, "a") as f:
-        f.write("complete\n")
+        f.write(i)
+        f.write("/")
+        f.write(count)
+        f.write("\n")                
+    save_cws.run(opts_in=opts, file_name_pattern=file_name_pattern, num_cpu=4)
+    
+    if i == count and count != 0:
+        with open(output_log, "a") as f:
+            f.write("complete\n")
