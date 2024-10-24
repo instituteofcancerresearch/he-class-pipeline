@@ -37,6 +37,13 @@ if __name__ == '__main__':
 
     if len(sys.argv) > 4:
         output_dir = sys.argv[4]
+        
+    i,count = 0,0
+    if len(sys.argv) > 5:
+        i = sys.argv[5]        
+    if len(sys.argv) > 6:
+        count = sys.argv[6]
+    print(i,"/",count)
 
     print("---Inputs---")
     print('wsi_input:', wsi_input)

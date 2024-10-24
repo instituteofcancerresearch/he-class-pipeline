@@ -32,10 +32,19 @@ if [[ "$is_singularity" == "TRUE" ]]; then
     #source activate openslide-mod	
     mkdir -p "$TilePath"
 
+    # count through the loop before exectuting it
+    ImageCount=0
+    for ImagePath in "$ImageDir"/*."$ImageFileExtension"; do        
+        ImageCount=$((ImageCount+1))
+        echo "Counting $ImagePath" $ImageCount
+    done
+
+    ImageI=0
     for ImagePath in "$ImageDir"/*."$ImageFileExtension"; do
+        ImageI=$((ImageI+1))
         echo "Processing $ImagePath"
         ImageFileName=$(basename "$ImagePath")
-        python3 "$CodePath/generate_cws.py" "$ImagePath" $OutMPP $InMPP "$TilePath"
+        python3 "$CodePath/generate_cws.py" "$ImagePath" $OutMPP $InMPP "$TilePath" $ImageI $ImageCount
     done
 else    
 	echo "Setting up the singularity container..."
