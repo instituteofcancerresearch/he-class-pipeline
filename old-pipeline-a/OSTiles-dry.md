@@ -11,9 +11,10 @@ sbatch /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/he-class-pipeline/old-pipel
 squeue -u $USER
 
 or 
+```
 CodePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-old/Code/OSTiles/"
 ImageDir="/data/rds/DMP/UCEC/GENEVOD/ntrahearn/Images/ClassifierPipelineDemoImages/testNDPIs/"
 TilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-old/out/"
-
 sbatch /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/he-class-pipeline/old-pipeline-a/OSTiles.sh $CodePath $ImageDir $TilePath
 squeue -u $USER
+```

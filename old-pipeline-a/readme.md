@@ -30,3 +30,7 @@ to mine
 sbatch OSTiles-ra.sh
 squeue -u $USER
 
+
+# copy conda env to RSE shared
+cp -r /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/.conda_simlink/envs/openslide-mod 
+mv -r /data/scratch/shared/RSE/.conda/openslide-mod /data/scratch/shared/RSE/.conda/envs/openslide-mod

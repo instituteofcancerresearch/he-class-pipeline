@@ -25,7 +25,9 @@ if [[ "$is_singularity" == "TRUE" ]]; then
 
     #module load anaconda/3 openslide java/jdk15.0.1
 	module load anaconda/3 java/jdk15.0.1		    
-	source activate openslide-mod
+	source /data/scratch/shared/RSE/sources/.nick
+    mamba activate /data/scratch/shared/RSE/.conda/envs/openslide-mod
+    #source activate openslide-mod
 	
     mkdir -p "$TilePath"
 
@@ -37,6 +39,5 @@ if [[ "$is_singularity" == "TRUE" ]]; then
 else    
 	export SINGULARITYENV_is_singularity="TRUE"
     OpenSlideContainerPath="/opt/software/containers/singularity/openslideicr.sif"
-    singularity exec --bind "/opt/software,/data," "$OpenSlideContainerPath" "$0"
-    #singularity exec -s /bin/bash --bind "/opt/software,/data," "/opt/software/containers/singularity/openslideicr.sif"
+    singularity exec --bind "/opt/software,/data," "$OpenSlideContainerPath" "$0"    
 fi
