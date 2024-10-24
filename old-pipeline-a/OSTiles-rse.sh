@@ -13,7 +13,7 @@ ImageDir=$2
 TilePath=$3
 
 if [[ "$is_singularity" == "TRUE" ]]; then    
-	exho "Running the script in the singularity container..."
+	echo "Running the script in the singularity container..."
     #ImageDir="/data/rds/DMP/UCEC/GENEVOD/ntrahearn/Images/ClassifierPipelineDemoImages/testNDPIs/"
     #TilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-old/out/"
     ImageFileExtension="ndpi"
