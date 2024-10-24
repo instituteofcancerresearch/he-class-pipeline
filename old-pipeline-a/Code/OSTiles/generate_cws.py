@@ -37,6 +37,17 @@ if __name__ == '__main__':
     if len(sys.argv) > 4:
         output_dir = sys.argv[4]
 
+    print("---Inputs---")
+    print('wsi_input:', wsi_input)
+    print('output_dir:', output_dir)       
+    print('in_mpp:', in_mpp)
+    print('out_mpp:', out_mpp)    
+    print('file_name_pattern:', file_name_pattern)         
+    print('cws_objective_value:', cws_objective_value)
+    print('out_mpp_target_objective:', out_mpp_target_objective)    
+    print('tif_obj:', tif_obj)
+    print("------")
+    
     opts = {
         'output_dir': output_dir,
         'wsi_input': wsi_input,

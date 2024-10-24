@@ -14,6 +14,9 @@ TilePath=$3
 
 if [[ "$is_singularity" == "TRUE" ]]; then    
 	echo "Running the script in the singularity container..."
+    echo "CodePath: $CodePath"
+    echo "ImageDir: $ImageDir"
+    echo "TilePath: $TilePath"
     #ImageDir="/data/rds/DMP/UCEC/GENEVOD/ntrahearn/Images/ClassifierPipelineDemoImages/testNDPIs/"
     #TilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-old/out/"
     ImageFileExtension="ndpi"
