@@ -51,7 +51,7 @@ if __name__ == '__main__':
     
     output_log = "a_log.txt"
     with open(output_log, "a") as f:
-        f.write(f"{datetime.datetime.now()}\tStarting OpenSlide ICR\n")
+        f.write("Starting OpenSlide ICR\n")
     
     
     opts = {
@@ -67,4 +67,4 @@ if __name__ == '__main__':
     save_cws.run(opts_in=opts, file_name_pattern=file_name_pattern, num_cpu=4)
     
     with open(output_log, "a") as f:
-        f.write(f"{datetime.datetime.now()}\t complete\n")
+        f.write("complete\n")
