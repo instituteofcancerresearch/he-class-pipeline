@@ -75,9 +75,9 @@ if __name__ == '__main__':
         
     
     with open(output_log, "a") as f:
-        f.write(i)
+        f.write(str(i))
         f.write("/")
-        f.write(count)
+        f.write(str(count))
         f.write(":")
     save_cws.run(opts_in=opts, file_name_pattern=file_name_pattern, num_cpu=4)
     
