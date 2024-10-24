@@ -4,6 +4,7 @@ import os
 import glob
 from multiprocessing import Pool
 from functools import partial
+import datetime
 
 
 def cws_all_process(obj):
@@ -56,6 +57,9 @@ def run(opts_in, file_name_pattern='*.ndpi', num_cpu=12):
                           out_mpp_target_objective=out_mpp_target_objective),
                   files_all)
 
-    if os.path.isfile(wsi_input):
+    if os.path.isfile(wsi_input):        
         input_dir, file_name = os.path.split(wsi_input)
+        output_log = "a_log.txt"
+        with open(output_log, "a") as f:
+            f.write(f"{datetime.datetime.now()}\t running {file_name}\n")
         single_file_run(file_name=file_name, output_dir=output_dir, input_dir=input_dir, tif_obj=tif_obj, cws_objective_value=cws_objective_value, in_mpp=in_mpp, out_mpp=out_mpp, out_mpp_target_objective=out_mpp_target_objective)

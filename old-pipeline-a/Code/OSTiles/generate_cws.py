@@ -1,6 +1,7 @@
 import pathlib
 import sys
 import os
+import datetime
 
 if os.name == 'nt':
     os.environ['PATH'] = "C:\\tools\\openslide-win64-20171122\\bin" + ";" + os.environ['PATH']
@@ -47,6 +48,11 @@ if __name__ == '__main__':
     print('out_mpp_target_objective:', out_mpp_target_objective)    
     print('tif_obj:', tif_obj)
     print("------")
+    
+    output_log = "a_log.txt"
+    with open(output_log, "a") as f:
+        f.write(f"{datetime.datetime.now()}\tStarting OpenSlide ICR\n")
+    
     
     opts = {
         'output_dir': output_dir,
