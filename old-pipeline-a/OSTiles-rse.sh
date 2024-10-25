@@ -26,9 +26,10 @@ if [[ "$is_singularity" == "TRUE" ]]; then
     OutMPP=0.22098959139024552
     OutMPP=None
         	
-    source /data/scratch/shared/RSE/sources/.nick    
-    module load anaconda/3 java/jdk15.0.1		    	
-    source activate /data/scratch/shared/RSE/.conda/envs/openslide-mod-rse
+    source /data/scratch/shared/RSE/sources/.rachel
+    #module load anaconda/3 java/jdk15.0.1		    	
+    module java/jdk15.0.1		    	
+    mamba activate /data/scratch/shared/RSE/.conda/envs/openslide-mod-rse
     echo "Path: $PATH"    
     echo "Python version: $(python --version)"
     echo "Python path: $(which python)"    
