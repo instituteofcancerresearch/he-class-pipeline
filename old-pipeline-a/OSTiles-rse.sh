@@ -29,8 +29,10 @@ if [[ "$is_singularity" == "TRUE" ]]; then
     source /data/scratch/shared/RSE/sources/.nick    
     module load anaconda/3 java/jdk15.0.1		    	
     source activate /data/scratch/shared/RSE/.conda/envs/openslide-mod-rse
-    echo "Python version: $(python3 --version)"
-    echo "Python path: $(which python3)"    
+    echo "Python3 version: $(python3 --version)"
+    echo "Python3 path: $(which python3)"    
+    echo "Python version: $(python --version)"
+    echo "Python path: $(which python)"    
     mkdir -p "$TilePath"
 
     # count through the loop before exectuting it
