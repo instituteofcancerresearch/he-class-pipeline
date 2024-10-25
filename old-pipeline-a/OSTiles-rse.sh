@@ -8,6 +8,9 @@
 #SBATCH -t 100:00:00
 #is_singularity="TRUE"
 
+#ImageDir="/data/rds/DMP/UCEC/GENEVOD/ntrahearn/Images/ClassifierPipelineDemoImages/testNDPIs/"
+#TilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-old/out/"
+#CodePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-old/Code/OSTiles/"
 CodePath=$1
 ImageDir=$2
 TilePath=$3
@@ -17,19 +20,17 @@ if [[ "$is_singularity" == "TRUE" ]]; then
     echo "CodePath: $CodePath"
     echo "ImageDir: $ImageDir"
     echo "TilePath: $TilePath"
-    #ImageDir="/data/rds/DMP/UCEC/GENEVOD/ntrahearn/Images/ClassifierPipelineDemoImages/testNDPIs/"
-    #TilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-old/out/"
+    
     ImageFileExtension="ndpi"
     InMPP=None
     OutMPP=0.22098959139024552
     OutMPP=None
-    #CodePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-old/Code/OSTiles/"
-    #module load anaconda/3 openslide java/jdk15.0.1
-	module load anaconda/3 java/jdk15.0.1		    
-	source /data/scratch/shared/RSE/sources/.nick
-    #source /data/scratch/shared/RSE/sources/.rachel
-    source activate /data/scratch/shared/RSE/.conda/envs/openslide-mod
-    #source activate openslide-mod	
+        	
+    source /data/scratch/shared/RSE/sources/.nick    
+    module load anaconda/3 java/jdk15.0.1		    	
+    source activate /data/scratch/shared/RSE/.conda/envs/openslide-mod-rse
+    echo "Python version: $(python --version)"
+    echo "Python path: $(which python)"    
     mkdir -p "$TilePath"
 
     # count through the loop before exectuting it
