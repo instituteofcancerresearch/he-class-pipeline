@@ -26,18 +26,15 @@ if [[ "$is_singularity" == "TRUE" ]]; then
     OutMPP=0.22098959139024552
     OutMPP=None
         	
-    source /data/scratch/shared/RSE/sources/.rachel
-    #source /data/scratch/shared/RSE/sources/.nick
-    #module load anaconda/3 java/jdk15.0.1		    	
-    module load java/jdk15.0.1		    	    
-    mamba activate /data/scratch/shared/RSE/.conda/envs/openslide-mod-rse
-    #mamba activate /data/scratch/shared/RSE/.conda/envs/he-shared-openslide-old
-    #source activate /data/scratch/shared/RSE/.conda/envs/he-shared-openslide-old
+    source /data/scratch/shared/RSE/sources/.rachel    
+    module load java/jdk15.0.1
+    mamba activate /data/scratch/shared/RSE/.conda/envs/openslide-mod    
     echo "Using mamba"
-    echo "Path: $PATH"    
+    echo "Path: $PATH"
     echo "Python version: $(python --version)"
     echo "Python path: $(which python)"    
     mkdir -p "$TilePath"
+    python -c "print('Using python')"
 
     # count through the loop before exectuting it
     ImageCount=0
