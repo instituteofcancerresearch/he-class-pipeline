@@ -5,7 +5,8 @@
 #SBATCH --gres=gpu:1
 
 
-source /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/home/.bashrc
+#source /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/home/.bashrc
+source /data/scratch/shared/RSE/sources/.rachel
 
 imagePath=$1
 imageName=$2
@@ -30,7 +31,8 @@ echo "cellDetectionResultsPath: $cellDetectionResultsPath"
 echo "cellClassificationResultsPath: $cellClassificationResultsPath"
 echo "cellDetectorCheckPointPath: $cellDetectorCheckPointPath"
 echo "********************************"
-conda_env1="$conda_dir/he-shared-tensorflow"
+#conda_env1="$conda_dir/he-shared-tensorflow"
+conda_env1="/data/scratch/shared/RSE/.conda/envs/he-shared-tensorflow-old"
 conda_env2="$conda_dir/he-shared-pytorch"
 code_path="$code_root/code"
 config_path="$code_root/config"
