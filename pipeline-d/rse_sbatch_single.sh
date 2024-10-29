@@ -242,4 +242,5 @@ if [[ $steps == *"3"* ]]; then
     ${matlabMergeCSVCommands} exit;"   
 fi
 
-echo "complete"
+echo ""
+echo "Complete"
