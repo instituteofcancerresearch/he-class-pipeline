@@ -50,7 +50,8 @@ matlabPath="${currentPath}/cell_detector/matlab_common/"
 if [[ $steps == *"1"* ]]; then
     echo "@@@@@@@@@@@@ script 1 @@@@@@@@@@@@"    
     mamba activate $conda_env1
-    python3 --version
+    echo "Python version: $(python --version)"
+    echo "Python path: $(which python)"        
     python3 -m pip show matlabengine
     python3 -c "import sys; print(sys.argv)" "$file_name" "$code_path"   
 
