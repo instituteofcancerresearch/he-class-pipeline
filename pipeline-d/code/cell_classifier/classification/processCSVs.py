@@ -13,6 +13,8 @@ from fastai.conv_learner import *
 
 def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, segmentPath=None, windowSize=[51, 51], cellImageSize=224, inLabels=None, outLabels=['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end'], batchSize=30, arch=dn201, gpu=True, overwrite=False, minProb=0.0, noClassLabel=None, outputProbs=False):
     batchSize = int(batchSize)
+    minProb = float(minProb)
+    noClassLabel = int(noClassLabel)
     if arch is not None:
         tforms = tfms_from_model(arch, cellImageSize)
         
