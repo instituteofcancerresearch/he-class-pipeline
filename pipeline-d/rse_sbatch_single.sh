@@ -83,7 +83,7 @@ if [[ $steps == *"2"* ]]; then
     cellClassCertainty=0.0
     outputProbs=False
 	overwrite=False
-    labelNames='["nep", "unk", "myo", "cep", "fib", "lym", "neu", "mac", "end"]'
+    #labelNames='["nep", "unk", "myo", "cep", "fib", "lym", "neu", "mac", "end"]'                
     noLabelIdx=1
     ###################
     echo "=======Calling processCSVs with the following parameters: ====="
@@ -95,8 +95,8 @@ if [[ $steps == *"2"* ]]; then
     echo "outPath: ${cellClassificationCSVPath}"
     echo "segmentPath: ${segmentationTilePath}"
     echo "batchSize: ${classificationBatchSize}"
-    echo "inLabels: ${labelNames}"
-    echo "outLabels: ${labelNames}"
+    #echo "inLabels: ${labelNames}"
+    #echo "outLabels: ${labelNames}"
     echo "minProb: ${cellClassCertainty}"
     echo "noClassLabel: ${noLabelIdx}"
     echo "outputProbs: ${outputProbs}"
@@ -108,9 +108,10 @@ if [[ $steps == *"2"* ]]; then
     detectionPath='${cellDetectionCSVPath}', \
     tilePath='${tilePath}',classifierPath='${cellClassifierPath}', \
     outPath='${cellClassificationCSVPath}', segmentPath='${segmentationTilePath}', \
-    batchSize='${classificationBatchSize}', inLabels='${labelNames}', outLabels='${labelNames}',\
+    batchSize='${classificationBatchSize}', \
     minProb='${cellClassCertainty}', noClassLabel='${noLabelIdx}', \
     outputProbs='${outputProbs}', overwrite='${overwrite}');"    
+    #inLabels='${labelNames}', outLabels='${labelNames}',\
     
     mamba deactivate
 fi
