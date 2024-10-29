@@ -10,47 +10,8 @@ import scipy.io as sio
 import time
 from fastai.transforms import *
 from fastai.conv_learner import *
-import datetime
 
-def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, segmentPath=None, windowSize=[51, 51], cellImageSize=224, inLabels=None, outLabels=['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end'], batchSize=30, arch=dn201, gpu=True, overwrite=False, minProb=0.0, noClassLabel=None, outputProbs=False):    
-    print("######### Entered processCSVs v1 ########## ")
-    outputProbs = str(outputProbs).lower() == 'true'
-    minProb = float(minProb)
-    noClassLabel = int(noClassLabel)                    
-    batchSize = int(batchSize)
-    
-    if type(inLabels) is str:
-        if len(inLabels) < 3:
-            inLabels = None
-        else:            
-            inLabels = inLabels.replace(" ","").replace('"',"").replace("'","").replace("[","").replace("]","").split(',')
-    
-    if type(outLabels) is str:
-        if len(outLabels) < 3:
-            outLabels = ['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end']
-        else:
-            outLabels = outLabels.replace(" ","").replace('"',"").replace("'","")[1:-1].split(',')
-        
-    print("***** Inputs **********************")
-    print("imagePath",imagePath)
-    print("detectionPath",detectionPath)
-    print("tilePath",tilePath)
-    print("classifierPath",classifierPath)
-    print("outPath",outPath)
-    print("segmentPath",segmentPath)
-    print("windowSize",windowSize)
-    print("cellImageSize",cellImageSize)
-    print("inLabels",inLabels,type(inLabels))
-    print("outLabels",outLabels,type(outLabels))
-    print("batchSize",batchSize)
-    print("arch",arch)
-    print("gpu",gpu)
-    print("overwrite",overwrite)
-    print("minProb",minProb)
-    print("noClassLabel",noClassLabel)
-    print("outputProbs",outputProbs)
-    print("*********************************")
-    
+def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, segmentPath=None, windowSize=[51, 51], cellImageSize=224, inLabels=None, outLabels=['nep', 'unk', 'myo', 'cep', 'fib', 'lym', 'neu', 'mac', 'end'], batchSize=30, arch=dn201, gpu=True, overwrite=False, minProb=0.0, noClassLabel=None, outputProbs=False):
     if arch is not None:
         tforms = tfms_from_model(arch, cellImageSize)
         
@@ -73,31 +34,24 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
         model = model.cpu().eval()
     
     detectionPath = os.path.join(detectionPath, '')
-    print("DetectionPath =",detectionPath)
-    print("ImagePath =",imagePath)
-    imageName = imagePath.split('/')[-1]
-    print("GlobPath =",str(os.path.join(detectionPath, imageName, '*.csv')))
-    
-    CSVs = GLOB.glob(os.path.join(detectionPath, imageName, '*.csv'))
-        
-    len_csvs = len(CSVs)
-    count = 1
+
+    CSVs = GLOB.glob(os.path.join(detectionPath, imagePath, '*.csv'))
+
     for csvPath in CSVs:
         outCSVPath = os.path.join(outPath, csvPath[len(detectionPath):])
-                
+        
         if outputProbs:
             outProbCSVPath = os.path.join(os.path.dirname(outCSVPath), 'probabilities', os.path.basename(outCSVPath))
         
-        if overwrite or not os.path.isfile(outCSVPath):            
-            print(datetime.datetime.now(), count, "/", len_csvs, "Classifying cells in: "+csvPath, flush=True)
-            count += 1
+        if overwrite or not os.path.isfile(outCSVPath):
+            print("Classifying cells in: "+csvPath, flush=True)
             tileImagePath = os.path.join(tilePath, csvPath[len(detectionPath):-4]+'.jpg')
             tileImage = open_image(tileImagePath)
 
             tileImage = np.concatenate((tileImage[int(math.floor((windowSize[1]-1)/2))::-1,:], tileImage, tileImage[:int(math.floor(-(windowSize[1]-1)/2)):-1,:]),0)
             tileImage = np.concatenate((tileImage[:,int(math.floor((windowSize[1]-1)/2))::-1], tileImage, tileImage[:,:int(math.floor(-(windowSize[1]-1)/2)):-1]),1)
             
-            if segmentPath is not None and len(segmentPath) > 1:
+            if segmentPath is not None and len(segmentPath) > 0:
                 segmentImagePath = os.path.join(segmentPath, csvPath[len(detectionPath):-4]+'.png')
                 
                 if os.path.isfile(segmentImagePath):
@@ -128,17 +82,13 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
                     for i in range(0, len(csvData)):
                         cellProbs[i, -2:] = csvData[i][1:]
                 
-                inLabels = None
                 if inLabels is not None:
                     validRows = [i for i in range(0, len(csvData)) if csvData[i][0] in inLabels]
                 else:
                     validRows = range(0, len(csvData))
-                print("ValidRows =",len(validRows),validRows)
-                print("From csvdata =",len(csvData),csvData)
                 
                 cellLabels = np.zeros(len(validRows))
-                                
-                print("Looping", len(validRows), batchSize)
+                
                 for i in range(0, len(validRows), batchSize):
                     iEnd = min(i+batchSize, len(validRows))
                     
@@ -160,12 +110,12 @@ def processCSVs(imagePath, detectionPath, tilePath, classifierPath, outPath, seg
                 
                     probs = np.exp(logProbs)
                     batchLabels = np.argmax(probs, axis=1)
-                                        
+                    
                     if minProb > 0.0 and noClassLabel >= 0 and noClassLabel < len(outLabels):
                         batchLabels[np.max(probs, axis=1) < minProb] = noClassLabel;
 
                     cellLabels[i:iEnd] = batchLabels
-                                        
+                    
                     if outputProbs:
                         cellProbs[validRows[i:iEnd], :-2] = probs
                     

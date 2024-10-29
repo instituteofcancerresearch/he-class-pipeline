@@ -1,4 +1,4 @@
-import tensorflow.compat.v1 as tf
+import tensorflow as tf
 import matlab.engine
 import numpy as np
 import glob
@@ -11,34 +11,17 @@ from subpackages import h5
 
 
 def make_sub_dirs(opts, sub_dir_name):
-    try:
-        print("Creating directory:",os.path.join(opts.results_dir, 'h5', sub_dir_name))
-        if not os.path.isdir(os.path.join(opts.results_dir, 'h5', sub_dir_name)):
-            os.makedirs(os.path.join(opts.results_dir, 'h5', sub_dir_name))
-    except Exception as e:    
-        print(e)
-    try:
-        print("Creating directory:",os.path.join(opts.results_dir, 'h5', sub_dir_name))
-        if not os.path.isdir(os.path.join(opts.results_dir, 'annotated_images', sub_dir_name)):
-            os.makedirs(os.path.join(opts.results_dir, 'annotated_images', sub_dir_name))
-    except Exception as e:    
-        print(e)
-    try:
-        print("Creating directory:",os.path.join(opts.results_dir, 'h5', sub_dir_name))
-        if not os.path.isdir(os.path.join(opts.results_dir, 'csv', sub_dir_name)):
-            os.makedirs(os.path.join(opts.results_dir, 'csv', sub_dir_name))
-    except Exception as e:    
-        print(e)
-    try:
-        print("Creating directory:",os.path.join(opts.preprocessed_dir, 'h5', sub_dir_name))
-        if not os.path.isdir(os.path.join(opts.preprocessed_dir, 'pre_processed', sub_dir_name)):
-            os.makedirs(os.path.join(opts.preprocessed_dir, 'pre_processed', sub_dir_name))
-    except Exception as e:    
-        print(e)
+    if not os.path.isdir(os.path.join(opts.results_dir, 'h5', sub_dir_name)):
+        os.makedirs(os.path.join(opts.results_dir, 'h5', sub_dir_name))
+    if not os.path.isdir(os.path.join(opts.results_dir, 'annotated_images', sub_dir_name)):
+        os.makedirs(os.path.join(opts.results_dir, 'annotated_images', sub_dir_name))
+    if not os.path.isdir(os.path.join(opts.results_dir, 'csv', sub_dir_name)):
+        os.makedirs(os.path.join(opts.results_dir, 'csv', sub_dir_name))
+    if not os.path.isdir(os.path.join(opts.preprocessed_dir, 'pre_processed', sub_dir_name)):
+        os.makedirs(os.path.join(opts.preprocessed_dir, 'pre_processed', sub_dir_name))
 
 
 def pre_process_images(opts, sub_dir_name, eng=None):
-    print('pre_process_images', flush=True)
     if eng is None:
         eng = matlab.engine.start_matlab()
         eng.eval('run initialize_matlab_variables.m', nargout=0)
@@ -106,12 +89,11 @@ def generate_network_output(opts, sub_dir_name, network, sess, logits):
                     data_train = np.pad(data_train, ((0, opts.batch_size-data_count), (0, 0), (0, 0), (0, 0)), mode='constant')
                 data_train = data_train.astype(np.float32, copy=False)
                 data_train_float32 = data_train / 255.0
-                logits_out = sess.run( #RSA todo this is where it goes into the detection network
+                logits_out = sess.run(
                     logits,
                     feed_dict={network.images: data_train_float32,
                                })
-                label_patches[start:end] = logits_out[:data_count, :, :, :] 
-                #RSA this is the most likely step where the network is being called
+                label_patches[start:end] = logits_out[:data_count, :, :, :]
 
                 if end + opts.batch_size > opts.num_examples_per_epoch_for_train - 1:
                     end = opts.num_examples_per_epoch_for_train - opts.batch_size
@@ -133,24 +115,22 @@ def generate_network_output(opts, sub_dir_name, network, sess, logits):
 
 
 def generate_output(network, opts, save_pre_process=True, network_output=True, post_process=True):
-    print('Generating output', network, opts, save_pre_process, network_output, post_process)
     cws_sub_dir = sorted(glob.glob(os.path.join(opts.data_dir, opts.file_name_pattern)))
 
     eng = matlab.engine.start_matlab()
 
     for cws_n in range(0, len(cws_sub_dir)):
         curr_cws_sub_dir = cws_sub_dir[cws_n]
-        print(cws_n, "/", len(cws_sub_dir), curr_cws_sub_dir, flush=True)
+        print(curr_cws_sub_dir, flush=True)
         sub_dir_name = os.path.basename(os.path.normpath(curr_cws_sub_dir))
 
         eng.eval('run initialize_matlab_variables.m', nargout=0)
         if save_pre_process:
-            print('Save preprocessing images', flush=True)
             pre_process_images(opts=opts, sub_dir_name=sub_dir_name, eng=eng)
 
         # files = sorted(glob.glob(os.path.join(opts.data_dir, sub_dir_name, 'Da*.jpg')))
         if network_output:
-            logits = network.inference() #RSA TODO
+            logits = network.inference()
             saver = tf.train.Saver(tf.global_variables(), max_to_keep=opts.num_of_epoch)
             with tf.Session() as sess:
                 ckpt = tf.train.get_checkpoint_state(opts.checkpoint_dir)

@@ -3,17 +3,9 @@ import numpy as np
 
 
 def h5read(filename, data_name):
-    
-
-
-    #h5f['kVals'][()] 
-    # rather than h5f['kVals'].value
-
     file = h5py.File(filename)
-    #data = file[data_name + '/data'].value
-    #shape = file[data_name + '/shape'].value
-    data = file[data_name + '/data'][()]
-    shape = file[data_name + '/shape'][()]
+    data = file[data_name + '/data'].value
+    shape = file[data_name + '/shape'].value
     data = data.reshape(shape, order='F')
 
     file.close()
