@@ -28,9 +28,10 @@ if [[ "$is_singularity" == "TRUE" ]]; then
         	
     #source /data/scratch/shared/RSE/sources/.rachel
     source /data/scratch/shared/RSE/sources/.nick
-    #module load anaconda/3 java/jdk15.0.1		    	
+    module load anaconda/3 java/jdk15.0.1		    	
     module load java/jdk15.0.1		    	    
-    mamba activate /data/scratch/shared/RSE/.conda/envs/he-shared-openslide-old
+    #mamba activate /data/scratch/shared/RSE/.conda/envs/he-shared-openslide-old
+    source activate /data/scratch/shared/RSE/.conda/envs/he-shared-openslide-old
     echo "Using mamba"
     echo "Path: $PATH"    
     echo "Python version: $(python --version)"
