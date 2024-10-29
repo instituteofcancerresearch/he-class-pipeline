@@ -26,9 +26,10 @@ if [[ "$is_singularity" == "TRUE" ]]; then
     OutMPP=0.22098959139024552
     OutMPP=None
         	
-    source /data/scratch/shared/RSE/sources/.rachel
+    #source /data/scratch/shared/RSE/sources/.rachel
+    source /data/scratch/shared/RSE/sources/.nick
     #module load anaconda/3 java/jdk15.0.1		    	
-    module load java/jdk15.0.1		    	
+    module load java/jdk15.0.1		    	    
     mamba activate /data/scratch/shared/RSE/.conda/envs/he-shared-openslide-old
     echo "Using mamba"
     echo "Path: $PATH"    
