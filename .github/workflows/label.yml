@@ -1,0 +1,19 @@
+name: Add bugs to bugs project
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+
+jobs:
+  add-to-project:
+    name: Add issue to project
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh issue edit "$NUMBER" --add-label "$LABELS"
+        env:
+          GH_TOKEN: ${{ secrets.ISSUE_COPY }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          LABELS: active
