@@ -1,0 +1,44 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific environment
+PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+
+alias sq="squeue --me"
+alias interactive="srun -N 1 -t 5:00:00 --job-name="Interactive" --pty /bin/bash"
+alias interactive-long="srun -N 1 -t 24:00:00 --job-name="Interactive" --pty /bin/bash"
+alias interactive-gpu="srun -N 1 -p yuangpu -t 72:00:00 --job-name="Interactive" --gres=gpu:1 --pty /bin/bash"
+alias interactive-dt="srun -N 1 -p interactive-data -t 2:00:00 --job-name="Interactive" --pty /bin/bash"
+alias ncdu="/data/scratch/DMP/UCEC/EVGENMOD/cjames/ncdu -f /data/scratch/DMP/UCEC/EVGENMOD/sottoriva_scratch.ncdu"
+alias squota-old="mmlsquota --block-size auto -j EVGENMOD dssfs01"
+alias squota="mmlsquota --block-size auto -j GENEVOD dssfs01"
+module use "/home/ntrahearn/lib"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+#__conda_setup="$('/opt/software/easybuild/software/Mamba/23.1.0-0/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "/opt/software/easybuild/software/Mamba/23.1.0-0/etc/profile.d/conda.sh" ]; then
+#        . "/opt/software/easybuild/software/Mamba/23.1.0-0/etc/profile.d/conda.sh"
+#    else
+#        export PATH="/opt/software/easybuild/software/Mamba/23.1.0-0/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
+#
+#if [ -f "/opt/software/easybuild/software/Mamba/23.1.0-0/etc/profile.d/mamba.sh" ]; then
+#    . "/opt/software/easybuild/software/Mamba/23.1.0-0/etc/profile.d/mamba.sh"
+#fi
+# <<< conda initialize <<<

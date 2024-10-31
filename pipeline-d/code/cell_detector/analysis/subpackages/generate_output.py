@@ -1,4 +1,4 @@
-import tensorflow.compat.v1 as tf
+import tensorflow as tf
 import matlab.engine
 import numpy as np
 import glob
@@ -11,34 +11,17 @@ from subpackages import h5
 
 
 def make_sub_dirs(opts, sub_dir_name):
-    try:
-        print("Creating directory:",os.path.join(opts.results_dir, 'h5', sub_dir_name))
-        if not os.path.isdir(os.path.join(opts.results_dir, 'h5', sub_dir_name)):
-            os.makedirs(os.path.join(opts.results_dir, 'h5', sub_dir_name))
-    except Exception as e:    
-        print(e)
-    try:
-        print("Creating directory:",os.path.join(opts.results_dir, 'h5', sub_dir_name))
-        if not os.path.isdir(os.path.join(opts.results_dir, 'annotated_images', sub_dir_name)):
-            os.makedirs(os.path.join(opts.results_dir, 'annotated_images', sub_dir_name))
-    except Exception as e:    
-        print(e)
-    try:
-        print("Creating directory:",os.path.join(opts.results_dir, 'h5', sub_dir_name))
-        if not os.path.isdir(os.path.join(opts.results_dir, 'csv', sub_dir_name)):
-            os.makedirs(os.path.join(opts.results_dir, 'csv', sub_dir_name))
-    except Exception as e:    
-        print(e)
-    try:
-        print("Creating directory:",os.path.join(opts.preprocessed_dir, 'h5', sub_dir_name))
-        if not os.path.isdir(os.path.join(opts.preprocessed_dir, 'pre_processed', sub_dir_name)):
-            os.makedirs(os.path.join(opts.preprocessed_dir, 'pre_processed', sub_dir_name))
-    except Exception as e:    
-        print(e)
+    if not os.path.isdir(os.path.join(opts.results_dir, 'h5', sub_dir_name)):
+        os.makedirs(os.path.join(opts.results_dir, 'h5', sub_dir_name))
+    if not os.path.isdir(os.path.join(opts.results_dir, 'annotated_images', sub_dir_name)):
+        os.makedirs(os.path.join(opts.results_dir, 'annotated_images', sub_dir_name))
+    if not os.path.isdir(os.path.join(opts.results_dir, 'csv', sub_dir_name)):
+        os.makedirs(os.path.join(opts.results_dir, 'csv', sub_dir_name))
+    if not os.path.isdir(os.path.join(opts.preprocessed_dir, 'pre_processed', sub_dir_name)):
+        os.makedirs(os.path.join(opts.preprocessed_dir, 'pre_processed', sub_dir_name))
 
 
 def pre_process_images(opts, sub_dir_name, eng=None):
-    print('pre_process_images', flush=True)
     if eng is None:
         eng = matlab.engine.start_matlab()
         eng.eval('run initialize_matlab_variables.m', nargout=0)
@@ -132,19 +115,17 @@ def generate_network_output(opts, sub_dir_name, network, sess, logits):
 
 
 def generate_output(network, opts, save_pre_process=True, network_output=True, post_process=True):
-    print('Generating output', network, opts, save_pre_process, network_output, post_process)
     cws_sub_dir = sorted(glob.glob(os.path.join(opts.data_dir, opts.file_name_pattern)))
 
     eng = matlab.engine.start_matlab()
 
     for cws_n in range(0, len(cws_sub_dir)):
         curr_cws_sub_dir = cws_sub_dir[cws_n]
-        print(cws_n, "/", len(cws_sub_dir), curr_cws_sub_dir, flush=True)
+        print(curr_cws_sub_dir, flush=True)
         sub_dir_name = os.path.basename(os.path.normpath(curr_cws_sub_dir))
 
         eng.eval('run initialize_matlab_variables.m', nargout=0)
         if save_pre_process:
-            print('Save preprocessing images', flush=True)
             pre_process_images(opts=opts, sub_dir_name=sub_dir_name, eng=eng)
 
         # files = sorted(glob.glob(os.path.join(opts.data_dir, sub_dir_name, 'Da*.jpg')))

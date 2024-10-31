@@ -1,5 +1,5 @@
 function image = annotate_image_with_class(image, points, colour, strength)
-    %disp("Annotating images function 2...");
+    
     if size(image, 3)~=3
         error('Please input an RGB image');
     end
@@ -10,7 +10,7 @@ function image = annotate_image_with_class(image, points, colour, strength)
     linearInd = sub2ind(size(label), points(:,2), points(:,1));
     label(linearInd) = 1;
     label = imdilate(label, strel('disk', strength))>0;
-    %     label = logical(repmat(label, [1, 1, 3]));  
+%     label = logical(repmat(label, [1, 1, 3]));
     image1 = image(:,:,1);
     image2 = image(:,:,2);
     image3 = image(:,:,3);

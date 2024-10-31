@@ -5,7 +5,8 @@
 #SBATCH --gres=gpu:1
 
 
-source /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/home/.bashrc
+#source /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/home/.bashrc
+source /data/scratch/shared/RSE/sources/.rachel
 
 imagePath=$1
 imageName=$2
@@ -19,6 +20,7 @@ cellClassificationResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he
 cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
 
 echo "*********INPUTS***********************"
+echo "New pipeline D"
 echo "imagePath: $imagePath"
 echo "imageName: $imageName"
 echo "code_root: $code_root"
@@ -31,8 +33,9 @@ echo "cellClassificationResultsPath: $cellClassificationResultsPath"
 echo "cellDetectorCheckPointPath: $cellDetectorCheckPointPath"
 echo "********************************"
 conda_env1="$conda_dir/he-shared-tensorflow"
+#conda_env1="/data/scratch/shared/RSE/.conda/envs/he-shared-tensorflow-old"
 conda_env2="$conda_dir/he-shared-pytorch"
-code_path="$code_root/code"
+code_path="$code_root/code-upgraded"
 config_path="$code_root/config"
 echo "conda_env1: $conda_env1"
 echo "conda_env2: $conda_env2"
@@ -48,7 +51,8 @@ matlabPath="${currentPath}/cell_detector/matlab_common/"
 if [[ $steps == *"1"* ]]; then
     echo "@@@@@@@@@@@@ script 1 @@@@@@@@@@@@"    
     mamba activate $conda_env1
-    python3 --version
+    echo "Python version: $(python --version)"
+    echo "Python path: $(which python)"        
     python3 -m pip show matlabengine
     python3 -c "import sys; print(sys.argv)" "$file_name" "$code_path"   
 
@@ -80,7 +84,7 @@ if [[ $steps == *"2"* ]]; then
     cellClassCertainty=0.0
     outputProbs=False
 	overwrite=False
-    labelNames='["nep", "unk", "myo", "cep", "fib", "lym", "neu", "mac", "end"]'
+    #labelNames='["nep", "unk", "myo", "cep", "fib", "lym", "neu", "mac", "end"]'                
     noLabelIdx=1
     ###################
     echo "=======Calling processCSVs with the following parameters: ====="
@@ -92,8 +96,8 @@ if [[ $steps == *"2"* ]]; then
     echo "outPath: ${cellClassificationCSVPath}"
     echo "segmentPath: ${segmentationTilePath}"
     echo "batchSize: ${classificationBatchSize}"
-    echo "inLabels: ${labelNames}"
-    echo "outLabels: ${labelNames}"
+    #echo "inLabels: ${labelNames}"
+    #echo "outLabels: ${labelNames}"
     echo "minProb: ${cellClassCertainty}"
     echo "noClassLabel: ${noLabelIdx}"
     echo "outputProbs: ${outputProbs}"
@@ -105,9 +109,10 @@ if [[ $steps == *"2"* ]]; then
     detectionPath='${cellDetectionCSVPath}', \
     tilePath='${tilePath}',classifierPath='${cellClassifierPath}', \
     outPath='${cellClassificationCSVPath}', segmentPath='${segmentationTilePath}', \
-    batchSize='${classificationBatchSize}', inLabels='${labelNames}', outLabels='${labelNames}',\
+    batchSize='${classificationBatchSize}', \
     minProb='${cellClassCertainty}', noClassLabel='${noLabelIdx}', \
     outputProbs='${outputProbs}', overwrite='${overwrite}');"    
+    #inLabels='${labelNames}', outLabels='${labelNames}',\
     
     mamba deactivate
 fi
@@ -238,4 +243,5 @@ if [[ $steps == *"3"* ]]; then
     ${matlabMergeCSVCommands} exit;"   
 fi
 
-echo "complete"
+echo ""
+echo "Complete"

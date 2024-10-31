@@ -1,12 +1,4 @@
 import tensorflow as tf
-import stain_normalization as sn # not needed forces path recognition
-
-import os,sys
-dir_path = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(dir_path)
-sys.path.append(str(dir_path) + "/subpackages")
-
-print("Paths in scnn:", sys.path)
 
 from subpackages import variable_summaries
 from subpackages import train_op
@@ -28,8 +20,6 @@ class SCCNN:
         self.out_width = out_width
         self.out_feat_dim = out_feat_dim
         self.radius = radius
-        
-        tf.compat.v1.disable_eager_execution()
 
         x, y = tf.meshgrid(tf.range(0, out_height), tf.range(0, out_width))
 
@@ -45,10 +35,10 @@ class SCCNN:
         self.X = tf.cast(x, dtype=tf.float32)
         self.Y = tf.cast(y, dtype=tf.float32)
 
-        self.images = tf.compat.v1.placeholder(tf.float32,
+        self.images = tf.placeholder(tf.float32,
                                      shape=[self.batch_size, self.image_height, self.image_width, self.in_feat_dim])
 
-        self.labels = tf.compat.v1.placeholder(tf.float32,
+        self.labels = tf.placeholder(tf.float32,
                                      shape=[self.batch_size, self.out_height, self.out_width, self.out_feat_dim])
 
         self.train_op = None

@@ -167,3 +167,4 @@ pipeline-a/dev.md
 
 #pipeline-d/code/cell_detector/analysis/subpackages/*
 #pipeline-d/code/cell_detector/matlab_common/*
+*:Zone.Identifier

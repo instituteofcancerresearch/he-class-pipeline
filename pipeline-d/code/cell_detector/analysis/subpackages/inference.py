@@ -1,4 +1,4 @@
-import tensorflow.compat.v1 as tf
+import tensorflow as tf
 
 
 def convolution2d_full(in_tensor, in_ch_dim, out_ch_dim, notbias, layer_name, kdim):
@@ -29,7 +29,7 @@ def max_pool(in_tensor):
 
 
 def weight_variable(shape, stddev, name):
-    initial = tf.random.truncated_normal(shape, stddev=stddev, name='Gaussian_Init')
+    initial = tf.truncated_normal(shape, stddev=stddev, name='Gaussian_Init')
     return tf.Variable(initial, name=name)
 
 

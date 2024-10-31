@@ -106,7 +106,7 @@ class CWSGENERATOR:
                     end_w = slide_w
                     out_w = rescale_slide_w - (w * cws_read_size[0])
 
-                im = openslide_obj.read_region([start_w, start_h], 0, [end_w - start_w, end_h - start_h])
+                im = openslide_obj.read_region([start_w, start_h], 0, [end_w - start_w, end_h - start_h]) #RSA TODO #############################################################
                 format_str = 'Da%d:  start_w:%d, end_w:%d, start_h:%d, end_h:%d, width:%d, height:%d'
                 text_output.write((format_str + '\n') % (
                     iter_tot, start_w, end_w, start_h, end_h, end_w - start_w, end_h - start_h)
@@ -119,7 +119,7 @@ class CWSGENERATOR:
                 if rescale != 1:
                     im = im.resize(size=[out_w, out_h],
                                    resample=Image.BICUBIC)
-                im.save(os.path.join(output_dir, 'Da' + str(iter_tot) + '.jpg'), format='JPEG')
+                im.save(os.path.join(output_dir, 'Da' + str(iter_tot) + '.jpg'), format='JPEG')  #RSA TODO have the defaults changed for this function? ############################
                 iter_tot += 1
 
         text_output.close()

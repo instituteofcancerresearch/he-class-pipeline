@@ -147,7 +147,6 @@ end
 end
 
 function [im_rot, csv_table_rot] = rotate_annotations(im, csv_table, angle)
-    disp('V1V2V3 table rot');
     im_size = size(im);
     
     sub_angle = 90-abs(90-mod(angle, 180));

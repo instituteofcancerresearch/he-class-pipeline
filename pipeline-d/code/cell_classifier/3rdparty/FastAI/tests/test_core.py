@@ -47,7 +47,7 @@ def test_T():
     to_half_mock.assert_called_once()
 
   with pytest.raises(NotImplementedError):
-    assert core.T(array.astype(np.object))
+    assert core.T(array.astype(object))
 
 def test_create_variable_passing_Variable_object():
   v = torch.autograd.Variable(core.T(np.arange(0, 3)))
