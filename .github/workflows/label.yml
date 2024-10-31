@@ -13,7 +13,7 @@ jobs:
     steps:
       - run: gh issue edit "$NUMBER" --add-label "$LABELS"
         env:
-          GH_TOKEN: ${{ secrets.ISSUE_COPY }}
+          GH_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.issue.number }}
           LABELS: active
