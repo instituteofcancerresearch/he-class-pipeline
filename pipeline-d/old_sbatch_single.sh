@@ -58,7 +58,7 @@ if [[ $steps == *"1"* ]]; then
 
     ##################################################
     echo "Check tensorflow installation"
-    python3 -c "import tensorflow as tf;tf.config.list_physical_devices('GPU');print('Num GPUs Available: ', len(tf.config.list_physical_devices('GPU')))"
+    python3 -c "import tensorflow as tf;tf.config.list_physical_devices('GPU');print('Num GPUs Available: ', len(tf.test.gpu_device_name()))"
     ################################################### 
     
     sccnnDetectionCodePath="${currentPath}/cell_detector/analysis"    
