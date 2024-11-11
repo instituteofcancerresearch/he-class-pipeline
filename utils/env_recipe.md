@@ -2,12 +2,9 @@ To create an environment for image comparison, run the following commands in ter
 
 ```console
 conda create comprate-images-env
-conda install conda-forge::pillow==11.0.0
-conda install numpy==1.26.4
+conda install -c conda-forge pillow==11.0.0 numpy==1.26.4
 conda install pip
-pip install opencv-python==4.10.0.84
-pip install image-similarity-measures==0.3.6
-pip install pyfftw==0.15.0
+pip install opencv-python==4.10.0.84 image-similarity-measures==0.3.6 pyfftw==0.15.0
 ```
 
 To run the environment, run:
