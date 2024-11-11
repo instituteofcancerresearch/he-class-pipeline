@@ -75,7 +75,7 @@ def compare_images(path_1, path_2):
 
 # Change paths to the folders with images you want to compare, folders have to have the same 
 # names for files that are being compared
-path1 = "/Users/ashcherbakova/Desktop/HE_test"
-path2 = "/Users/ashcherbakova/Projects/he-class-pipeline/regression"
+path1 = ""
+path2 = ""
 
 compare_images(path1, path2)

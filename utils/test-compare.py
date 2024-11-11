@@ -68,7 +68,7 @@ def compare_images(path_1, path_2):
 # Change paths by specifying where your data is:
 ## path1 - analysed test data directory
 ## path2 - test data directory you have analysed with updated pipeline 
-path1 = "he-class-pipeline/regression/"
+path1 = "path/to/data/he-class-pipeline/regression/"
 path2 = "path/to/data/HE_test/"
 
 compare_images(path1, path2)
