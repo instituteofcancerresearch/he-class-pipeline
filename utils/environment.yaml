@@ -4,20 +4,21 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - pillow
   - numpy
+  - pillow
   - pip:
-    - image-similarity-measures==0.3.6
-    - imageio==2.36.0
-    - lazy-loader==0.4
-    - networkx==3.4.2
-    - opencv-python==4.10.0.84
-    - packaging==24.2
-    - phasepack==1.5
-    - pyfftw==0.15.0
-    - pywavelets==1.7.0
-    - scikit-image==0.20.0
-    - scipy==1.14.1
-    - setuptools==75.3.0
-    - tifffile==2024.9.20
+      - image-similarity-measures==0.3.6
+      - imageio==2.36.0
+      - lazy-loader==0.4
+      - networkx==3.4.2
+      - numpy==1.26.4
+      - opencv-python==4.10.0.84
+      - packaging==24.2
+      - phasepack==1.5
+      - pyfftw==0.15.0
+      - pywavelets==1.7.0
+      - scikit-image==0.20.0
+      - scipy==1.14.1
+      - setuptools==75.3.0
+      - tifffile==2024.9.20
 prefix: /opt/anaconda3/envs/compare-images-env
