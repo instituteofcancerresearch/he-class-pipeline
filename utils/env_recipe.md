@@ -1,16 +1,19 @@
 To create an environment for image comparison, run the following commands in terminal:
 
 ```console
-conda create comprate-images-env
-conda install -c conda-forge pillow==11.0.0 numpy==1.26.4
-conda install pip
-pip install opencv-python==4.10.0.84 image-similarity-measures==0.3.6 pyfftw==0.15.0
+conda create --name compare-images-env
+conda activate compare-images-env
+conda install -c conda-forge pillow
+conda install numpy
+pip install opencv-python
+pip install pyfftw
+pip install image-similarity-measures
 ```
 
-To run the environment, run:
+To activate the environment, run:
 
 ```console
-conda activate comprate-images-env
+conda activate compare-images-env
 ```
 
 To deactivate the environment, run:
@@ -22,13 +25,13 @@ conda deactivate
 To save the environment specifications, run the following commands to generate environment.yml file and requirements.txt files:
 
 ```console
-conda env export > environment.yml
+conda env export --from-history > environment.yaml
 pip freeze > requirements.txt
 ```
 
 If you want to create the same environment in the future, you can run the following commands:
  
 ```console
-conda create --name ENV_NAME --f environment.yml
+conda env create -f environment.yaml
 pip install -r requirements.txt
 ```
