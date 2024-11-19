@@ -71,7 +71,8 @@ def compare_images(path_1, path_2):
                         #     print(f"Da{i}: The images are the same.")
 
                     except FileNotFoundError as e:
-                        print(f"Error opening images Da{i} with {ext} extension: {e}")
+                        with open('compare-images-result.err', 'a') as err_file:
+                            err_file.write(f"Error opening images Da{i} with {ext} extension: {e}\n")
                         continue
 
                 # else:
