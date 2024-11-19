@@ -7,6 +7,7 @@ conda install -c conda-forge pillow
 conda install numpy
 pip install opencv-python
 pip install pyfftw
+pip install scikit-image
 pip install image-similarity-measures
 ```
 
