@@ -1,0 +1,23 @@
+# This is for installation on mamba
+name: compare-images-env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - pillow
+  - pyfftw
+  - pip:
+    - image-similarity-measures==0.3.6
+    - imageio==2.36.0
+    - lazy-loader==0.4
+    - networkx==3.4.2
+    - numpy==1.26.4
+    - opencv-python==4.10.0.84
+    - packaging==24.2
+    - phasepack==1.5
+    - pywavelets==1.7.0
+    - scikit-image==0.20.0
+    - scipy==1.14.1
+    - tifffile==2024.9.20
+prefix: /opt/anaconda3/envs/compare-images-env
