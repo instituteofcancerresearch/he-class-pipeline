@@ -1,11 +1,12 @@
-## need to first install the requirements form the requirements.txt
 from PIL import Image
 import numpy as np
 import cv2
 # image_similarity_measures taken from: https://github.com/nekhtiari/image-similarity-measures
 from image_similarity_measures.quality_metrics import rmse, sre
-import os
 import glob
+import sys
+path1 = sys.argv[1]
+path2 = sys.argv[2]
 
 def compare_images(path_1, path_2):
     """
@@ -22,6 +23,9 @@ def compare_images(path_1, path_2):
     folder_list2 = sorted(glob.glob(path_2+"/out*"))
     # print(folder_list1)
     # print(folder_list2)
+    if folder_list1 == [] or folder_list2 == []:
+        raise FileNotFoundError
+
     for folder1, folder2 in zip(folder_list1, folder_list2):
         subfolder_list1 = sorted(glob.glob(folder1+"/*.ndpi"))
         subfolder_list2 = sorted(glob.glob(folder2+"/*.ndpi"))
@@ -30,7 +34,10 @@ def compare_images(path_1, path_2):
         for subfolder1, subfolder2 in zip(subfolder_list1, subfolder_list2):
             print(f"In folder {subfolder1}")
             file_num1 = len(glob.glob(subfolder1+"/Da*"))
-            file_num2 = len(glob.glob(subfolder2+"/Da*"))
+            # file_num2 = len(glob.glob(subfolder2+"/Da*"))
+
+            if file_num1 == 0:
+                raise FileNotFoundError
 
             for i in range(0, (file_num1 + 1)):
                 count = 0
@@ -63,19 +70,14 @@ def compare_images(path_1, path_2):
                         # else:
                         #     print(f"Da{i}: The images are the same.")
 
-                    except FileNotFoundError:
+                    except FileNotFoundError as e:
+                        with open('compare-images-result.err', 'a') as err_file:
+                            err_file.write(f"Error opening images Da{i} with {ext} extension: {e}\n")
                         continue
-                    except Exception as e:
-                        print(f"Error opening images Da{i} with {ext} extension: {e}")
-                        continue
+
                 # else:
                 #     print(f"Da{i}: No image file found with .jpg or .png extensions.")
 
             # print(f"{count} different images in folder {folder}")
-
-# Change paths to the folders with images you want to compare, folders have to have the same 
-# names for files that are being compared
-path1 = ""
-path2 = ""
 
 compare_images(path1, path2)

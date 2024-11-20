@@ -1,4 +1,3 @@
-## need to first install the requirements form the requirements.txt
 from PIL import Image
 import numpy as np
 import cv2
@@ -31,13 +30,15 @@ def compare_images(path_1, path_2):
             print(f"In folder {step_lit_test[step]}/{folder_name}")
 
             for i in range(0, 35):
-                image1_base = f'{folder_path1+folder_name}/Da{i}'
-                image2_base = f'{folder_path2+folder_name}/Da{i}'
+                image1_base = f'{folder_path1+"/"+folder_name}/Da{i}'
+                image2_base = f'{folder_path2+"/"+folder_name}/Da{i}'
 
                 for ext in ['.jpg', '.png']:
                     try:
                         image1_path = (f'{image1_base}{ext}')
                         image2_path = (f'{image2_base}{ext}')
+                        # print(image1_path)
+                        # print(image2_path)
                         
                         image1 = Image.open(image1_path)
                         image2 = Image.open(image2_path)
@@ -55,10 +56,8 @@ def compare_images(path_1, path_2):
                             print(f"RMSE image difference: {out_rmse}")
                             # print(f"SRE image difference: {out_sre}")
 
-                    except FileNotFoundError:
-                        continue
-                    except Exception as e:
-                        print(f"Error opening images Da{i} with {ext} extension: {e}")
+                    except FileNotFoundError as e:
+                        # print(f"Error opening images Da{i} with {ext} extension: {e}")
                         continue
                 # else:
                 #     print(f"Da{i}: No image file found with .jpg or .png extensions.")
@@ -67,8 +66,12 @@ def compare_images(path_1, path_2):
 
 # Change paths by specifying where your data is:
 ## path1 - analysed test data directory
-## path2 - test data directory you have analysed with updated pipeline 
-path1 = "path/to/data/he-class-pipeline/regression/"
-path2 = "path/to/data/HE_test/"
+## path2 - test data directory you have analysed with updated pipeline
+
+# path1 = "path/to/data/he-class-pipeline/regression/"
+# path2 = "path/to/data/HE_test/"
+
+path1 = "/Users/ashcherbakova/Projects/he-class-pipeline/regression/"
+path2 = "/Users/ashcherbakova/Desktop/HE_test/"
 
 compare_images(path1, path2)
