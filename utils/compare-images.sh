@@ -12,6 +12,9 @@ mamba activate comprate-images-env
 echo -e "Running compare images script..."
 python3 compare-images.py "$1" "$2" > compare-images-result.log 2> compare-images-result.err
 
+echo -e "Result output:"
+cat compare-images-result.log
+
 # conda init
 echo -e "Deactivating conda enviroment..."
 # conda deactivate
