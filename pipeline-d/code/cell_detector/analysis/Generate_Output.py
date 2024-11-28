@@ -51,15 +51,30 @@ opts.results_dir = os.path.join(opts.results_dir, '20180117')
 opts.preprocessed_dir = os.path.join(opts.preprocessed_dir, '20180117')
 
 if not os.path.isdir(opts.results_dir):
-    os.makedirs(opts.results_dir)
+    try:
+        os.makedirs(opts.results_dir)
+    except OSError as e:
+        print(e)
 if not os.path.isdir(os.path.join(opts.results_dir, 'h5')):
-    os.makedirs(os.path.join(opts.results_dir, 'h5'))
+    try:
+        os.makedirs(os.path.join(opts.results_dir, 'h5'))
+    except OSError as e:
+        print(e)
 if not os.path.isdir(os.path.join(opts.results_dir, 'annotated_images')):
-    os.makedirs(os.path.join(opts.results_dir, 'annotated_images'))
+    try:
+        os.makedirs(os.path.join(opts.results_dir, 'annotated_images'))
+    except OSError as e:
+        print(e)
 if not os.path.isdir(os.path.join(opts.results_dir, 'csv')):
-    os.makedirs(os.path.join(opts.results_dir, 'csv'))
+    try:
+        os.makedirs(os.path.join(opts.results_dir, 'csv'))
+    except OSError as e:
+        print(e)
 if not os.path.isdir(os.path.join(opts.preprocessed_dir, 'pre_processed')):
-    os.makedirs(os.path.join(opts.preprocessed_dir, 'pre_processed'))
+    try:
+        os.makedirs(os.path.join(opts.preprocessed_dir, 'pre_processed'))
+    except OSError as e:
+        print(e)
 
 Network = sccnn.SCCNN(batch_size=opts.batch_size,
                       image_height=opts.image_height,
