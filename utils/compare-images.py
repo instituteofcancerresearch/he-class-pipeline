@@ -51,9 +51,9 @@ def compare_images(path_1, path_2, recursive):
                 image1_base = f'{subfolder1}/Da{i}'
                 image2_base = f'{subfolder2}/Da{i}'
                 
-                print(f"{i+1}/{file_num1+1}")
-                print("... Image1: ", image1_base)
-                print("... Image2: ", image2_base)
+                #print(f"{i+1}/{file_num1+1}")
+                #print("... Image1: ", image1_base)
+                #print("... Image2: ", image2_base)
 
                 for ext in ['.jpg', '.png']:
                     try:
