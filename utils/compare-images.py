@@ -7,10 +7,11 @@ import glob
 import sys
 path1 = sys.argv[1]
 path2 = sys.argv[2]
+recursive = sys.argv[3]
 print(f"InputPath 1: {path1}")
 print(f"InputPath 2: {path2}")
 
-def compare_images(path_1, path_2, recursive="Y"):
+def compare_images(path_1, path_2, recursive):
     """
         Description:
         Function which compares images to each other thourgh comparing their numpy arrays.
@@ -86,4 +87,4 @@ def compare_images(path_1, path_2, recursive="Y"):
 
             # print(f"{count} different images in folder {folder}")
 
-compare_images(path1, path2)
+compare_images(path1, path2, recursive)
