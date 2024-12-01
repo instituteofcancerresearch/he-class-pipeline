@@ -39,15 +39,15 @@ def compare_images(path_1, path_2, recursive):
         #print(subfolder_list1)
         #print(subfolder_list2)
         for subfolder1, subfolder2 in zip(subfolder_list1, subfolder_list2):
-            print(f"In folder {subfolder1}")
+            print(f"Compare folders {subfolder1} {subfolder2}")
             file_num1 = len(glob.glob(subfolder1+"/Da*"))
             # file_num2 = len(glob.glob(subfolder2+"/Da*"))
 
             if file_num1 == 0:
                 raise FileNotFoundError
 
-            for i in range(0, (file_num1 + 1)):
-                count = 0
+            count = 0
+            for i in range(0, (file_num1 + 1)):                
                 image1_base = f'{subfolder1}/Da{i}'
                 image2_base = f'{subfolder2}/Da{i}'
                 
@@ -69,7 +69,7 @@ def compare_images(path_1, path_2, recursive):
                         image2_array = np.array(image2)
 
                         if np.array_equal(image1_array, image2_array) == False:
-                            count += 1
+                            count += 1                            
                             print(f"Da{i}: The images are different.")
                             image1_cv2 = cv2.imread(image1_path)
                             image2_cv2 = cv2.imread(image2_path)
@@ -89,6 +89,6 @@ def compare_images(path_1, path_2, recursive):
                 # else:
                 #     print(f"Da{i}: No image file found with .jpg or .png extensions.")
 
-            # print(f"{count} different images in folder {folder}")
+            print(f"{count} different images in folder found")
 
 compare_images(path1, path2, recursive)
