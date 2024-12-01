@@ -14,19 +14,21 @@
 CodePath=$1
 ImageDir=$2
 TilePath=$3
+CondaPath=$4
 
 if [[ "$is_singularity" == "TRUE" ]]; then    
 	echo "Running the script in the singularity container..."
     echo "CodePath: $CodePath"
     echo "ImageDir: $ImageDir"
     echo "TilePath: $TilePath"
+    echo "CondaPath: $CondaPath"
     
     ImageFileExtension="ndpi"
     InMPP=None
     OutMPP=0.22098959139024552
     OutMPP=None
         	
-    source /data/scratch/shared/RSE/sources/.rachel    
+    source /data/scratch/shared/RSE/sources/.rachel
     module load java/jdk15.0.1
     mamba activate /data/scratch/shared/RSE/.conda/envs/openslide-mod    
     echo "Using mamba"
