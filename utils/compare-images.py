@@ -89,6 +89,6 @@ def compare_images(path_1, path_2, recursive):
                 # else:
                 #     print(f"Da{i}: No image file found with .jpg or .png extensions.")
 
-            print(f"{count} different images in folder found")
+            print(f"--- {count} different images in folder found")
 
 compare_images(path1, path2, recursive)

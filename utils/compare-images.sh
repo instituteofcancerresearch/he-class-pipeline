@@ -38,8 +38,20 @@ echo -e "Activating conda enviroment..."
 # conda activate comprate-images-env
 mamba activate $conda_path
 
-echo -e "Running compare images script..."
+echo -e "Running compare images script for A..."
 srun python $python_script "$image_dir_a" "$image_comp_a" "N"
+
+echo -e "Running compare images script for B..."
+srun python $python_script "$image_dir_b" "$image_comp_b" "N"
+
+echo -e "Running compare images script for C..."
+srun python $python_script "$image_dir_c" "$image_comp_c" "N"
+
+echo -e "Running compare images script for D1..."
+srun python $python_script "$image_dir_d1" "$image_comp_d1" "N"
+
+echo -e "Running compare images script for D2..."
+srun python $python_script "$image_dir_d2" "$image_comp_d2" "N"
 
 echo -e "Deactivating conda enviroment..."
 mamba deactivate
