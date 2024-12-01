@@ -11,12 +11,12 @@ image_dir_d1=$6
 image_dir_d2=$7
 
 # Fixed comparison directories
-image_comp_a="{$pipeline_path}/regression/outA-Tiles"
-image_comp_b="{$pipeline_path}/regression/outB-Masks"
-image_comp_c="{$pipeline_path}/regression/outC-Norm"
-image_comp_d1="{$pipeline_path}/regression/outD1-Detection"
-image_comp_d2="{$pipeline_path}/regression/outD2-Classification"
-python_script="{$pipeline_path}/utils/compare-images.py"
+image_comp_a="${pipeline_path}/regression/outA-Tiles"
+image_comp_b="${pipeline_path}/regression/outB-Masks"
+image_comp_c="${pipeline_path}/regression/outC-Norm"
+image_comp_d1="${pipeline_path}/regression/outD1-Detection"
+image_comp_d2="${pipeline_path}/regression/outD2-Classification"
+python_script="${pipeline_path}/utils/compare-images.py"
 
 echo "*********INPUTS***********************"
 echo "pipe_path: $pipeline_path"
