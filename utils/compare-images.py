@@ -7,6 +7,8 @@ import glob
 import sys
 path1 = sys.argv[1]
 path2 = sys.argv[2]
+print(f"InputPath 1: {path1}")
+print(f"InputPath 2: {path2}")
 
 def compare_images(path_1, path_2):
     """
