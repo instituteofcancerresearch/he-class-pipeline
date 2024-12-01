@@ -9,7 +9,7 @@ image_dir_b=$4
 image_dir_c=$5
 image_dir_d1=$6
 image_dir_d2=$7
-pipes=$8 
+pipes=$8
 
 # Fixed comparison directories
 image_comp_a="${pipeline_path}/regression/outA-Tiles"
@@ -40,27 +40,27 @@ echo -e "Activating conda enviroment..."
 # conda activate comprate-images-env
 mamba activate $conda_path
 
-if [[ $steps == *"A"* ]]; then
+if [[ $pipes == *"A"* ]]; then
     echo -e "Running compare images script for A..."
     srun python $python_script "$image_dir_a" "$image_comp_a" "N"
 fi
 
-if [[ $steps == *"B"* ]]; then
+if [[ $pipes == *"B"* ]]; then
     echo -e "Running compare images script for B..."
     srun python $python_script "$image_dir_b" "$image_comp_b" "N"
 fi
 
-if [[ $steps == *"C"* ]]; then
+if [[ $pipes == *"C"* ]]; then
     echo -e "Running compare images script for C..."
     srun python $python_script "$image_dir_c" "$image_comp_c" "N"
 fi
 
-if [[ $steps == *"D1"* ]]; then
+if [[ $pipes == *"D1"* ]]; then
     echo -e "Running compare images script for D1..."
     srun python $python_script "$image_dir_d1" "$image_comp_d1" "N"
 fi
 
-if [[ $steps == *"D2"* ]]; then
+if [[ $pipes == *"D2"* ]]; then
     echo -e "Running compare images script for D2..."
     srun python $python_script "$image_dir_d2" "$image_comp_d2" "N"
 fi
