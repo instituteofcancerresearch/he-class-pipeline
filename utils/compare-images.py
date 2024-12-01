@@ -36,8 +36,8 @@ def compare_images(path_1, path_2, recursive):
     for folder1, folder2 in zip(folder_list1, folder_list2):
         subfolder_list1 = sorted(glob.glob(folder1+"/*.ndpi"))
         subfolder_list2 = sorted(glob.glob(folder2+"/*.ndpi"))
-        # print(subfolder_list1)
-        # print(subfolder_list2)
+        #print(subfolder_list1)
+        #print(subfolder_list2)
         for subfolder1, subfolder2 in zip(subfolder_list1, subfolder_list2):
             print(f"In folder {subfolder1}")
             file_num1 = len(glob.glob(subfolder1+"/Da*"))
@@ -50,6 +50,10 @@ def compare_images(path_1, path_2, recursive):
                 count = 0
                 image1_base = f'{subfolder1}/Da{i}'
                 image2_base = f'{subfolder2}/Da{i}'
+                
+                print(f"{i+1}/{file_num1+1}")
+                print("... Image1: ", image1_base)
+                print("... Image2: ", image2_base)
 
                 for ext in ['.jpg', '.png']:
                     try:
