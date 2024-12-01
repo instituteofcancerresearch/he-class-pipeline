@@ -31,18 +31,13 @@ echo "image_comp_c: $image_comp_c"
 echo "image_comp_d1: $image_comp_d1"
 echo "image_comp_d2: $image_comp_d2"
 
-cd "{$pipeline_path}/utils"
-
 # conda init
 echo -e "Activating conda enviroment..."
 # conda activate comprate-images-env
 mamba activate $conda_path
 
 echo -e "Running compare images script..."
-python compare-images.py "$image_dir_a" "$image_comp_a" > compare-images-result.log 2> compare-images-result.err
-
-echo -e "Result output:"
-cat compare-images-result.log
+python compare-images.py "$image_dir_a" "$image_comp_a"
 
 echo -e "Deactivating conda enviroment..."
 mamba deactivate
