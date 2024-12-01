@@ -39,7 +39,7 @@ echo -e "Activating conda enviroment..."
 mamba activate $conda_path
 
 echo -e "Running compare images script..."
-python $python_script "$image_dir_a" "$image_comp_a"
+srun python $python_script "$image_dir_a" "$image_comp_a"
 
 echo -e "Deactivating conda enviroment..."
 mamba deactivate
