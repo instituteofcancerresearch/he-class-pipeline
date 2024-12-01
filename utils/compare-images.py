@@ -10,7 +10,7 @@ path2 = sys.argv[2]
 print(f"InputPath 1: {path1}")
 print(f"InputPath 2: {path2}")
 
-def compare_images(path_1, path_2):
+def compare_images(path_1, path_2, recursive=True):
     """
         Description:
         Function which compares images to each other thourgh comparing their numpy arrays.
@@ -21,12 +21,16 @@ def compare_images(path_1, path_2):
 
     """
 
-    folder_list1 = sorted(glob.glob(path_1+"/out*"))
-    folder_list2 = sorted(glob.glob(path_2+"/out*"))
-    # print(folder_list1)
-    # print(folder_list2)
-    if folder_list1 == [] or folder_list2 == []:
-        raise FileNotFoundError
+    if recursive:
+        folder_list1 = sorted(glob.glob(path_1+"/out*"))
+        folder_list2 = sorted(glob.glob(path_2+"/out*"))
+        # print(folder_list1)
+        # print(folder_list2)
+        if folder_list1 == [] or folder_list2 == []:
+            raise FileNotFoundError
+    else:
+        folder_list1 = [path_1]
+        folder_list2 = [path_2]
 
     for folder1, folder2 in zip(folder_list1, folder_list2):
         subfolder_list1 = sorted(glob.glob(folder1+"/*.ndpi"))
