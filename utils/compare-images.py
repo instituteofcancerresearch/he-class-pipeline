@@ -69,7 +69,7 @@ def compare_images(path_new, path_regression, recursive):
                 image1_path = f'{subfolder1}/{file}'
                 image2_path = f'{subfolder2}/{file}'
                 
-                print(f"Compare images {image1_path} {image2_path}")
+                #print(f"Compare images {image1_path} {image2_path}")
                 
                 if not os.exists(image2_path):
                     total_missing += 1
