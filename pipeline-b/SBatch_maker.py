@@ -23,8 +23,8 @@ with open(batch_file, "a") as f:
     f.write("source ~/.bashrc\n")
     f.write("module load MATLAB/R2020b\n")    
     f.write("echo 'Starting HEBr'\n")
-    f.write("Params=\"'jpg', [3.5 5000 225]\"")
-    f.write("MaskMethod=\"E\";")
+    f.write("Params=\"'jpg', [3.5 5000 225]\"\n")
+    f.write("MaskMethod=\"E\"\n")
     
     f.write("matlab -nodesktop -nosplash -r ")
     f.write('"')
