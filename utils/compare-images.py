@@ -46,19 +46,22 @@ def compare_images(path_new, path_regression, recursive):
         for subfolder1, subfolder2 in zip(subfolder_list1, subfolder_list2):
             print(f"Compare folders {subfolder1} {subfolder2}")
             file_num1 = len(glob.glob(subfolder1+"/Da*"))
-            # file_num2 = len(glob.glob(subfolder2+"/Da*"))
+            file_num2 = len(glob.glob(subfolder2+"/Da*"))
 
             if file_num1 == 0:
                 raise FileNotFoundError
-
+            
+            if file_num1 != file_num2:
+                print(f"Number of files in folders are different: {file_num1} {file_num2}")
+                
             count = 0
-            for i in range(0, (file_num1 + 1)):                
+            for i in range(file_num1):                
                 image1_base = f'{subfolder1}/Da{i}'
                 image2_base = f'{subfolder2}/Da{i}'
                 
-                #print(f"{i+1}/{file_num1+1}")
-                #print("... Image1: ", image1_base)
-                #print("... Image2: ", image2_base)
+                print(f"{i+1}/{file_num1+1}")
+                print("... Image1: ", image1_base)
+                print("... Image2: ", image2_base)
                 
                 subimages1_list1 = sorted(glob.glob(image1_base+"/*.jpg"))
                 subimages1_list2 = sorted(glob.glob(image1_base+"/*.png"))
