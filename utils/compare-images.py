@@ -27,9 +27,7 @@ def compare_images(path_new, path_regression, recursive):
 
     if recursive == "Y":
         folder_list1 = sorted(glob.glob(path_regression+"/out*"))
-        folder_list2 = sorted(glob.glob(path_new+"/out*"))
-        # print(folder_list1)
-        # print(folder_list2)
+        folder_list2 = sorted(glob.glob(path_new+"/out*"))        
         if folder_list1 == [] or folder_list2 == []:
             raise FileNotFoundError
     else:
@@ -52,34 +50,27 @@ def compare_images(path_new, path_regression, recursive):
             
         print(f"Regression images: {name_list1}")
         print(f"Test images: {name_list2}")
-        
-        if len(subfolder_list1) != len(subfolder_list2):
-            print(f"Number of folders in folders are different: {len(subfolder_list1)} {len(subfolder_list2)}")
-            total_missing += abs(len(subfolder_list1) - len(subfolder_list2))
-            continue
-        for subfolder1, subfolder2 in zip(subfolder_list1, subfolder_list2):
+                
+        for image_name in name_list1:
+            subfolder1 = folder1 + "/" + image_name
+            subfolder2 = folder2 + "/" + image_name
             print(f"Compare folders {subfolder1} {subfolder2}")
-            file_num1 = len(glob.glob(subfolder1+"/Da*"))
-            file_num2 = len(glob.glob(subfolder2+"/Da*"))
-
-            if file_num1 == 0:
-                raise FileNotFoundError
-            
-            if file_num1 != file_num2:
-                print(f"Number of files in folders are different: {file_num1} vs {file_num2}")
-                print(f"{file_num1} in {subfolder1}/Da*")
-                print(f"{file_num2} in {subfolder2}/Da*")
-                continue
-                
+            files_1tmp = sorted(glob.glob(subfolder1+"/Da*"))
+            files_2tmp = sorted(glob.glob(subfolder2+"/Da*"))            
+            files_1 = []
+            files_2 = []            
+            for file in files_1tmp:
+                files_1.append(os.path.basename(file))
+            for file in files_2tmp:
+                files_2.append(os.path.basename(file))
+                                                                            
             count = 0
-            for i in range(file_num1):                
-                image1_base = f'{subfolder1}/Da{i}'
-                image2_base = f'{subfolder2}/Da{i}'
+            for file in files_1:
+                image1_base = f'{subfolder1}/{file}'
+                image2_base = f'{subfolder2}/{file}'
                 
-                #print(f"{i+1}/{file_num1+1}")
-                #print("... Image1: ", image1_base)
-                #print("... Image2: ", image2_base)
-                
+                print(f"Compare images {image1_base} {image2_base}")
+                                                
                 subimages1_list1 = sorted(glob.glob(image1_base+"*.jpg"))
                 subimages1_list2 = sorted(glob.glob(image1_base+"*.png"))
                 subimages2_list1 = sorted(glob.glob(image2_base+"*.jpg"))
