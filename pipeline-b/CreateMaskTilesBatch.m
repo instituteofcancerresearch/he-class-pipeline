@@ -1,6 +1,10 @@
 function CreateMaskTilesBatch(TilesFolder, MasksFolder, Method, varargin)
 %CREATEMASKTILEBATCH Summary of this function goes here
 %   Detailed explanation goes here
+    if nargin < 3
+        Method = 'E';
+        varargin = {};
+    end    
     fprintf('Params entered to matlab\n');
 	fprintf(TilesFolder);
 	fprintf('\n');
@@ -8,11 +12,7 @@ function CreateMaskTilesBatch(TilesFolder, MasksFolder, Method, varargin)
 	fprintf('\n');
 	fprintf(Method);
 	fprintf('\n');	    
-	if nargin < 3
-        Method = 'E';
-        varargin = {};
-    end
-
+	
     files = dir(TilesFolder);
     files = files(~ismember({files.name}, {'.', '..'}));
     files = files([files.isdir]);
