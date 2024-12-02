@@ -3,14 +3,12 @@ function CreateMaskTilesEntropy(ImageTilePath, MaskTilePath, Ext, Params)
 %   Detailed explanation goes here
     if nargin < 3
         Ext = 'jpg';
-    end    
+    end
+    
     if nargin < 4
         Params = [3.5 5000 225];
     end
-    fprintf('Params entered:Entropy\n');    
-    fprintf(Ext);
-	fprintf('\n');	
-        
+
     imageTileFiles = dir(fullfile(ImageTilePath, ['Da*.' Ext]));
     
     if ~isfolder(MaskTilePath)
