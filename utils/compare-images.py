@@ -33,13 +33,16 @@ def compare_images(path_1, path_2, recursive):
         folder_list1 = [path_1]
         folder_list2 = [path_2]
 
+    print(folder_list1)
+    print(folder_list2)
+    
     total_count = 0
     total_missing = 0
     for folder1, folder2 in zip(folder_list1, folder_list2):
         subfolder_list1 = sorted(glob.glob(folder1+"/*.ndpi"))
         subfolder_list2 = sorted(glob.glob(folder2+"/*.ndpi"))
-        #print(subfolder_list1)
-        #print(subfolder_list2)
+        print(subfolder_list1)
+        print(subfolder_list2)
         for subfolder1, subfolder2 in zip(subfolder_list1, subfolder_list2):
             print(f"Compare folders {subfolder1} {subfolder2}")
             file_num1 = len(glob.glob(subfolder1+"/Da*"))
