@@ -65,5 +65,5 @@ if [[ $pipes == *"D2"* ]]; then
     srun python $python_script "$image_dir_d2" "$image_comp_d2" "N"
 fi
 
-echo -e "Deactivating conda enviroment..."
+#echo -e "Deactivating conda enviroment..."
 mamba deactivate
