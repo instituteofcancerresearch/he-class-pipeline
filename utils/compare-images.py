@@ -56,7 +56,10 @@ def compare_images(path_new, path_regression, recursive):
                 raise FileNotFoundError
             
             if file_num1 != file_num2:
-                print(f"Number of files in folders are different: {file_num1} {file_num2}")
+                print(f"Number of files in folders are different: {file_num1} vs {file_num2}")
+                print(f"{file_num1} in {subfolder1}/Da*")
+                print(f"{file_num2} in {subfolder2}/Da*")
+                continue
                 
             count = 0
             for i in range(file_num1):                
@@ -75,8 +78,8 @@ def compare_images(path_new, path_regression, recursive):
                 subimages1_list1 = subimages1_list1 + subimages1_list2
                 subimages2_list1 = subimages2_list1 + subimages2_list2
                                 
-                print(subimages1_list1)
-                print(subimages2_list1)                                                                                                                    
+                #print(subimages1_list1)
+                #print(subimages2_list1)                                                                                                                    
 
                 if len(subimages1_list1) != len(subimages2_list1) == 0:
                     print("Number of images in folders are different:")
