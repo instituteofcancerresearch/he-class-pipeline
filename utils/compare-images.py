@@ -34,6 +34,7 @@ def compare_images(path_1, path_2, recursive):
         folder_list2 = [path_2]
 
     total_count = 0
+    total_missing = 0
     for folder1, folder2 in zip(folder_list1, folder_list2):
         subfolder_list1 = sorted(glob.glob(folder1+"/*.ndpi"))
         subfolder_list2 = sorted(glob.glob(folder2+"/*.ndpi"))
@@ -64,7 +65,12 @@ def compare_images(path_1, path_2, recursive):
                         # print(image2_path)
                         
                         image1 = Image.open(image1_path)
-                        image2 = Image.open(image2_path)
+                        try:
+                            image2 = Image.open(image2_path)
+                        except FileNotFoundError as e:
+                            print(f"Da{i}: Error opening images with {ext} extension: {e}")
+                            total_missing += 1
+                            continue
                         
                         image1_array = np.array(image1)
                         image2_array = np.array(image2)
@@ -78,19 +84,13 @@ def compare_images(path_1, path_2, recursive):
                             # out_sre = sre(image1_cv2, image2_cv2)
                             print(f"RMSE image difference: {out_rmse}")
                             # print(f"SRE image difference: {out_sre}")
-                        
-                        # else:
-                        #     print(f"Da{i}: The images are the same.")
-
-                    except FileNotFoundError as e:                        
-                        print(f"Da{i}: Error opening images with {ext} extension: {e}")
+                                                
+                    except FileNotFoundError as e:                                                
                         continue
-
-                # else:
-                #     print(f"Da{i}: No image file found with .jpg or .png extensions.")
-
+                
             print(f"--- {count} different images in folder found")
             total_count += count
     print(f"Total differences in all folders: {total_count}")
+    print(f"Total missing in compare folder: {total_missing}")
 
 compare_images(path1, path2, recursive)
