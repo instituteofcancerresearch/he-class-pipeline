@@ -71,7 +71,7 @@ def compare_images(path_new, path_regression, recursive):
                 
                 #print(f"Compare images {image1_path} {image2_path}")
                 
-                if not os.exists(image2_path):
+                if not os.path.isfile(image2_path):
                     total_missing += 1
                     print(f"Missing file: {image2_path}")                                                                                                    
                 else:
