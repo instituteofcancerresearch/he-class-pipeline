@@ -5,6 +5,8 @@ import cv2
 from image_similarity_measures.quality_metrics import rmse, sre
 import glob
 import sys
+import os
+
 path1 = sys.argv[1]
 path2 = sys.argv[2]
 recursive = sys.argv[3]
@@ -33,17 +35,23 @@ def compare_images(path_new, path_regression, recursive):
     else:
         folder_list1 = [path_regression]
         folder_list2 = [path_new]
-
-    print(f"Regression folders: {folder_list1}")
-    print(f"Test folders: {folder_list2}")
-        
+            
     total_count = 0
     total_missing = 0
     for folder1, folder2 in zip(folder_list1, folder_list2):
         subfolder_list1 = sorted(glob.glob(folder1+"/*.ndpi"))
         subfolder_list2 = sorted(glob.glob(folder2+"/*.ndpi"))
-        print(f"Regression images: {subfolder_list1}")
-        print(f"Test images: {subfolder_list2}")
+        
+        name_list1 = []
+        for subfolder in subfolder_list1:
+            name_list1.append(os.path.basename(subfolder))
+            
+        name_list2 = []
+        for subfolder in subfolder_list2:
+            name_list2.append(os.path.basename(subfolder))
+            
+        print(f"Regression images: {name_list1}")
+        print(f"Test images: {name_list2}")
         
         if len(subfolder_list1) != len(subfolder_list2):
             print(f"Number of folders in folders are different: {len(subfolder_list1)} {len(subfolder_list2)}")
