@@ -63,15 +63,22 @@ def compare_images(path_new, path_regression, recursive):
                 print("... Image1: ", image1_base)
                 print("... Image2: ", image2_base)
                 
-                subimages1_list1 = sorted(glob.glob(image1_base+"/*.jpg"))
-                subimages1_list2 = sorted(glob.glob(image1_base+"/*.png"))
-                subimages2_list1 = sorted(glob.glob(image2_base+"/*.jpg"))
-                subimages2_list2 = sorted(glob.glob(image2_base+"/*.png"))
+                subimages1_list1 = sorted(glob.glob(image1_base+"*.jpg"))
+                subimages1_list2 = sorted(glob.glob(image1_base+"*.png"))
+                subimages2_list1 = sorted(glob.glob(image2_base+"*.jpg"))
+                subimages2_list2 = sorted(glob.glob(image2_base+"*.png"))
                 
-                print(subimages1_list1)
-                print(subimages1_list2)
-                print(subimages2_list1)
-                print(subimages2_list2)
+                if subimages1_list1 != []:
+                    print(subimages1_list1)
+                    print(subimages2_list1)
+                    
+                if subimages2_list1 != []:
+                    print(subimages1_list2)
+                    print(subimages2_list2)
+                
+                
+                
+                
                 
 
                 for ext in ['.jpg', '.png']:
