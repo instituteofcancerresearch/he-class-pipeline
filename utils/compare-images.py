@@ -85,6 +85,7 @@ def compare_images(path_1, path_2, recursive):
                     except FileNotFoundError as e:
                         with open('compare-images-result.err', 'a') as err_file:
                             err_file.write(f"Error opening images Da{i} with {ext} extension: {e}\n")
+                            print(f"Da{i}: Error opening images with {ext} extension: {e}")
                         continue
 
                 # else:
