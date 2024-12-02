@@ -11,7 +11,7 @@ recursive = sys.argv[3]
 print(f"InputPath 1: {path1}")
 print(f"InputPath 2: {path2}")
 
-def compare_images(path_1, path_2, recursive):
+def compare_images(path_new, path_regression, recursive):
     """
         Description:
         Function which compares images to each other thourgh comparing their numpy arrays.
@@ -23,15 +23,15 @@ def compare_images(path_1, path_2, recursive):
     """
 
     if recursive == "Y":
-        folder_list1 = sorted(glob.glob(path_1+"/out*"))
-        folder_list2 = sorted(glob.glob(path_2+"/out*"))
+        folder_list1 = sorted(glob.glob(path_regression+"/out*"))
+        folder_list2 = sorted(glob.glob(path_new+"/out*"))
         # print(folder_list1)
         # print(folder_list2)
         if folder_list1 == [] or folder_list2 == []:
             raise FileNotFoundError
     else:
-        folder_list1 = [path_1]
-        folder_list2 = [path_2]
+        folder_list1 = [path_regression]
+        folder_list2 = [path_new]
 
     print(folder_list1)
     print(folder_list2)
