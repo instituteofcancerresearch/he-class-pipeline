@@ -8,8 +8,6 @@ import sys
 path1 = sys.argv[1]
 path2 = sys.argv[2]
 recursive = sys.argv[3]
-print(f"InputPath 1: {path1}")
-print(f"InputPath 2: {path2}")
 
 def compare_images(path_new, path_regression, recursive):
     """
@@ -21,6 +19,9 @@ def compare_images(path_new, path_regression, recursive):
         RMSE - measures the amount of change per pixel due to the processing.
 
     """
+    print("---------- Image Compare Utility ----------")
+    print(f"Regression: {path_regression}")
+    print(f"New test: {path_new}")
 
     if recursive == "Y":
         folder_list1 = sorted(glob.glob(path_regression+"/out*"))
@@ -43,6 +44,7 @@ def compare_images(path_new, path_regression, recursive):
         subfolder_list2 = sorted(glob.glob(folder2+"/*.ndpi"))
         print(f"Regression images: {subfolder_list1}")
         print(f"Test images: {subfolder_list2}")
+        
         if len(subfolder_list1) != len(subfolder_list2):
             print(f"Number of folders in folders are different: {len(subfolder_list1)} {len(subfolder_list2)}")
             total_missing += abs(len(subfolder_list1) - len(subfolder_list2))
