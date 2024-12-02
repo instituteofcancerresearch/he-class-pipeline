@@ -66,55 +66,34 @@ def compare_images(path_new, path_regression, recursive):
                                                                             
             count = 0
             for file in files_1:
-                image1_base = f'{subfolder1}/{file}'
-                image2_base = f'{subfolder2}/{file}'
+                image1_path = f'{subfolder1}/{file}'
+                image2_path = f'{subfolder2}/{file}'
                 
-                print(f"Compare images {image1_base} {image2_base}")
-                                                
-                subimages1_list1 = sorted(glob.glob(image1_base+"*.jpg"))
-                subimages1_list2 = sorted(glob.glob(image1_base+"*.png"))
-                subimages2_list1 = sorted(glob.glob(image2_base+"*.jpg"))
-                subimages2_list2 = sorted(glob.glob(image2_base+"*.png"))
+                print(f"Compare images {image1_path} {image2_path}")
                 
-                subimages1_list1 = subimages1_list1 + subimages1_list2
-                subimages2_list1 = subimages2_list1 + subimages2_list2
-                                
-                #print(subimages1_list1)
-                #print(subimages2_list1)                                                                                                                    
-
-                if len(subimages1_list1) != len(subimages2_list1) == 0:
-                    print("Number of images in folders are different:")
-                    print(f"{len(subimages1_list1)} in {subimages1_list1}")
-                    print(f"{len(subimages2_list1)} in {subimages2_list1}")
-                    
-                    total_missing += abs(len(subimages1_list1) - len(subimages2_list1))
-                    continue
+                if not os.exists(image2_path):
+                    total_missing += 1
+                    print(f"Missing file: {image2_path}")                                                                                                    
                 else:
-                    for j in range(len(subimages1_list1)):
-                        try:
-                            image1_path = subimages1_list1[j]
-                            image2_path = subimages2_list1[j]
-                                                    
-                            image1 = Image.open(image1_path)                        
-                            image2 = Image.open(image2_path)
-                            
-                            
-                            image1_array = np.array(image1)
-                            image2_array = np.array(image2)
+                    try:
+                        image1 = Image.open(image1_path)                        
+                        image2 = Image.open(image2_path)                                        
+                        image1_array = np.array(image1)
+                        image2_array = np.array(image2)
 
-                            if np.array_equal(image1_array, image2_array) == False:
-                                count += 1                            
-                                print(f"Da{i}: The images are different.")
-                                image1_cv2 = cv2.imread(image1_path)
-                                image2_cv2 = cv2.imread(image2_path)
-                                out_rmse = rmse(image1_cv2, image2_cv2)
-                                # out_sre = sre(image1_cv2, image2_cv2)
-                                print(f"RMSE image difference: {out_rmse}")
-                                # print(f"SRE image difference: {out_sre}")
-                                                    
-                        except FileNotFoundError as e: 
-                            print(f"File not found: {e}")                                               
-                            continue
+                        if np.array_equal(image1_array, image2_array) == False:
+                            count += 1                            
+                            print(f"{file}: The images are different.")
+                            image1_cv2 = cv2.imread(image1_path)
+                            image2_cv2 = cv2.imread(image2_path)
+                            out_rmse = rmse(image1_cv2, image2_cv2)
+                            # out_sre = sre(image1_cv2, image2_cv2)
+                            print(f"RMSE image difference: {out_rmse}")
+                            # print(f"SRE image difference: {out_sre}")
+                                                
+                    except FileNotFoundError as e: 
+                        print(f"File not found: {e}")                                               
+                        continue
                 
             print(f"--- {count} different images in folder found")
             total_count += count
