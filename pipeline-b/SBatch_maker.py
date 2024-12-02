@@ -35,8 +35,7 @@ with open(batch_file, "a") as f:
     f.write(f"addpath(genpath('{pipeline_dir}/he-class-pipeline/pipeline-b/')); ")
     f.write(f"CreateMaskTilesBatch('{inB}', '{outB}', ")
     f.write("'$MaskMethod', '$Params'")
-    f.write("); exit;")
-    f.write('"')
+    f.write("); exit;\"")    
 """
 #!/bin/sh
 #SBATCH -J "HEBr"
