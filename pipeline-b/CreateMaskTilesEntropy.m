@@ -8,6 +8,11 @@ function CreateMaskTilesEntropy(ImageTilePath, MaskTilePath, Ext, Params)
     if nargin < 4
         Params = [3.5 5000 225];
     end
+    fprintf('Params entered:Entropy\n');    
+    fprintf(Ext);
+	fprintf('\n');	
+    fprintf(Params);
+    fprintf('\n');	
 
     imageTileFiles = dir(fullfile(ImageTilePath, ['Da*.' Ext]));
     

@@ -9,6 +9,12 @@ function CreateMaskTilesThreshold(ImageTilePath, MaskTilePath, Ext, Threshold)
         Ext = 'jpg';
     end
 
+    fprintf('Params entered:Threshold\n');    
+    fprintf(Ext);
+	fprintf('\n');	
+    fprintf(Threshold);
+    fprintf('\n');	
+
     imageTileFiles = dir(fullfile(ImageTilePath, ['Da*.' Ext]));
     
     if ~isfolder(MaskTilePath)

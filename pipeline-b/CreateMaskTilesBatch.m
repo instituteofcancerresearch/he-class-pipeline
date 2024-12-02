@@ -8,6 +8,8 @@ function CreateMaskTilesBatch(TilesFolder, MasksFolder, Method, varargin)
 	fprintf('\n');
 	fprintf(Method);
 	fprintf('\n');	
+    fprintf(varargin);
+	fprintf('\n');	
 	if nargin < 3
         Method = 'E';
         varargin = {};

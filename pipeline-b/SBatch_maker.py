@@ -25,7 +25,7 @@ with open(batch_file, "a") as f:
     f.write("module load MATLAB/R2020b\n")    
     f.write("\n")
     f.write("echo 'Starting HEBr'\n")
-    f.write("Params='jpg, [3.5 5000 225]'\n")
+    #f.write("Params='jpg, [3.5 5000 225]'\n") - this is hardcoded in the matlab scripts
     f.write("MaskMethod=\"E\"\n")
     f.write("\n")
     f.write("module load MATLAB\n")
@@ -34,7 +34,8 @@ with open(batch_file, "a") as f:
     f.write('"')
     f.write(f"addpath(genpath('{pipeline_dir}/he-class-pipeline/pipeline-b/')); ")
     f.write(f"CreateMaskTilesBatch('{inB}', '{outB}', ")
-    f.write("'$MaskMethod', '$Params'")
+    #f.write("'$MaskMethod', '$Params'")
+    f.write("'$MaskMethod'")
     f.write("); exit;\"")    
 """
 #!/bin/sh
