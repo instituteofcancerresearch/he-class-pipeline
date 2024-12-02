@@ -33,16 +33,20 @@ def compare_images(path_new, path_regression, recursive):
         folder_list1 = [path_regression]
         folder_list2 = [path_new]
 
-    print(folder_list1)
-    print(folder_list2)
-    
+    print(f"Regression folders: {folder_list1}")
+    print(f"Test folders: {folder_list2}")
+        
     total_count = 0
     total_missing = 0
     for folder1, folder2 in zip(folder_list1, folder_list2):
         subfolder_list1 = sorted(glob.glob(folder1+"/*.ndpi"))
         subfolder_list2 = sorted(glob.glob(folder2+"/*.ndpi"))
-        print(subfolder_list1)
-        print(subfolder_list2)
+        print(f"Regression images: {subfolder_list1}")
+        print(f"Test images: {subfolder_list2}")
+        if len(subfolder_list1) != len(subfolder_list2):
+            print(f"Number of folders in folders are different: {len(subfolder_list1)} {len(subfolder_list2)}")
+            total_missing += abs(len(subfolder_list1) - len(subfolder_list2))
+            continue
         for subfolder1, subfolder2 in zip(subfolder_list1, subfolder_list2):
             print(f"Compare folders {subfolder1} {subfolder2}")
             file_num1 = len(glob.glob(subfolder1+"/Da*"))
@@ -59,9 +63,9 @@ def compare_images(path_new, path_regression, recursive):
                 image1_base = f'{subfolder1}/Da{i}'
                 image2_base = f'{subfolder2}/Da{i}'
                 
-                print(f"{i+1}/{file_num1+1}")
-                print("... Image1: ", image1_base)
-                print("... Image2: ", image2_base)
+                #print(f"{i+1}/{file_num1+1}")
+                #print("... Image1: ", image1_base)
+                #print("... Image2: ", image2_base)
                 
                 subimages1_list1 = sorted(glob.glob(image1_base+"*.jpg"))
                 subimages1_list2 = sorted(glob.glob(image1_base+"*.png"))
@@ -75,7 +79,11 @@ def compare_images(path_new, path_regression, recursive):
                 print(subimages2_list1)                                                                                                                    
 
                 if len(subimages1_list1) != len(subimages2_list1) == 0:
-                    print(f"Number of images in folders are different: {len(subimages1_list1)} {len(subimages2_list1)}")
+                    print("Number of images in folders are different:")
+                    print(f"{len(subimages1_list1)} in {subimages1_list1}")
+                    print(f"{len(subimages2_list1)} in {subimages2_list1}")
+                    
+                    total_missing += abs(len(subimages1_list1) - len(subimages2_list1))
                     continue
                 else:
                     for j in range(len(subimages1_list1)):
