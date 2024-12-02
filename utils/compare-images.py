@@ -33,6 +33,7 @@ def compare_images(path_1, path_2, recursive):
         folder_list1 = [path_1]
         folder_list2 = [path_2]
 
+    total_count = 0
     for folder1, folder2 in zip(folder_list1, folder_list2):
         subfolder_list1 = sorted(glob.glob(folder1+"/*.ndpi"))
         subfolder_list2 = sorted(glob.glob(folder2+"/*.ndpi"))
@@ -90,5 +91,7 @@ def compare_images(path_1, path_2, recursive):
                 #     print(f"Da{i}: No image file found with .jpg or .png extensions.")
 
             print(f"--- {count} different images in folder found")
+            total_count += count
+    print(f"Total differences in all folders: {total_count}")
 
 compare_images(path1, path2, recursive)
