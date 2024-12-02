@@ -56,6 +56,17 @@ def compare_images(path_1, path_2, recursive):
                 #print(f"{i+1}/{file_num1+1}")
                 #print("... Image1: ", image1_base)
                 #print("... Image2: ", image2_base)
+                
+                subimages1_list1 = sorted(glob.glob(image1_base+"/*.jpg"))
+                subimages1_list2 = sorted(glob.glob(image1_base+"/*.png"))
+                subimages2_list1 = sorted(glob.glob(image2_base+"/*.jpg"))
+                subimages2_list2 = sorted(glob.glob(image2_base+"/*.png"))
+                
+                print(subimages1_list1)
+                print(subimages1_list2)
+                print(subimages2_list1)
+                print(subimages2_list2)
+                
 
                 for ext in ['.jpg', '.png']:
                     try:
