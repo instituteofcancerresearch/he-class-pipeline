@@ -2,7 +2,8 @@ function CreateMaskTilesThreshold(ImageTilePath, MaskTilePath, Ext, Threshold)
 %CREATEMASKTILES Summary of this function goes here
 %   Detailed explanation goes here
     if nargin < 4
-        Threshold = [0 250];
+        % Threshold = [0 250];
+        Threshold = [3.5 5000 225];
     end
     
     if nargin < 3
