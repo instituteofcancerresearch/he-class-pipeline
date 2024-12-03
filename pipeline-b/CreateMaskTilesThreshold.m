@@ -2,13 +2,17 @@ function CreateMaskTilesThreshold(ImageTilePath, MaskTilePath, Ext, Threshold)
 %CREATEMASKTILES Summary of this function goes here
 %   Detailed explanation goes here
     if nargin < 4
-        Threshold = [0 250];
+        Threshold = [0 250];        
     end
     
     if nargin < 3
         Ext = 'jpg';
     end
 
+    fprintf('Params entered:Threshold\n');    
+    fprintf(Ext);
+	fprintf('\n');	
+    
     imageTileFiles = dir(fullfile(ImageTilePath, ['Da*.' Ext]));
     
     if ~isfolder(MaskTilePath)

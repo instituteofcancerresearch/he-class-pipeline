@@ -69,3 +69,13 @@ If you want to create the same environment in the future, you can run the follow
 ```console
 conda env create -f conda_environment.yaml # or mamba env create -f mamba_environment.yaml
 ```
+
+# Creating this in the shared RSE directory
+```
+cd /data/scratch/shared/RSE/envs
+mamba create --prefix /data/scratch/shared/RSE/envs/he-compare-images -c conda-forge python=3.10 numpy pillow pyfftw
+mamba activate he-compare-images
+python -m pip install opencv-python
+python -m pip install image-similarity-measures
+mamba deactivate
+```
