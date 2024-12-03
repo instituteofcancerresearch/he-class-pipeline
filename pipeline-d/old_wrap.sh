@@ -5,6 +5,7 @@
 #SBATCH -n 4
 #SBATCH -t 100:00:00
 
+
 image_dir=$1
 pipe_path=$2
 code_path=$3
@@ -16,6 +17,7 @@ segmentationTilePath=$8 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classif
 cellDetectionResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
 cellClassificationResultsPath=$10 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
 echo "*********INPUTS***********************"
+echo "old_wrap.sh"
 echo "image_dir: $image_dir"
 echo "pipe_path: $pipe_path"
 echo "code_path: $code_path"

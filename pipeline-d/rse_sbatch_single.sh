@@ -20,7 +20,7 @@ cellClassificationResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he
 cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
 
 echo "*********INPUTS***********************"
-echo "New pipeline D"
+echo "rse_sbatch_single.sh"
 echo "imagePath: $imagePath"
 echo "imageName: $imageName"
 echo "code_root: $code_root"

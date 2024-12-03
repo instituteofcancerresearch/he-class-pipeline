@@ -15,6 +15,7 @@ segmentationTilePath=$7 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classif
 cellDetectionResultsPath=$8 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
 cellClassificationResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
 echo "*********INPUTS***********************"
+echo "rse_wrap.sh"
 echo "image_dir: $image_dir"
 echo "pipe_path: $pipe_path"
 echo "code_path: $code_path"
