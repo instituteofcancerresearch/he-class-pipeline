@@ -4,6 +4,7 @@ import pandas as pd
 
 def compare_h5(data_path_1, data_path_2):
 
+    are_the_same = True
     h5_file_1 = h5py.File(data_path_1, 'r')
     h5_file_2 = h5py.File(data_path_2, 'r')
 
@@ -32,17 +33,21 @@ def compare_h5(data_path_1, data_path_2):
         flag = False
 
     if flag:
-        print("Data files are the same.")
+        are_the_same = True
 
     else:
-        print("Data files are not the same.")
+        are_the_same = False
+    
+    return are_the_same
 
 def compare_csv(data_path_1, data_path_2):
+    are_the_same = True
     df1 = pd.read_csv(data_path_1)
     df2 = pd.read_csv(data_path_2)
 
     if df1.equals(df2):
-        print("Data files are the same.")
+        are_the_same = True
     else:
-        print("Data files are not the same.")
+        are_the_same = False
+    return are_the_same
 

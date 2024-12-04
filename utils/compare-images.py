@@ -6,6 +6,7 @@ from image_similarity_measures.quality_metrics import rmse, sre
 import glob
 import sys
 import os
+from compare_h5_csv import compare_h5, compare_csv
 
 path1 = sys.argv[1]
 path2 = sys.argv[2]
@@ -76,7 +77,7 @@ def compare_images(path_new, path_regression, recursive):
                     print(f"Missing file: {image2_path}")                                                                                                    
                 else:
                     try:
-                        if ".jpg" in file or .jpeg in file or ".png" in file or ".tif" in file:
+                        if ".jpg" in file or ".jpeg" in file or ".png" in file or ".tif" in file:
                             image1 = Image.open(image1_path)                        
                             image2 = Image.open(image2_path)                                        
                             image1_array = np.array(image1)
@@ -91,9 +92,16 @@ def compare_images(path_new, path_regression, recursive):
                                 # out_sre = sre(image1_cv2, image2_cv2)
                                 print(f"RMSE image difference: {out_rmse}")
                                 # print(f"SRE image difference: {out_sre}")
+                        elif ".h5" in file:
+                            if not compare_h5(image1_path, image2_path):
+                                count += 1
+                                print(f"{file}: The h5 files are different.")                                                        
+                        elif ".csv" in file:
+                            if not compare_csv(image1_path, image2_path):
+                                count += 1
+                                print(f"{file}: The csv files are different.")
                         else:
-                            if ".csv" in file or ".h5" in file:
-                                print(f"CSV or H5 file: {file} going to implement soon")
+                            print(f"Not handled: {file}")
                             
                                                 
                     except FileNotFoundError as e: 
