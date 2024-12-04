@@ -17,6 +17,8 @@ pip install opencv-python
 pip install pyfftw
 pip install scikit-image
 pip install image-similarity-measures
+conda install anaconda::h5py
+conda install pandas
 ```
 
 # Mamba environment
@@ -27,7 +29,9 @@ mamba create --name compare-images-env -c conda-forge python=3.10 numpy pillow p
 mamba activate compare-images-env
 pip install opencv-python
 pip install image-similarity-measures
-conda deactivate 
+conda install anaconda::h5py
+conda install pandas
+mamba deactivate 
 ```
 
 # General instructions
