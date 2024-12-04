@@ -15,7 +15,7 @@ conda_2=$6
 tilePath=$7 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
 segmentationTilePath=$8 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
 cellDetectionResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
-cellClassificationResultsPath='$10' #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
+cellClassificationResultsPath=${10} #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
 echo "*********INPUTS***********************"
 echo "old_wrap.sh"
 echo "image_dir: $image_dir"
