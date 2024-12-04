@@ -21,7 +21,7 @@ image_dir_d2_big="$8/labelledImagesBigDot"
 image_dir_d2_th="$8/thumbnails"
 image_dir_d2_tif="$8/tif"
 
-pipes=$8
+pipes=$9
 
 # Fixed comparison directories
 image_comp_a="${regression_path}/outA-Tiles"
