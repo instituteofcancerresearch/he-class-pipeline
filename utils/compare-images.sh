@@ -103,10 +103,10 @@ fi
 
 if [[ $pipes == *"D1"* ]]; then
     echo -e "Running compare images script for D1..."
-    srun python $python_script "$image_dir_d1" "$image_comp_d1_ai" "N"
-    #srun python $python_script "$image_dir_d1" "$image_comp_d1_csv" "N"
-    #srun python $python_script "$image_dir_d1" "$image_comp_d1_h5" "N"
-    #srun python $python_script "$image_dir_d1" "$image_comp_d1_pp" "N"
+    srun python $python_script "$image_dir_d1_ai" "$image_comp_d1_ai" "N"
+    srun python $python_script "$image_dir_d1_csv" "$image_comp_d1_csv" "N"
+    #srun python $python_script "$image_dir_d1_h5" "$image_comp_d1_h5" "N"
+    #srun python $python_script "$image_dir_d1_pp" "$image_comp_d1_pp" "N"
 fi
 
 if [[ $pipes == *"D2"* ]]; then
