@@ -3,41 +3,42 @@
 source /data/scratch/shared/RSE/sources/.rachel
 
 pipeline_path=$1
-conda_path=$2
-image_dir_a=$3
-image_dir_b=$4
-image_dir_c=$5
+regression_path=$2
+conda_path=$3
+image_dir_a=$4
+image_dir_b=$5
+image_dir_c=$6
 
-image_dir_d1_ai="$6/20180117/annotated_images"
-image_dir_d1_csv="$6/20180117/csv"
-image_dir_d1_h5="$6/20180117/h5"
-image_dir_d1_pp="$6/20180117/pre_processed"
+image_dir_d1_ai="$7/20180117/annotated_images"
+image_dir_d1_csv="$7/20180117/csv"
+image_dir_d1_h5="$7/20180117/h5"
+image_dir_d1_pp="$7/20180117/pre_processed"
 
-image_dir_d2_ac="$7/all_cells"
-image_dir_d2_csv="$7/csv"
-image_dir_d2_li="$7/labelledImages"
-image_dir_d2_big="$7/labelledImagesBigDot"
-image_dir_d2_th="$7/thumbnails"
-image_dir_d2_tif="$7/tif"
+image_dir_d2_ac="$8/all_cells"
+image_dir_d2_csv="$8/csv"
+image_dir_d2_li="$8/labelledImages"
+image_dir_d2_big="$8/labelledImagesBigDot"
+image_dir_d2_th="$8/thumbnails"
+image_dir_d2_tif="$8/tif"
 
 pipes=$8
 
 # Fixed comparison directories
-image_comp_a="${pipeline_path}/regression/outA-Tiles"
-image_comp_b="${pipeline_path}/regression/outB-Masks"
-image_comp_c="${pipeline_path}/regression/outC-Norm"
+image_comp_a="${regression_path}/outA-Tiles"
+image_comp_b="${regression_path}/outB-Masks"
+image_comp_c="${regression_path}/outC-Norm"
 
-image_comp_d1_ai="${pipeline_path}/regression/outD1-Detection/20180117/annotated_images"        #png
-image_comp_d1_csv="${pipeline_path}/regression/outD1-Detection/20180117/csv"                    #csv
-image_comp_d1_h5="${pipeline_path}/regression/outD1-Detection/20180117/h5"                      #h5
-image_comp_d1_pp="${pipeline_path}/regression/outD1-Detection/20180117/pre_processed"           #h5
+image_comp_d1_ai="${regression_path}/outD1-Detection/20180117/annotated_images"        #png
+image_comp_d1_csv="${regression_path}/outD1-Detection/20180117/csv"                    #csv
+image_comp_d1_h5="${regression_path}/outD1-Detection/20180117/h5"                      #h5
+image_comp_d1_pp="${regression_path}/outD1-Detection/20180117/pre_processed"           #h5
 
-image_comp_d2_ac="${pipeline_path}/regression/outD2-Classification/all_cells"                   #csv
-image_comp_d2_csv="${pipeline_path}/regression/outD2-Classification/csv"                        #csv
-image_comp_d2_li="${pipeline_path}/regression/outD2-Classification/labelledImages"              #jpg
-image_comp_d2_big="${pipeline_path}/regression/outD2-Classification/labelledImagesBigDot"       #jpg
-image_comp_d2_th="${pipeline_path}/regression/outD2-Classification/thumbnails"                  #png
-image_comp_d2_tif="${pipeline_path}/regression/outD2-Classification/tif"                        #tif
+image_comp_d2_ac="${regression_path}/outD2-Classification/all_cells"                   #csv
+image_comp_d2_csv="${regression_path}/outD2-Classification/csv"                        #csv
+image_comp_d2_li="${regression_path}/outD2-Classification/labelledImages"              #jpg
+image_comp_d2_big="${regression_path}/outD2-Classification/labelledImagesBigDot"       #jpg
+image_comp_d2_th="${regression_path}/outD2-Classification/thumbnails"                  #png
+image_comp_d2_tif="${regression_path}/outD2-Classification/tif"                        #tif
 
 
 python_script="${pipeline_path}/utils/compare-images.py"
