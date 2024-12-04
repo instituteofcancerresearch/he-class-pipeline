@@ -45,6 +45,7 @@ python_script="${pipeline_path}/utils/compare-images.py"
 
 echo "*********INPUTS***********************"
 echo "pipe_path: $pipeline_path"
+echo "regression_path: $regression_path"
 echo "conda_path: $conda_path"
 echo "pipes: $pipes"
 echo "python_script: $python_script"
