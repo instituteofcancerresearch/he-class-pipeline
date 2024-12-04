@@ -76,20 +76,25 @@ def compare_images(path_new, path_regression, recursive):
                     print(f"Missing file: {image2_path}")                                                                                                    
                 else:
                     try:
-                        image1 = Image.open(image1_path)                        
-                        image2 = Image.open(image2_path)                                        
-                        image1_array = np.array(image1)
-                        image2_array = np.array(image2)
+                        if ".jpg" in file or .jpeg in file or ".png" in file or ".tif" in file:
+                            image1 = Image.open(image1_path)                        
+                            image2 = Image.open(image2_path)                                        
+                            image1_array = np.array(image1)
+                            image2_array = np.array(image2)
 
-                        if np.array_equal(image1_array, image2_array) == False:
-                            count += 1                            
-                            print(f"{file}: The images are different.")
-                            image1_cv2 = cv2.imread(image1_path)
-                            image2_cv2 = cv2.imread(image2_path)
-                            out_rmse = rmse(image1_cv2, image2_cv2)
-                            # out_sre = sre(image1_cv2, image2_cv2)
-                            print(f"RMSE image difference: {out_rmse}")
-                            # print(f"SRE image difference: {out_sre}")
+                            if np.array_equal(image1_array, image2_array) == False:
+                                count += 1                            
+                                print(f"{file}: The images are different.")
+                                image1_cv2 = cv2.imread(image1_path)
+                                image2_cv2 = cv2.imread(image2_path)
+                                out_rmse = rmse(image1_cv2, image2_cv2)
+                                # out_sre = sre(image1_cv2, image2_cv2)
+                                print(f"RMSE image difference: {out_rmse}")
+                                # print(f"SRE image difference: {out_sre}")
+                        else:
+                            if ".csv" in file or ".h5" in file:
+                                print(f"CSV or H5 file: {file} going to implement soon")
+                            
                                                 
                     except FileNotFoundError as e: 
                         print(f"File not found: {e}")                                               
