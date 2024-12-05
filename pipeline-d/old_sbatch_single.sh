@@ -8,6 +8,7 @@
 #source /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/home/.bashrc
 #source /data/scratch/shared/RSE/sources/.rachel
 source /data/scratch/shared/RSE/sources/.nick
+module load anaconda/3
 
 imagePath=$1
 imageName=$2
