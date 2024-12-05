@@ -47,7 +47,8 @@ matlabPath="${currentPath}/cell_detector/matlab_common/"
 ###################
 if [[ $steps == *"1"* ]]; then
     echo "@@@@@@@@@@@@ script 1 @@@@@@@@@@@@"    
-    mamba activate $conda_env1
+    #mamba activate $conda_env1
+    source activate $conda_env1
     echo "Python version: $(python --version)"
     echo "Python path: $(which python)"        
     python3 -m pip show matlabengine
@@ -65,12 +66,14 @@ if [[ $steps == *"1"* ]]; then
     python3 "./Generate_Output.py" "${cellDetectorCheckPointPath}" "${tilePath}" \
     "${cellDetectionResultsPath}" "${detectionBatchSize}" "${imageName}" \
     "${segmentationTilePath}" "${matlabPath}")    
-    mamba deactivate
+    #mamba deactivate
+    conda deactivate
 fi
 
 if [[ $steps == *"2"* ]]; then
     echo "@@@@@@@@@@@@ script 2 @@@@@@@@@@@@"    
-    mamba activate $conda_env2
+    #mamba activate $conda_env2
+    source activate $conda_env2
     ###################
     classificationCodePath="${code_path}/cell_classifier/classification"
     cellClassifierPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellClassification/EPICC/NDPI/Current/EPICC_Cell_Classifier_NDPI.h5"
@@ -111,7 +114,8 @@ if [[ $steps == *"2"* ]]; then
     outputProbs='${outputProbs}', overwrite='${overwrite}');"    
     #inLabels='${labelNames}', outLabels='${labelNames}',\
     
-    mamba deactivate
+    #mamba deactivate
+    conda deactivate
 fi
 
 if [[ $steps == *"3"* ]]; then
