@@ -88,34 +88,34 @@ mamba activate $conda_path
 
 if [[ $pipes == *"A"* ]]; then
     echo -e "Running compare images script for A..."
-    srun python $python_script "$image_dir_a" "$image_comp_a" "N"
+    srun python $python_script "$image_dir_a" "$image_comp_a" "N" "Y"
 fi
 
 if [[ $pipes == *"B"* ]]; then
     echo -e "Running compare images script for B..."
-    srun python $python_script "$image_dir_b" "$image_comp_b" "N"
+    srun python $python_script "$image_dir_b" "$image_comp_b" "N" "Y"
 fi
 
 if [[ $pipes == *"C"* ]]; then
     echo -e "Running compare images script for C..."
-    srun python $python_script "$image_dir_c" "$image_comp_c" "N"
+    srun python $python_script "$image_dir_c" "$image_comp_c" "N" "Y"
 fi
 
 if [[ $pipes == *"D1"* ]]; then
     echo -e "Running compare images script for D1..."
-    srun python $python_script "$image_dir_d1_ai" "$image_comp_d1_ai" "N"
-    srun python $python_script "$image_dir_d1_csv" "$image_comp_d1_csv" "N"
-    srun python $python_script "$image_dir_d1_h5" "$image_comp_d1_h5" "N"
-    srun python $python_script "$image_dir_d1_pp" "$image_comp_d1_pp" "N"
+    srun python $python_script "$image_dir_d1_ai" "$image_comp_d1_ai" "N" "Y"
+    srun python $python_script "$image_dir_d1_csv" "$image_comp_d1_csv" "N" "Y"
+    srun python $python_script "$image_dir_d1_h5" "$image_comp_d1_h5" "N" "Y"
+    srun python $python_script "$image_dir_d1_pp" "$image_comp_d1_pp" "N" "Y"
 fi
 
 if [[ $pipes == *"D2"* ]]; then
     echo -e "Running compare images script for D2..."
-    srun python $python_script "$image_dir_d2_ac" "$image_comp_d2_ac" "N"
-    srun python $python_script "$image_dir_d2_csv" "$image_comp_d2_csv" "N"
-    srun python $python_script "$image_dir_d2_li" "$image_comp_d2_li" "N"
-    #srun python $python_script "$image_dir_d2_big" "$image_comp_d2_big" "N"
-    srun python $python_script "$image_dir_d2_tif" "$image_comp_d2_tif" "N"    
+    srun python $python_script "$image_dir_d2_ac" "$image_comp_d2_ac" "N" "N"
+    srun python $python_script "$image_dir_d2_csv" "$image_comp_d2_csv" "N" "Y"
+    srun python $python_script "$image_dir_d2_li" "$image_comp_d2_li" "N" "Y"
+    #srun python $python_script "$image_dir_d2_big" "$image_comp_d2_big" "N" "Y"
+    srun python $python_script "$image_dir_d2_tif" "$image_comp_d2_tif" "N" "N"  
 fi
 
 #echo -e "Deactivating conda enviroment..."

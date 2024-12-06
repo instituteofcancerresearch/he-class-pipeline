@@ -12,7 +12,7 @@ path1 = sys.argv[1]
 path2 = sys.argv[2]
 recursive = sys.argv[3]
 
-def compare_images(path_new, path_regression, recursive):
+def compare_images(path_new, path_regression, recursive,ndpi):
     """
         Description:
         Function which compares images to each other thourgh comparing their numpy arrays.
@@ -36,10 +36,16 @@ def compare_images(path_new, path_regression, recursive):
         folder_list2 = [path_new]
             
     total_count = 0
+    total_same = 0
     total_missing = 0
     for folder1, folder2 in zip(folder_list1, folder_list2):
-        subfolder_list1 = sorted(glob.glob(folder1+"/*.ndpi"))
-        subfolder_list2 = sorted(glob.glob(folder2+"/*.ndpi"))
+        if ndpi == "Y":
+            subfolder_list1 = sorted(glob.glob(folder1+"/*.ndpi"))
+            subfolder_list2 = sorted(glob.glob(folder2+"/*.ndpi"))
+        else:
+            subfolder_list1 = [subfolder_list1]
+            subfolder_list2 = [subfolder_list2]
+            
         
         name_list1 = []
         for subfolder in subfolder_list1:
@@ -92,16 +98,23 @@ def compare_images(path_new, path_regression, recursive):
                                 # out_sre = sre(image1_cv2, image2_cv2)
                                 print(f"RMSE image difference: {out_rmse}")
                                 # print(f"SRE image difference: {out_sre}")
+                            else:
+                                total_same += 1
                         elif ".h5" in file:
                             if not compare_h5(image1_path, image2_path):
                                 count += 1
                                 print(f"{file}: The h5 files are different.")                                                        
+                            else:
+                                total_same += 1
                         elif ".csv" in file:
                             if not compare_csv(image1_path, image2_path):
                                 count += 1
                                 print(f"{file}: The csv files are different.")
+                            else:
+                                total_same += 1
                         else:
                             print(f"Not handled: {file}")
+                            count += 1
                             
                                                 
                     except FileNotFoundError as e: 
@@ -111,6 +124,7 @@ def compare_images(path_new, path_regression, recursive):
             print(f"--- {count} different images in folder found")
             total_count += count
     print(f"Total differences in all folders: {total_count}")
+    print(f"Total files in all folders: {total_same}")
     print(f"Total missing in compare folder: {total_missing}")
 
 compare_images(path1, path2, recursive)
