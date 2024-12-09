@@ -49,37 +49,6 @@ echo "regression_path: $regression_path"
 echo "conda_path: $conda_path"
 echo "pipes: $pipes"
 echo "python_script: $python_script"
-echo "image_dir_a: $image_dir_a"
-echo "image_dir_b: $image_dir_b"
-echo "image_dir_c: $image_dir_c"
-
-echo "image_dir_d1-ai: $image_dir_d1_ai"
-echo "image_dir_d1-csv: $image_dir_d1_csv"
-echo "image_dir_d1-h5: $image_dir_d1_h5"
-echo "image_dir_d1-pp: $image_dir_d1_pp"
-
-echo "image_dir_d2-ac: $image_dir_d2_ac"
-echo "image_dir_d2-csv: $image_dir_d2_csv"
-echo "image_dir_d2-li: $image_dir_d2_li"
-echo "image_dir_d2-big: $image_dir_d2_big"
-echo "image_dir_d2-th: $image_dir_d2_th"
-echo "image_dir_d2-tif: $image_dir_d2_tif"
-
-echo "image_comp_a: $image_comp_a"
-echo "image_comp_b: $image_comp_b"
-echo "image_comp_c: $image_comp_c"
-
-echo "image_comp_d1-ai: $image_comp_d1_ai"
-echo "image_comp_d1-csv: $image_comp_d1_csv"
-echo "image_comp_d1-h5: $image_comp_d1_h5"
-echo "image_comp_d1-pp: $image_comp_d1_pp"
-
-echo "image_comp_d2-ac: $image_comp_d2_ac"
-echo "image_comp_d2-csv: $image_comp_d2_csv"
-echo "image_comp_d2-li: $image_comp_d2_li"
-echo "image_comp_d2-big: $image_comp_d2_big"
-echo "image_comp_d2-th: $image_comp_d2_th"
-echo "image_comp_d2-tif: $image_comp_d2_tif"
 
 # conda init
 echo -e "Activating conda enviroment..."
@@ -88,21 +57,37 @@ mamba activate $conda_path
 
 if [[ $pipes == *"A"* ]]; then
     echo -e "Running compare images script for A..."
+    echo "image_dir_a: $image_dir_a"
+    echo "image_comp_a: $image_comp_a"
     srun python $python_script "$image_dir_a" "$image_comp_a" "N" "Y"
 fi
 
 if [[ $pipes == *"B"* ]]; then
     echo -e "Running compare images script for B..."
+    echo "image_dir_b: $image_dir_b"
+    echo "image_comp_b: $image_comp_b"
     srun python $python_script "$image_dir_b" "$image_comp_b" "N" "Y"
 fi
 
 if [[ $pipes == *"C"* ]]; then
     echo -e "Running compare images script for C..."
+    echo "image_dir_c: $image_dir_c"
+    echo "image_comp_c: $image_comp_c"
     srun python $python_script "$image_dir_c" "$image_comp_c" "N" "Y"
 fi
 
 if [[ $pipes == *"D1"* ]]; then
     echo -e "Running compare images script for D1..."
+    echo "image_dir_d1-ai: $image_dir_d1_ai"
+    echo "image_dir_d1-csv: $image_dir_d1_csv"
+    echo "image_dir_d1-h5: $image_dir_d1_h5"
+    echo "image_dir_d1-pp: $image_dir_d1_pp"
+
+    echo "image_comp_d1-ai: $image_comp_d1_ai"
+    echo "image_comp_d1-csv: $image_comp_d1_csv"
+    echo "image_comp_d1-h5: $image_comp_d1_h5"
+    echo "image_comp_d1-pp: $image_comp_d1_pp"
+
     srun python $python_script "$image_dir_d1_ai" "$image_comp_d1_ai" "N" "Y"
     srun python $python_script "$image_dir_d1_csv" "$image_comp_d1_csv" "N" "Y"
     srun python $python_script "$image_dir_d1_h5" "$image_comp_d1_h5" "N" "Y"
@@ -111,6 +96,21 @@ fi
 
 if [[ $pipes == *"D2"* ]]; then
     echo -e "Running compare images script for D2..."
+    
+    echo "image_dir_d2-ac: $image_dir_d2_ac"
+    echo "image_dir_d2-csv: $image_dir_d2_csv"
+    echo "image_dir_d2-li: $image_dir_d2_li"
+    echo "image_dir_d2-big: $image_dir_d2_big"
+    echo "image_dir_d2-th: $image_dir_d2_th"
+    echo "image_dir_d2-tif: $image_dir_d2_tif"
+
+    echo "image_comp_d2-ac: $image_comp_d2_ac"
+    echo "image_comp_d2-csv: $image_comp_d2_csv"
+    echo "image_comp_d2-li: $image_comp_d2_li"
+    echo "image_comp_d2-big: $image_comp_d2_big"
+    echo "image_comp_d2-th: $image_comp_d2_th"
+    echo "image_comp_d2-tif: $image_comp_d2_tif"
+
     srun python $python_script "$image_dir_d2_ac" "$image_comp_d2_ac" "N" "N"
     srun python $python_script "$image_dir_d2_csv" "$image_comp_d2_csv" "N" "Y"
     srun python $python_script "$image_dir_d2_li" "$image_comp_d2_li" "N" "Y"

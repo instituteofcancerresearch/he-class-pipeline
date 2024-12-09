@@ -76,6 +76,7 @@ def compare_images(path_new, path_regression, recursive,ndpi):
             for file in files_1:
                 image1_path = f'{subfolder1}/{file}'
                 image2_path = f'{subfolder2}/{file}'
+                total_same += 1
                 
                 #print(f"Compare images {image1_path} {image2_path}")
                 
@@ -98,21 +99,15 @@ def compare_images(path_new, path_regression, recursive,ndpi):
                                 out_rmse = rmse(image1_cv2, image2_cv2)
                                 # out_sre = sre(image1_cv2, image2_cv2)
                                 print(f"RMSE image difference: {out_rmse}")
-                                # print(f"SRE image difference: {out_sre}")
-                            else:
-                                total_same += 1
+                                # print(f"SRE image difference: {out_sre}")                            
                         elif ".h5" in file:
                             if not compare_h5(image1_path, image2_path):
                                 count += 1
-                                print(f"{file}: The h5 files are different.")                                                        
-                            else:
-                                total_same += 1
+                                print(f"{file}: The h5 files are different.")                                                                                    
                         elif ".csv" in file:
                             if not compare_csv(image1_path, image2_path):
                                 count += 1
-                                print(f"{file}: The csv files are different.")
-                            else:
-                                total_same += 1
+                                print(f"{file}: The csv files are different.")                            
                         else:
                             print(f"Not handled: {file}")
                             count += 1
