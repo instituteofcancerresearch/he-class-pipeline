@@ -11,6 +11,7 @@ from compare_h5_csv import compare_h5, compare_csv
 path1 = sys.argv[1]
 path2 = sys.argv[2]
 recursive = sys.argv[3]
+ndpi = sys.argv[4]
 
 def compare_images(path_new, path_regression, recursive,ndpi):
     """
@@ -127,4 +128,4 @@ def compare_images(path_new, path_regression, recursive,ndpi):
     print(f"Total files in all folders: {total_same}")
     print(f"Total missing in compare folder: {total_missing}")
 
-compare_images(path1, path2, recursive)
+compare_images(path1, path2, recursive, ndpi)
