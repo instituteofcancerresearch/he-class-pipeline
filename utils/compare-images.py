@@ -68,8 +68,12 @@ def compare_images(path_new, path_regression, recursive, ndpi, key):
                 subfolder1 = folder1
                 subfolder2 = folder2
             print(f"Compare folders {subfolder1} {subfolder2}")
-            files_1tmp = sorted(glob.glob(subfolder1+"/*"))
-            files_2tmp = sorted(glob.glob(subfolder2+"/*"))            
+            if ndpi == "Y":
+                files_1tmp = sorted(glob.glob(subfolder1+"/Da*"))
+                files_2tmp = sorted(glob.glob(subfolder2+"/Da*"))            
+            else:
+                files_1tmp = sorted(glob.glob(subfolder1+"/SS*"))
+                files_2tmp = sorted(glob.glob(subfolder2+"/SS*"))
             files_1 = []
             files_2 = []            
             for file in files_1tmp:
