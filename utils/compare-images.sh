@@ -91,7 +91,7 @@ if [[ $pipes == *"D1"* ]]; then
     srun python $python_script "$image_dir_d1_ai" "$image_comp_d1_ai" "N" "Y" "x"
     srun python $python_script "$image_dir_d1_csv" "$image_comp_d1_csv" "N" "Y" "x"
     srun python $python_script "$image_dir_d1_h5" "$image_comp_d1_h5" "N" "Y" "ALL"
-    srun python $python_script "$image_dir_d1_pp" "$image_comp_d1_pp" "N" "Y" "x"
+    srun python $python_script "$image_dir_d1_pp" "$image_comp_d1_pp" "N" "Y" "ALL"
 fi
 
 if [[ $pipes == *"D2"* ]]; then
