@@ -10,19 +10,18 @@ def compare_h5(data_path_1, data_path_2, key):
 
     flag = True
 
-    groups_1 = list(h5_file_1.keys())
-    groups_2 = list(h5_file_2.keys())
-
+    if key.upper() == "ALL":
+        groups_1 = list(h5_file_1.keys())
+        groups_2 = list(h5_file_2.keys())
+    else:
+        groups_1 = list(key)
+        groups_2 = list(key)
+                    
     if groups_1 == groups_2:
-        for group_1 in groups_1:
-            if key.upper() == "ALL":
-                datasets_1 = list(h5_file_1[group_1].items())
-                datasets_2 = list(h5_file_2[group_1].items())
-            else:
-                datasets_1 = [key]
-                datasets_2 = [key]
-                
-            
+        for group_1 in groups_1:            
+            datasets_1 = list(h5_file_1[group_1].items())
+            datasets_2 = list(h5_file_2[group_1].items())
+                                        
         if datasets_1 == datasets_2:
             for (dataset_1_name, dataset_1), (dataset_2_name, dataset_2) in zip(datasets_1, datasets_2):
                 if dataset_1_name == dataset_2_name and dataset_1.shape == dataset_2.shape:
