@@ -45,8 +45,8 @@ def compare_images(path_new, path_regression, recursive, ndpi, key):
             subfolder_list1 = sorted(glob.glob(folder1+"/*.ndpi"))
             subfolder_list2 = sorted(glob.glob(folder2+"/*.ndpi"))
         else:
-            subfolder_list1 = [subfolder_list1]
-            subfolder_list2 = [subfolder_list2]
+            subfolder_list1 = [folder1]
+            subfolder_list2 = [folder2]
             
         
         name_list1 = []
