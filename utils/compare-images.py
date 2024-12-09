@@ -12,8 +12,9 @@ path1 = sys.argv[1]
 path2 = sys.argv[2]
 recursive = sys.argv[3]
 ndpi = sys.argv[4]
+key = sys.argv[5]
 
-def compare_images(path_new, path_regression, recursive,ndpi):
+def compare_images(path_new, path_regression, recursive, ndpi, key):
     """
         Description:
         Function which compares images to each other thourgh comparing their numpy arrays.
@@ -101,7 +102,7 @@ def compare_images(path_new, path_regression, recursive,ndpi):
                                 print(f"RMSE image difference: {out_rmse}")
                                 # print(f"SRE image difference: {out_sre}")                            
                         elif ".h5" in file:
-                            if not compare_h5(image1_path, image2_path):
+                            if not compare_h5(image1_path, image2_path,key):
                                 count += 1
                                 print(f"{file}: The h5 files are different.")                                                                                    
                         elif ".csv" in file:
@@ -123,4 +124,4 @@ def compare_images(path_new, path_regression, recursive,ndpi):
     print(f"Total files in all folders: {total_same}")
     print(f"Total missing in compare folder: {total_missing}")
 
-compare_images(path1, path2, recursive, ndpi)
+compare_images(path1, path2, recursive, ndpi, key)

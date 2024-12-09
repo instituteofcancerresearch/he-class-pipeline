@@ -59,21 +59,21 @@ if [[ $pipes == *"A"* ]]; then
     echo -e "Running compare images script for A..."
     echo "image_dir_a: $image_dir_a"
     echo "image_comp_a: $image_comp_a"
-    srun python $python_script "$image_dir_a" "$image_comp_a" "N" "Y"
+    srun python $python_script "$image_dir_a" "$image_comp_a" "N" "Y" "x"
 fi
 
 if [[ $pipes == *"B"* ]]; then
     echo -e "Running compare images script for B..."
     echo "image_dir_b: $image_dir_b"
     echo "image_comp_b: $image_comp_b"
-    srun python $python_script "$image_dir_b" "$image_comp_b" "N" "Y"
+    srun python $python_script "$image_dir_b" "$image_comp_b" "N" "Y" "x"
 fi
 
 if [[ $pipes == *"C"* ]]; then
     echo -e "Running compare images script for C..."
     echo "image_dir_c: $image_dir_c"
     echo "image_comp_c: $image_comp_c"
-    srun python $python_script "$image_dir_c" "$image_comp_c" "N" "Y"
+    srun python $python_script "$image_dir_c" "$image_comp_c" "N" "Y" "x"
 fi
 
 if [[ $pipes == *"D1"* ]]; then
@@ -88,10 +88,10 @@ if [[ $pipes == *"D1"* ]]; then
     echo "image_comp_d1-h5: $image_comp_d1_h5"
     echo "image_comp_d1-pp: $image_comp_d1_pp"
 
-    srun python $python_script "$image_dir_d1_ai" "$image_comp_d1_ai" "N" "Y"
-    srun python $python_script "$image_dir_d1_csv" "$image_comp_d1_csv" "N" "Y"
-    srun python $python_script "$image_dir_d1_h5" "$image_comp_d1_h5" "N" "Y"
-    srun python $python_script "$image_dir_d1_pp" "$image_comp_d1_pp" "N" "Y"
+    srun python $python_script "$image_dir_d1_ai" "$image_comp_d1_ai" "N" "Y" "x"
+    srun python $python_script "$image_dir_d1_csv" "$image_comp_d1_csv" "N" "Y" "x"
+    srun python $python_script "$image_dir_d1_h5" "$image_comp_d1_h5" "N" "Y" "x"
+    srun python $python_script "$image_dir_d1_pp" "$image_comp_d1_pp" "N" "Y" "x"
 fi
 
 if [[ $pipes == *"D2"* ]]; then
@@ -111,11 +111,11 @@ if [[ $pipes == *"D2"* ]]; then
     echo "image_comp_d2-th: $image_comp_d2_th"
     echo "image_comp_d2-tif: $image_comp_d2_tif"
 
-    srun python $python_script "$image_dir_d2_ac" "$image_comp_d2_ac" "N" "N"
-    srun python $python_script "$image_dir_d2_csv" "$image_comp_d2_csv" "N" "Y"
-    srun python $python_script "$image_dir_d2_li" "$image_comp_d2_li" "N" "Y"
-    #srun python $python_script "$image_dir_d2_big" "$image_comp_d2_big" "N" "Y"
-    srun python $python_script "$image_dir_d2_tif" "$image_comp_d2_tif" "N" "N"  
+    srun python $python_script "$image_dir_d2_ac" "$image_comp_d2_ac" "N" "N" "x"
+    srun python $python_script "$image_dir_d2_csv" "$image_comp_d2_csv" "N" "Y" "x"
+    srun python $python_script "$image_dir_d2_li" "$image_comp_d2_li" "N" "Y" "x"
+    srun python $python_script "$image_dir_d2_big" "$image_comp_d2_big" "N" "Y" "x"
+    srun python $python_script "$image_dir_d2_tif" "$image_comp_d2_tif" "N" "N" "x"
 fi
 
 #echo -e "Deactivating conda enviroment..."
