@@ -24,12 +24,12 @@ def compare_h5(data_path_1, data_path_2, key_in = "ALL"):
                                                             
                     if datasets_1 != datasets_2:                    
                         print(f"Datasets are different: KEY={key1}")
-                        print(f"{datasets_1}")
-                        print(f"{datasets_2}")
+                        #print(f"{datasets_1}")
+                        #print(f"{datasets_2}")
                         
                     
                     for (dataset_1_name, dataset_1), (dataset_2_name, dataset_2) in zip(datasets_1, datasets_2):
-                        print(f"Compare datasets {dataset_1_name} {dataset_2_name}")
+                        #print(f"Compare datasets {dataset_1_name} {dataset_2_name}")
                         if dataset_1_name == dataset_2_name and dataset_1.shape == dataset_2.shape:
                             num_records += 1                            
                             if not np.array_equal(dataset_1[:], dataset_2[:]):
