@@ -102,8 +102,9 @@ def compare_images(path_new, path_regression, recursive, ndpi, key):
                                 print(f"RMSE image difference: {out_rmse}")
                                 # print(f"SRE image difference: {out_sre}")                            
                         elif ".h5" in file:
-                            if not compare_h5(image1_path, image2_path,key):
-                                count += 1
+                            num_records, num_diff = compare_h5(image1_path, image2_path,key)
+                            if num_diff > 0:
+                                count += num_diff
                                 print(f"{file}: The h5 files are different.")                                                                                    
                         elif ".csv" in file:
                             if not compare_csv(image1_path, image2_path):
