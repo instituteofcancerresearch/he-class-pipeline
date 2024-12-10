@@ -22,8 +22,8 @@ def compare_h5(data_path_1, data_path_2, key_in = "ALL"):
                     datasets_1 = list(h5_file_1[key1].items())
                     datasets_2 = list(h5_file_2[key1].items())
                                                             
-                    if datasets_1 != datasets_2:                    
-                        print(f"Datasets are different: KEY={key1}")
+                    #if datasets_1 != datasets_2:                    
+                        #print(f"Datasets are different: KEY={key1}")
                         #print(f"{datasets_1}")
                         #print(f"{datasets_2}")
                         
@@ -38,6 +38,10 @@ def compare_h5(data_path_1, data_path_2, key_in = "ALL"):
                                 #        print(f"{dataset_1[i]}, {dataset_2[i]}")
                                 num_diff += 1
                                 print(f"Dataset {dataset_1_name} is different")
+                                np1 = np.array(dataset_1[0])
+                                np2 = np.array(dataset_2[0])                                
+                                print(np1)
+                                print(np2)
                                 
                                                             
         return num_records, num_diff

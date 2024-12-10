@@ -168,5 +168,5 @@ pipeline-a/dev.md
 #pipeline-d/code/cell_detector/analysis/subpackages/*
 #pipeline-d/code/cell_detector/matlab_common/*
 *:Zone.Identifier
-utils/sDa6.h5
-utils/rDa6.h5
+utils/*.h5
+utils/pp/*
