@@ -81,5 +81,8 @@ mamba create --prefix /data/scratch/shared/RSE/envs/he-compare-images -c conda-f
 mamba activate he-compare-images
 python -m pip install opencv-python
 python -m pip install image-similarity-measures
+python -m pip install h5py
 mamba deactivate
 ```
+
+
