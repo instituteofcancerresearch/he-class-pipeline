@@ -1,4 +1,4 @@
-# This is the H&E Image Classifier pipeline
+# [H&E Image Classifier pipeline](https://github.com/instituteofcancerresearch/he-class-pipeline)
 
 The pipeline has been taken from Nick Trahearn's code and adapted to work with the ICR H&E Image Classifier web-app.
 
