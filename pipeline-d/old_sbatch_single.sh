@@ -8,7 +8,7 @@
 #source /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/home/.bashrc
 #source /data/scratch/shared/RSE/sources/.rachel
 source /data/scratch/shared/RSE/sources/.nick
-module load anaconda/3
+#module load anaconda/3
 
 imagePath=$1
 imageName=$2
@@ -49,6 +49,7 @@ matlabPath="${currentPath}/cell_detector/matlab_common/"
 ###################
 if [[ $steps == *"1"* ]]; then
     echo "@@@@@@@@@@@@ script 1 @@@@@@@@@@@@"    
+    echo "@@@@@@@@@@@@ script 1 @@@@@@@@@@@@" >&2 
     #mamba activate $conda_env1
     source activate $conda_env1
     echo "Python version: $(python --version)"
@@ -74,8 +75,11 @@ fi
 
 if [[ $steps == *"2"* ]]; then
     echo "@@@@@@@@@@@@ script 2 @@@@@@@@@@@@"    
+    echo "@@@@@@@@@@@@ script 2 @@@@@@@@@@@@" >&2 
     #mamba activate $conda_env2
     source activate $conda_env2
+    echo "Python version: $(python --version)"
+    echo "Python path: $(which python)"
     ###################
     classificationCodePath="${code_path}/cell_classifier/classification"
     cellClassifierPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellClassification/EPICC/NDPI/Current/EPICC_Cell_Classifier_NDPI.h5"
@@ -122,6 +126,7 @@ fi
 
 if [[ $steps == *"3"* ]]; then
     echo "@@@@@@@@@@@@ script 3 @@@@@@@@@@@@"    
+    echo "@@@@@@@@@@@@ script 3 @@@@@@@@@@@@" >&2 
 
     module load MATLAB/R2020b
 
