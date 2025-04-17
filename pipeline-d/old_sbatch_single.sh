@@ -253,3 +253,4 @@ fi
 
 echo ""
 echo "Complete"
+echo "Complete" >&2 
