@@ -4,7 +4,7 @@ import sys
 print(sys.argv)
 
 working_dir = sys.argv[1]
-sing_dir = sys.argv[2]
+sing_file = sys.argv[2]
 pipeline_dir = sys.argv[3]
 inC_tiles = sys.argv[4]
 inC_masks = sys.argv[5]
@@ -35,7 +35,7 @@ with open(batch_file, "a") as f:
     sing_call += f"-B {outC}:/output -B {working_dir}:/log "
     sing_call += f"-B {inC_masks}:/input_masks "
     sing_call += f"-B {inC_refMasks}:/target_masks "
-    sing_call += f"{sing_dir}/HEC.sif "
+    sing_call += f"{sing_file} "
     sing_call += "/log /input_tiles /target_tiles /output /input_masks /target_masks '*.*'"
             
     f.write("#SBATCH -J HECr\n")
