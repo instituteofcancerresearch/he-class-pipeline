@@ -1,16 +1,9 @@
 #!/bin/bash
-
-#SBATCH -J "HEAr"
-#SBATCH -o a_run.out
-#SBATCH -e a_run.err
-#SBATCH -n 8
-#SBATCH --mail-type="END,FAIL"
-#SBATCH -t 100:00:00
+#$ -N "HEAr"
+#$ -o a_run.out
+#$ -e a_run.err
 #is_singularity="TRUE"
 
-#ImageDir="/data/rds/DMP/UCEC/GENEVOD/ntrahearn/Images/ClassifierPipelineDemoImages/testNDPIs/"
-#TilePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-old/out/"
-#CodePath="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier-old/Code/OSTiles/"
 CodePath=$1
 ImageDir=$2
 TilePath=$3
