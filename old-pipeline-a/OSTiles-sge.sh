@@ -15,6 +15,7 @@ CodePath=$1
 ImageDir=$2
 TilePath=$3
 CondaPath=$4
+OpenSlideContainerPath=$5
 
 if [[ "$is_singularity" == "TRUE" ]]; then    
 	echo "Running the script in the singularity container..."
@@ -22,6 +23,7 @@ if [[ "$is_singularity" == "TRUE" ]]; then
     echo "ImageDir: $ImageDir"
     echo "TilePath: $TilePath"
     echo "CondaPath: $CondaPath"
+    echo "SingPath: $SingPath"
     
     ImageFileExtension="ndpi"
     InMPP=None
@@ -30,8 +32,9 @@ if [[ "$is_singularity" == "TRUE" ]]; then
         	
     source /data/scratch/shared/RSE/sources/.rachel
     module load java/jdk15.0.1
-    mamba activate /data/scratch/shared/RSE/.conda/envs/openslide-mod    
-    echo "Using mamba"
+    #mamba activate /data/scratch/shared/RSE/.conda/envs/openslide-mod    
+    #echo "Using mamba"
+    source activate $CondaPath
     echo "Path: $PATH"
     echo "Python version: $(python --version)"
     echo "Python path: $(which python)"    
@@ -54,8 +57,9 @@ if [[ "$is_singularity" == "TRUE" ]]; then
     done
 else    
 	echo "Setting up the singularity container..."
+    echo "OpenSlideContainerPath: $OpenSlideContainerPath"
     export SINGULARITYENV_is_singularity="TRUE"
-    OpenSlideContainerPath="/opt/software/containers/singularity/openslideicr.sif"
-    singularity exec --bind "/opt/software,/data," "$OpenSlideContainerPath" "$0" "$1" "$2" "$3"
+    #OpenSlideContainerPath="/opt/software/containers/singularity/openslideicr.sif"
+    singularity exec --bind "/opt/software,/data," "$OpenSlideContainerPath" "$0" "$1" "$2" "$3" "$4"
     echo "Finished"
 fi
