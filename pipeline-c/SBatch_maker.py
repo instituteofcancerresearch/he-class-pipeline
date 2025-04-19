@@ -39,12 +39,11 @@ with open(batch_file, "a") as f:
     sing_call += f"{sing_file} "
     sing_call += "/log /input_tiles /target_tiles /output /input_masks /target_masks '*.*'"
             
-    if hpc == "sge":
-        f.write("#$ -cwd\n")
-        f.write("#$ -j y\n")
+    if hpc == "sge":                
+        f.write("#$ -N HECr\n")
         f.write("#$ -o c_run.out\n")
         f.write("#$ -e c_run.err\n")
-        f.write("#$ -pe smp 4\n")
+        f.write("#$ -pe smp 1\n")
         f.write("#$ -l h_rt=100:00:00\n")
     else:
         f.write("#SBATCH -J HECr\n")
