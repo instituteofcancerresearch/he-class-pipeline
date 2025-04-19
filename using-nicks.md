@@ -16,6 +16,6 @@ python3 -c "import tensorflow as tf;print('Num GPUs Available: ', len(tf.test.gp
 
 D2: 
 cp -r /data/scratch/DMP/UCEC/GENEVOD/ntrahearn/.conda/envs/pytorch0p3 /data/rds/DIT/SCICOM/SCRSE/shared/conda/pytorch0p3
-Then the deny needs to be removed from the access settgings :-( 
+Then the deny needs to be removed from the access settings :-(
 source activate /data/rds/DIT/SCICOM/SCRSE/shared/conda/pytorch0p3
 echo "Python path: $(which python)"
