@@ -8,6 +8,7 @@ pipeline_dir = sys.argv[2]
 inB = sys.argv[3]
 outB = sys.argv[4]
 method = sys.argv[5]
+hpc = sys.argv[6]
 
 batch_file = f"{working_dir}/b_run.sh"
 
@@ -15,17 +16,26 @@ with open(batch_file, "w") as f:
     f.write("#!/bin/sh\n")
 
 with open(batch_file, "a") as f:
-    f.write("#SBATCH -J HEBr\n")
-    f.write("#SBATCH -o b_run.out\n")
-    f.write("#SBATCH -e b_run.err\n")
-    f.write("#SBATCH -n 4\n")
-    f.write("#SBATCH -t 100:00:00\n")
+    if hpc == "sge":
+        f.write("#!/bin/sh\n")
+        f.write("#$ -N HEBr\n")
+        f.write("#$ -o b_run.out\n")
+        f.write("#$ -e b_run.err\n")
+        f.write("#$ -pe smp 4\n")
+        f.write("#$ -l h_rt=100:00:00\n")
+    else:
+        f.write("#!/bin/sh\n")
+        f.write("#SBATCH -J HEBr\n")
+        f.write("#SBATCH -o b_run.out\n")
+        f.write("#SBATCH -e b_run.err\n")
+        f.write("#SBATCH -n 4\n")
+        f.write("#SBATCH -t 100:00:00\n")
+    
     f.write("\n")    
-    f.write("source ~/.bashrc\n")
+    #f.write("source ~/.bashrc\n")
     f.write("module load MATLAB/R2020b\n")    
     f.write("\n")
-    f.write("echo 'Starting HEBr'\n")
-    #f.write("Params='jpg, [3.5 5000 225]'\n") - this is hardcoded in the matlab scripts
+    f.write("echo 'Starting HEBr'\n")    
     f.write("MaskMethod=\"E\"\n")
     f.write("\n")
     f.write("module load MATLAB\n")
@@ -33,8 +43,7 @@ with open(batch_file, "a") as f:
     f.write("matlab -nodesktop -nosplash -r ")
     f.write('"')
     f.write(f"addpath(genpath('{pipeline_dir}/pipeline-b/')); ")
-    f.write(f"CreateMaskTilesBatch('{inB}', '{outB}', ")
-    #f.write("'$MaskMethod', '$Params'")
+    f.write(f"CreateMaskTilesBatch('{inB}', '{outB}', ")    
     f.write("'$MaskMethod'")
     f.write("); exit;\"")    
 """

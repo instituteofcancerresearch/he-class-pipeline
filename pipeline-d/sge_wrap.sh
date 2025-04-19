@@ -1,10 +1,9 @@
 #!/bin/sh
-#SBATCH -J "HEDwr"
-#SBATCH -o d_run.out
-#SBATCH -e d_run.err
-#SBATCH -n 4
-#SBATCH -t 100:00:00
-
+#$ -N "HEDr"
+#$ -o d_run.out
+#$ -e d_run.err
+#$ -pe smp 4
+#$ -l h_rt=100:00:00
 
 image_dir=$1
 pipe_path=$2
@@ -42,7 +41,7 @@ do
   var1="logsD/d_run_$counter.err"
   var2="logsD/d_run_$counter.out"  
   jabname="HEDr"  
-  sbatch --error=$var1 --output=$var2 "$pipe_path/old_sbatch_single.sh" $image_file $base_image_file $code_path $steps $conda_1 $conda_2 $tilePath $segmentationTilePath $cellDetectionResultsPath $cellClassificationResultsPath
+  sbatch --error=$var1 --output=$var2 "$pipe_path/sge_single.sh" $image_file $base_image_file $code_path $steps $conda_1 $conda_2 $tilePath $segmentationTilePath $cellDetectionResultsPath $cellClassificationResultsPath
   ((counter++))
 done
 
