@@ -20,6 +20,7 @@ with open(batch_file, "w") as f:
         f.write("#$ -e b_run.err\n")
         f.write("#$ -pe smp 4\n")
         f.write("#$ -l h_rt=20:00:00\n")
+        f.write(f"#$ -wd {working_dir}\n")
     else:
         f.write("#!/bin/sh\n")
         f.write("#SBATCH -J HEBr\n")

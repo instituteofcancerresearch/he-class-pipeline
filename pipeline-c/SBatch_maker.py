@@ -44,6 +44,7 @@ with open(batch_file, "w") as f:
         f.write("#$ -e c_run.err\n")
         f.write("#$ -pe smp 1\n")
         f.write("#$ -l h_rt=20:00:00\n")
+        f.write(f"#$ -wd {working_dir}\n")
     else:
         f.write("#!/bin/sh\n")
         f.write("#SBATCH -J HECr\n")
