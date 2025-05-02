@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -l
 #$ -N "HEAr"
 #$ -o a_run.out
 #$ -e a_run.err
@@ -11,7 +11,9 @@ CondaPath=$4
 OpenSlideContainerPath=$5
 
 if [[ "$is_singularity" == "TRUE" ]]; then    
-	echo "Running the script in the singularity container..."
+	source ~/.bashrc
+    
+    echo "Running the script in the singularity container..."
     echo "CodePath: $CodePath"
     echo "ImageDir: $ImageDir"
     echo "TilePath: $TilePath"
@@ -23,9 +25,8 @@ if [[ "$is_singularity" == "TRUE" ]]; then
     OutMPP=0.22098959139024552
     OutMPP=None
         	
-    source /data/scratch/shared/RSE/sources/.rachel
-    module load java/jdk15.0.1
-    #mamba activate /data/scratch/shared/RSE/.conda/envs/openslide-mod    
+    module load python/miniconda3/24.3.0-0
+    module load java/1.8.0_45    
     #echo "Using mamba"
     source activate $CondaPath
     echo "Path: $PATH"
@@ -49,10 +50,11 @@ if [[ "$is_singularity" == "TRUE" ]]; then
         python3 "$CodePath/generate_cws.py" "$ImagePath" $OutMPP $InMPP "$TilePath" $ImageI $ImageCount
     done
 else    
-	echo "Setting up the singularity container..."
+    echo "Setting up the singularity container..."
     echo "OpenSlideContainerPath: $OpenSlideContainerPath"
     export SINGULARITYENV_is_singularity="TRUE"
     #OpenSlideContainerPath="/opt/software/containers/singularity/openslideicr.sif"
-    singularity exec --bind "/opt/software,/data," "$OpenSlideContainerPath" "$0" "$1" "$2" "$3" "$4"
+    #singularity exec --bind "/opt/software,/data," "$OpenSlideContainerPath" "$0" "$1" "$2" "$3" "$4"
+    singularity exec --bind "$(dirname "$0"),/shared/ucl/apps,/home/regmna1/" "$OpenSlideContainerPath" "$0" "$1" "$2" "$3" "$4"
     echo "Finished"
 fi

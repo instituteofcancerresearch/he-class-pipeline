@@ -18,6 +18,7 @@ tilePath=$7 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
 segmentationTilePath=$8 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
 cellDetectionResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
 cellClassificationResultsPath=${10} #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
+cellDetectorCheckPointPath=${11} #"/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
 echo "*********INPUTS***********************"
 echo "old_wrap.sh"
 echo "image_dir: $image_dir"
@@ -44,7 +45,13 @@ do
   var1="logsD/d_run_$counter.err"
   var2="logsD/d_run_$counter.out"  
   jabname="HEDr"  
-  sbatch --error=$var1 --output=$var2 "$pipe_path/slurm_single.sh" $image_file $base_image_file $code_path $steps $conda_1 $conda_2 $tilePath $segmentationTilePath $cellDetectionResultsPath $cellClassificationResultsPath
+  sbatch --error=$var1 --output=$var2 "$pipe_path/slurm_single.sh" \
+  $image_file $base_image_file $code_path \
+  $steps $conda_1 $conda_2 $tilePath \
+  $segmentationTilePath \
+  $cellDetectionResultsPath \
+  $cellClassificationResultsPath \
+  $cellDetectorCheckPointPath
   ((counter++))
 done
 

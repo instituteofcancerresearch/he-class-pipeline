@@ -15,12 +15,10 @@ pattern = sys.argv[9]
 hpc = sys.argv[10]
 
 
+print(sys.argv[10])
 batch_file = f"{working_dir}/c_run.sh"
 
 with open(batch_file, "w") as f:
-    f.write("#!/bin/sh\n")
-
-with open(batch_file, "a") as f:
     """    
     log_path = args[0]
     cws_path = args[1]
@@ -38,14 +36,16 @@ with open(batch_file, "a") as f:
     sing_call += f"-B {inC_refMasks}:/target_masks "
     sing_call += f"{sing_file} "
     sing_call += "/log /input_tiles /target_tiles /output /input_masks /target_masks '*.*'"
-            
-    if hpc == "sge":                
+    
+    if hpc == "sge": 
+        f.write("#!/bin/bash -l\n")
         f.write("#$ -N HECr\n")
         f.write("#$ -o c_run.out\n")
         f.write("#$ -e c_run.err\n")
         f.write("#$ -pe smp 1\n")
-        f.write("#$ -l h_rt=100:00:00\n")
+        f.write("#$ -l h_rt=20:00:00\n")
     else:
+        f.write("#!/bin/sh\n")
         f.write("#SBATCH -J HECr\n")
         f.write("#SBATCH -o c_run.out\n")
         f.write("#SBATCH -e c_run.err\n")
@@ -58,7 +58,6 @@ with open(batch_file, "a") as f:
     f.write("echo 'Starting HECr'\n")        
     #f.write(f"srun {sing_call}")
     f.write(f"{sing_call}")
-            
 """
 #!/bin/sh
 #SBATCH -J "HEBr"
@@ -66,7 +65,7 @@ with open(batch_file, "a") as f:
 #SBATCH -e b_run.err
 #SBATCH -n 4
 #SBATCH -t 100:00:00
-
+ 
 srun singularity run 
 -B /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA:/input_tiles 
 -B /data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB:/target_tiles 

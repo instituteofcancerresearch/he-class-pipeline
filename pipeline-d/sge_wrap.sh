@@ -1,9 +1,8 @@
-#!/bin/sh
+#!/bin/bash -l
 #$ -N "HEDr"
 #$ -o d_run.out
 #$ -e d_run.err
-#$ -pe smp 4
-#$ -l h_rt=100:00:00
+#$ -l h_rt=24:00:00
 
 image_dir=$1
 pipe_path=$2
@@ -15,6 +14,7 @@ tilePath=$7 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
 segmentationTilePath=$8 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
 cellDetectionResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
 cellClassificationResultsPath=${10} #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
+cellDetectorCheckPointPath=${11} #"/home/regmna1/Scratch/Models/CellDetection/EPICC/Current/"
 echo "*********INPUTS***********************"
 echo "old_wrap.sh"
 echo "image_dir: $image_dir"
@@ -41,7 +41,13 @@ do
   var1="logsD/d_run_$counter.err"
   var2="logsD/d_run_$counter.out"  
   jabname="HEDr"  
-  sbatch --error=$var1 --output=$var2 "$pipe_path/sge_single.sh" $image_file $base_image_file $code_path $steps $conda_1 $conda_2 $tilePath $segmentationTilePath $cellDetectionResultsPath $cellClassificationResultsPath
+  qsub -e "$var1" -o "$var2" "$pipe_path/sge_single.sh" \
+  $image_file $base_image_file $code_path \
+  $steps $conda_1 $conda_2 $tilePath \
+  $segmentationTilePath \
+  $cellDetectionResultsPath \
+  $cellClassificationResultsPath \
+  $cellDetectorCheckPointPath
   ((counter++))
 done
 
