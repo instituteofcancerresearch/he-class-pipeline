@@ -15,6 +15,7 @@ segmentationTilePath=$8 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classif
 cellDetectionResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
 cellClassificationResultsPath=${10} #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
 cellDetectorCheckPointPath=${11} #"/home/regmna1/Scratch/Models/CellDetection/EPICC/Current/"
+cellClassifierCheckPointPath=${12} #"/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
 echo "*********INPUTS***********************"
 echo "old_wrap.sh"
 echo "image_dir: $image_dir"
@@ -47,7 +48,8 @@ do
   $segmentationTilePath \
   $cellDetectionResultsPath \
   $cellClassificationResultsPath \
-  $cellDetectorCheckPointPath
+  $cellDetectorCheckPointPath \
+  $cellClassifierCheckPointPath
   ((counter++))
 done
 

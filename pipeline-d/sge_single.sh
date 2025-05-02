@@ -85,7 +85,7 @@ if [[ $steps == *"2"* ]]; then
     ###################
     fastAIPath="${code_path}/cell_classifier/3rdparty/FastAI/"
     classificationCodePath="${code_path}/cell_classifier/classification"
-    cellClassifierPath="/home/regmna1/Scratch/Models/CellClassification/EPICC/NDPI/Current/EPICC_Cell_Classifier_NDPI.h5"
+    cellClassifierPath=${12} #"/home/regmna1/Scratch/Models/CellClassification/EPICC/NDPI/Current/EPICC_Cell_Classifier_NDPI.h5"
     cellDetectionCSVPath="${cellDetectionResultsPath}/20180117/csv"
     cellClassificationCSVPath="${cellClassificationResultsPath}/csv"
     

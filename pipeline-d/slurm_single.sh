@@ -82,7 +82,7 @@ if [[ $steps == *"2"* ]]; then
     echo "Python path: $(which python)"
     ###################
     classificationCodePath="${code_path}/cell_classifier/classification"
-    cellClassifierPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellClassification/EPICC/NDPI/Current/EPICC_Cell_Classifier_NDPI.h5"
+    cellClassifierPath=${12} #"/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellClassification/EPICC/NDPI/Current/EPICC_Cell_Classifier_NDPI.h5"
     cellDetectionCSVPath="${cellDetectionResultsPath}/20180117/csv"
     cellClassificationCSVPath="${cellClassificationResultsPath}/csv"
     
