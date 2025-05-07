@@ -254,7 +254,7 @@ if [[ $steps == *"3"* ]]; then
 
     matlab -nodesktop -nosplash -r "${matlabOpeningCommands} \
     ${matlabSmallDotCommands} ${matlabBigDotCommands} \
-    ${matlabMergeCSVCommands}, ${matlabMakeThumbnailCommands} exit;"
+    ${matlabMergeCSVCommands} ${matlabMakeThumbnailCommands} exit;"
     
 fi
 

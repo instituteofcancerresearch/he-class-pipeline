@@ -1,4 +1,4 @@
-unction makeThumbnails(fPath, filePattern, inFolder, outFolder)
+function makeThumbnails(fPath, filePattern, inFolder, outFolder)
     if nargin < 2
         filePattern = '*BigDot.tif';
     end
