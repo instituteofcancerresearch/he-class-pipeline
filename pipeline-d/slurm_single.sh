@@ -246,9 +246,12 @@ if [[ $steps == *"3"* ]]; then
     echo "matlabBigDotCommands: $matlabBigDotCommands"
     echo "matlabMergeCSVCommands: $matlabMergeCSVCommands"
 
+    matlabMakeThumbnailCommands="makeThumbnails('$(dirname "$tifPath")', '$(basename "$tifFile")', '$(basename "$tifPath")', 'thumbnails');"
+
     matlab -nodesktop -nosplash -r "${matlabOpeningCommands} \
     ${matlabSmallDotCommands} ${matlabBigDotCommands} \
-    ${matlabMergeCSVCommands} exit;"   
+    ${matlabMergeCSVCommands}, ${matlabMakeThumbnailCommands} exit;"
+    
 fi
 
 echo ""
