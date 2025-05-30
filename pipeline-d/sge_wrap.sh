@@ -29,6 +29,9 @@ echo "segmentationTilePath: $segmentationTilePath"
 echo "cellDetectionResultsPath: $cellDetectionResultsPath"
 echo "cellClassificationResultsPath: $cellClassificationResultsPath"
 
+child_working_dir = "$(pwd)/logsD"
+echo "child_working_dir: $child_working_dir"
+
 counter=0
 for image_file in "$image_dir"/*
 do
@@ -39,10 +42,14 @@ do
   echo "BaseImageFile=$base_image_file"
   echo "CodePath=$code_path"
   echo "Steps=$steps"  
-  var1="logsD/d_run_$counter.err"
-  var2="logsD/d_run_$counter.out"  
+  var1="d_run_$counter.err"
+  var2="d_run_$counter.out"  
   jabname="HEDr"  
-  qsub -e "$var1" -o "$var2" "$pipe_path/sge_single.sh" \
+
+
+
+
+  qsub -wd "$child_working_dir" -e "$var1" -o "$var2" "$pipe_path/sge_single.sh" \
   $image_file $base_image_file $code_path \
   $steps $conda_1 $conda_2 $tilePath \
   $segmentationTilePath \
