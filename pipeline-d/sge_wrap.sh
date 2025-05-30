@@ -29,7 +29,7 @@ echo "segmentationTilePath: $segmentationTilePath"
 echo "cellDetectionResultsPath: $cellDetectionResultsPath"
 echo "cellClassificationResultsPath: $cellClassificationResultsPath"
 
-child_working_dir = "$(pwd)/logsD"
+child_working_dir="$(pwd)/logsD"
 echo "child_working_dir: $child_working_dir"
 
 counter=0
