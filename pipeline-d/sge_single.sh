@@ -1,13 +1,16 @@
-#!/bin/sh
+#!/bin/bash -l
 #$ -l gpu=1
 #$ -N "HEDri"
 #$ -l h_rt=12:00:00
-
+#$ -l mem=5G
 
 #source /data/scratch/shared/SINGULARITY-DOWNLOAD/RSE/home/.bashrc
 #source /data/scratch/shared/RSE/sources/.rachel
-source /data/scratch/shared/RSE/sources/.nick
+#source /data/scratch/shared/RSE/sources/.nick
 #module load anaconda/3
+
+module load python/miniconda3/24.3.0-0
+source ~/.bashrc
 
 imagePath=$1
 imageName=$2
@@ -19,7 +22,7 @@ tilePath=$7 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
 segmentationTilePath=$8 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
 cellDetectionResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
 cellClassificationResultsPath=${10} #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
-cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
+cellDetectorCheckPointPath=${11} #"/home/regmna1/Scratch/Models/CellDetection/EPICC/Current/"
 
 echo "*********INPUTS***********************"
 echo "old_sbatch_single.sh"
@@ -77,11 +80,12 @@ if [[ $steps == *"2"* ]]; then
     echo "@@@@@@@@@@@@ script 2 @@@@@@@@@@@@" >&2 
     #mamba activate $conda_env2
     source activate $conda_env2
-    echo "Python version: $(python --version)"
-    echo "Python path: $(which python)"
+    echo "Python version: $(python3 --version)"
+    echo "Python path: $(which python3)"
     ###################
+    fastAIPath="${code_path}/cell_classifier/3rdparty/FastAI/"
     classificationCodePath="${code_path}/cell_classifier/classification"
-    cellClassifierPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellClassification/EPICC/NDPI/Current/EPICC_Cell_Classifier_NDPI.h5"
+    cellClassifierPath=${12} #"/home/regmna1/Scratch/Models/CellClassification/EPICC/NDPI/Current/EPICC_Cell_Classifier_NDPI.h5"
     cellDetectionCSVPath="${cellDetectionResultsPath}/20180117/csv"
     cellClassificationCSVPath="${cellClassificationResultsPath}/csv"
     
@@ -110,6 +114,7 @@ if [[ $steps == *"2"* ]]; then
     echo "======================="
 
     python3 -c "import sys; sys.path.append('${classificationCodePath}'); \
+    sys.path.append('${fastAIPath}'); \
     import processCSVs;processCSVs.processCSVs(imagePath='${imageName}', \
     detectionPath='${cellDetectionCSVPath}', \
     tilePath='${tilePath}',classifierPath='${cellClassifierPath}', \
@@ -127,7 +132,7 @@ if [[ $steps == *"3"* ]]; then
     echo "@@@@@@@@@@@@ script 3 @@@@@@@@@@@@"    
     echo "@@@@@@@@@@@@ script 3 @@@@@@@@@@@@" >&2 
 
-    module load MATLAB/R2020b
+    module load matlab/full/r2023a/9.14
 
     echo "=========variables=============="
     imageScan="$imagePath/FinalScan.ini"
@@ -245,9 +250,12 @@ if [[ $steps == *"3"* ]]; then
     echo "matlabBigDotCommands: $matlabBigDotCommands"
     echo "matlabMergeCSVCommands: $matlabMergeCSVCommands"
 
+    matlabMakeThumbnailCommands="makeThumbnails('$(dirname "$tifPath")', '$(basename "$tifFile")', '$(basename "$tifPath")', 'thumbnails');"
+
     matlab -nodesktop -nosplash -r "${matlabOpeningCommands} \
     ${matlabSmallDotCommands} ${matlabBigDotCommands} \
-    ${matlabMergeCSVCommands} exit;"   
+    ${matlabMergeCSVCommands} ${matlabMakeThumbnailCommands} exit;"
+    
 fi
 
 echo ""

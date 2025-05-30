@@ -20,7 +20,7 @@ tilePath=$7 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
 segmentationTilePath=$8 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
 cellDetectionResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
 cellClassificationResultsPath=${10} #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
-cellDetectorCheckPointPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
+cellDetectorCheckPointPath=${11} #"/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
 
 echo "*********INPUTS***********************"
 echo "old_sbatch_single.sh"
@@ -82,7 +82,7 @@ if [[ $steps == *"2"* ]]; then
     echo "Python path: $(which python)"
     ###################
     classificationCodePath="${code_path}/cell_classifier/classification"
-    cellClassifierPath="/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellClassification/EPICC/NDPI/Current/EPICC_Cell_Classifier_NDPI.h5"
+    cellClassifierPath=${12} #"/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellClassification/EPICC/NDPI/Current/EPICC_Cell_Classifier_NDPI.h5"
     cellDetectionCSVPath="${cellDetectionResultsPath}/20180117/csv"
     cellClassificationCSVPath="${cellClassificationResultsPath}/csv"
     
@@ -246,9 +246,12 @@ if [[ $steps == *"3"* ]]; then
     echo "matlabBigDotCommands: $matlabBigDotCommands"
     echo "matlabMergeCSVCommands: $matlabMergeCSVCommands"
 
+    matlabMakeThumbnailCommands="makeThumbnails('$(dirname "$tifPath")', '$(basename "$tifFile")', '$(basename "$tifPath")', 'thumbnails');"
+
     matlab -nodesktop -nosplash -r "${matlabOpeningCommands} \
     ${matlabSmallDotCommands} ${matlabBigDotCommands} \
-    ${matlabMergeCSVCommands} exit;"   
+    ${matlabMergeCSVCommands} ${matlabMakeThumbnailCommands} exit;"
+    
 fi
 
 echo ""

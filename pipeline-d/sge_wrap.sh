@@ -1,9 +1,8 @@
-#!/bin/sh
+#!/bin/bash -l
 #$ -N "HEDr"
 #$ -o d_run.out
 #$ -e d_run.err
-#$ -pe smp 4
-#$ -l h_rt=100:00:00
+#$ -l h_rt=24:00:00
 
 image_dir=$1
 pipe_path=$2
@@ -15,6 +14,8 @@ tilePath=$7 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outA"
 segmentationTilePath=$8 #="/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outB"
 cellDetectionResultsPath=$9 #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outD"
 cellClassificationResultsPath=${10} #"/data/scratch/DCO/DIGOPS/SCIENCOM/ralcraft/he-classifier/outE"
+cellDetectorCheckPointPath=${11} #"/home/regmna1/Scratch/Models/CellDetection/EPICC/Current/"
+cellClassifierCheckPointPath=${12} #"/data/scratch/DMP/UCEC/GENEVOD/ntrahearn/Models/CellDetection/EPICC/Current/"
 echo "*********INPUTS***********************"
 echo "old_wrap.sh"
 echo "image_dir: $image_dir"
@@ -28,6 +29,9 @@ echo "segmentationTilePath: $segmentationTilePath"
 echo "cellDetectionResultsPath: $cellDetectionResultsPath"
 echo "cellClassificationResultsPath: $cellClassificationResultsPath"
 
+child_working_dir="$(pwd)/logsD"
+echo "child_working_dir: $child_working_dir"
+
 counter=0
 for image_file in "$image_dir"/*
 do
@@ -38,10 +42,21 @@ do
   echo "BaseImageFile=$base_image_file"
   echo "CodePath=$code_path"
   echo "Steps=$steps"  
-  var1="logsD/d_run_$counter.err"
-  var2="logsD/d_run_$counter.out"  
+  var1="d_run_$counter.err"
+  var2="d_run_$counter.out"  
   jabname="HEDr"  
-  sbatch --error=$var1 --output=$var2 "$pipe_path/sge_single.sh" $image_file $base_image_file $code_path $steps $conda_1 $conda_2 $tilePath $segmentationTilePath $cellDetectionResultsPath $cellClassificationResultsPath
+
+
+
+
+  qsub -wd "$child_working_dir" -e "$var1" -o "$var2" "$pipe_path/sge_single.sh" \
+  $image_file $base_image_file $code_path \
+  $steps $conda_1 $conda_2 $tilePath \
+  $segmentationTilePath \
+  $cellDetectionResultsPath \
+  $cellClassificationResultsPath \
+  $cellDetectorCheckPointPath \
+  $cellClassifierCheckPointPath
   ((counter++))
 done
 
